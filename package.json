@@ -1,0 +1,25 @@
+{
+  "name": "Reboji",
+  "version": "1.0.0",
+  "description": "Reboji is a facebook chat bot to place a puzzle guessing game for rebusy emoji.",
+  "engines": {
+    "node": "4.2.1",
+    "npm": "2.14.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adriaanbalt/reboji.git"
+  },
+  "scripts": {
+    "start": "gulp",
+    "dev": "gulp dev | tee dev.log &",
+    "qa": "gulp qa | tee qa.log &",
+    "stop": "node server/stop",
+    "prod": "gulp prod"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.3",
+    "request": "^2.72.0"
+  }
+}
