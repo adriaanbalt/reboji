@@ -1,6 +1,6 @@
 var gulp    = require('gulp'),
     webpack = require('webpack'),
-    config  = require('../config/webpack.config.production')('production'),
+    config  = require('../config/webpack.config.production')('prod'),
     logger  = require('../lib/compileLogger'),
     server  = require('../../server');
 
