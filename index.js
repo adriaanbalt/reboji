@@ -14,10 +14,14 @@ app.use(bodyParser.urlencoded({extended: false}))
 // Process application/json
 app.use(bodyParser.json())
 
-// Index route
+// Set static folder
+app.use(express.static(path.join(root, 'public')));
 
+// Index route
 // Serve index.html from root
-app.get('/', (req, res, next) => res.sendFile('/index.html'));
+app.get('/', (req, res, next) => res.sendFile('/index.html', {
+  root: path.join(root, 'public')
+}));
 
 
 // app.get('/', function (req, res) {
