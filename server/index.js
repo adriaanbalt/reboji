@@ -43,14 +43,16 @@ app.post('/webhook/', function (req, res) {
         let event = req.body.entry[0].messaging[i]
         let sender = event.sender.id
         if (event.message && event.message.text) {
-            let text = event.message.text
+            let text = "" + event.message.text
             console.log ( 'text', text, currentPuzzle );
             // TODO connect to DB 
             
-            if ( text == currentPuzzle.answer) {
+            if ( text == "1" ){
+                sendTextMessage(sender, currentPuzzle.question );
+            } else if ( text == currentPuzzle.answer) {
                 sendTextMessage(sender, "Congratulations!" );
             } else {
-                sendTextMessage(sender, "Fail!" );
+                sendTextMessage(sender, "Fail!  Press 1 to try again" );
             }
             // compare text to current puzzle question answer
             // if ( checkPuzzleValidity( text ) ){
@@ -87,7 +89,7 @@ function sendNewPuzzle() {
 function getNewPuzzle() {
     // get the new puzzle from the database
     currentPuzzle = {
-        puzzle: "👗👗👗👗👗",
+        question: "👗👗👗👗👗",
         answer: "girls"
     };
     return currentPuzzle;
@@ -95,7 +97,7 @@ function getNewPuzzle() {
 
 const token = "EAAF0MuSayRkBAPHrPoIX9MLbR9itpARYzI4dEBPEX8LVe3MmqZArZA0iJOtXNTqKwY4y1Qu11HEARGtqcxXjbcWNyUfyX7BocxtiDxg1KlLyu32VfyS9bkErZBayW8B7itHPntLZCMgMRW2ct7K2nynYBCQ3LloZD"
 let currentPuzzle = {
-    puzzle: "✨",
+    question: "✨",
     answer: "star"
 };
 
