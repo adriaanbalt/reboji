@@ -17,9 +17,7 @@ app.use(bodyParser.json())
 // Index route
 
 // Serve index.html from root
-app.get('/', (req, res, next) => res.sendFile('/index.html', {
-  root: path.join(root, 'public')
-}));
+app.get('/', (req, res, next) => res.sendFile('/index.html'));
 
 
 // app.get('/', function (req, res) {
