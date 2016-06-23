@@ -17,14 +17,14 @@ app.use(bodyParser.json())
 // Index route
 
 // Serve index.html from root
-// app.get('/*', (req, res, next) => res.sendFile('/index.html', {
-//   root: path.join(root, 'public')
-// }));
+app.get('/', (req, res, next) => res.sendFile('/index.html', {
+  root: path.join(root, 'public')
+}));
 
 
-app.get('/', function (req, res) {
-    res.send('Hello world, I am a chat bot')
-})
+// app.get('/', function (req, res) {
+//     res.send('Hello world, I am a chat bot')
+// })
 
 // for Facebook verification
 app.get('/webhook/', function (req, res) {
