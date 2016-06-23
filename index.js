@@ -39,7 +39,7 @@ app.post('/webhook/', function (req, res) {
                 sendGenericMessage(sender)
                 continue
             }
-            sendTextMessage(sender, "🏢 🏫 🏭 🏥 🏬 🏪 💒 Text received, echo: " + text.substring(0, 200))
+            sendTextMessage(sender, "👕 👘 👗 👢 👠 👡 💼 👜 👔 🎩 👒 👑 💍 ⛵ ⛽ ✈ ⛲ ⛺ ⛪ ☎ ✉ ✂ 🚽 🛀 👙 💄 ✌ ☀ ☁ ☔ ⚡ ✨ ⭐ ✳ ⛄ ☕ ♨ 🎀 🌂 💧 🔨 💺 〽 🔱 🔰 🀄 💎 💠 🔷 🔶 ✌ ☀ ☁ ☔ ⚡ ✨ ⭐ ✳ ⛄ ☕ ♨ 🏢 🏫 🏭 🏥 🏬 🏪 💒 : you said : " + text.substring(0, 200))
         }
     }
     res.sendStatus(200)
@@ -181,808 +181,91 @@ Chris Putnam emoticonFacebook Penguin EmoticonPeace Fingers EmoticonFacebook Sun
 
 <(")
 
-✌
-
-☀
-
-☁
-
-☔
-
-⚡
-
-✨
-
-⭐
-
-✳
-
-⛄
-
-☕
-
-♨
+✌ ☀ ☁ ☔ ⚡ ✨ ⭐ ✳ ⛄ ☕ ♨
 Boat emoticonFuel pump emoticonAirplane Facebook emoticonFountain emoticonTent emoticonFacebook church emoticonTelephone Facebook EmoticonEnvelope emoticonScissors emoticonToilet emoticon for FacebookBath emoticonRed bikini undearwear emoticon for FacebookLipstick emoticon
 
-⛵
-
-⛽
-
-✈
-
-⛲
-
-⛺
-
-⛪
-
-☎
-
-✉
-
-✂
-
-🚽
-
-🛀
-
-👙
-
-💄
+⛵ ⛽ ✈ ⛲ ⛺ ⛪ ☎ ✉ ✂ 🚽 🛀 👙 💄
 T-shirt emoticonKimono emojiDress emoticonBoots emoticonHigh heels emoticonSandal emoticonBriefcase emoticonHandbagTie emoticon for FacebookTop hat Facebook emoticonsWomans hat emojiCrown emoticonRing emoticon
 
-👕
-
-👘
-
-👗
-
-👢
-
-👠
-
-👡
-
-💼
-
-👜
-
-👔
-
-🎩
-
-👒
-
-👑
-
-💍
+👕 👘 👗 👢 👠 👡 💼 👜 👔 🎩 👒 👑 💍
 No smoking Facebook emoticonSoccer ball emoticonBaseball emoticonGolf emoticonFootball emoticonBasketball emoticonTennis emoticonBilliard emoticonTarget emoticonSkis emoticonRacing flags emoticonFinish line emoticonTrophy emoticon
 
-🚭
-
-⚽
-
-⚾
-
-⛳
-
-🏈
-
-🏀
-
-🎾
-
-🎱
-
-🎯
-
-🎿
-
-🎌
-
-🏁
-
-🏆
+🚭 ⚽ ⚾ ⛳ 🏈 🏀 🎾 🎱 🎯 🎿 🎌 🏁 🏆
 Warning sign emoticon for FacebookNo entry emoticonexclamation point EmojiExclamation mark emoticonRed exclamation point emoticonQuestion mark emoticonCross mark emoticonCross mark Facebook emojiMultiplication Facebook symbolHeart suit emoticonSpades emoticonDiamond suit emoticon for FacebookClubs suit emoticon
 
-⚠
-
-⛔
-
-❕
-
-❓
-
-❗
-
-❔
-
-❌
-
-❎
-
-✖
-
-♥
-
-♠
-
-♦
-
-♣
+⚠ ⛔ ❕ ❓ ❗ ❔ ❌ ❎ ✖ ♥ ♠ ♦ ♣
 A-ok signDislike EmoticonFacebook Clenched Fist EmoticonIndex finger emoticonHigh Five EmoticonTwo hands reaching upMuscle armFist EmoticonA pair of hands clapping.Finger pointing upIndex fingerFinger pointing left emoticonFinger pointing down Emoticon
 
-👌
-
-👎
-
-✊
-
-☝
-
-✋
-
-🙌
-
-💪
-
-👊
-
-👏
-
-👆
-
-👉
-
-👈
-
-👇
+👌 👎 ✊ ☝ ✋ 🙌 💪 👊 👏 👆 👉 👈 👇
 Broken Heart EmoticonFacebook Blue Heart IconGreen Heart EmoticonYellow Heart EmoticonPurple Heart EmoticonTriple Heart EmoticonStabbed HeartCool heart iconWrapped Heart EmoticonSparkling Heart IconRevolving hearts EmojiWhite heart in red squareLove letter Facebook emoticon
 
-💔
-
-💙
-
-💚
-
-💛
-
-💜
-
-💗
-
-💘
-
-💓
-
-💝
-
-💖
-
-💞
-
-💟
-
-💌
+💔 💙 💚 💛 💜 💗 💘 💓 💝 💖 💞 💟 💌
 Couple in loveLip Mark EmoticonLips EmoticonEmoticon in loveEmoticon Blowing A KissKiss emoticon for FacebookHappy Facebook smiley red in faceSmirking smileySatisfiedSmiling face for FacebookBig smile emoticonDisappointed emoticonCrying Emoji smiley for Facebook
 
-💑
-
-💋
-
-👄
-
-😍
-
-😘
-
-😚
-
-😊
-
-😏
-
-😌
-
-😃
-
-😄
-
-😞
-
-😢
+💑 💋 👄 😍 😘 😚 😊 😏 😌 😃 😄 😞 😢
 Medic Facebook smileyEmoticon with cold sweatFear EmoticonRelieved emoticonSleepy smileyScared Facebook EmoticonEmoticon screaming in fearDizzy emoticonEmoticon Shedding TearsAngry face emoticonEmoticon with eyes wide openAstonished EmoticonBig Grin Emoticon
 
-😷
-
-😓
-
-😰
-
-😥
-
-😪
-
-😨
-
-😱
-
-😵
-
-😭
-
-😠
-
-😳
-
-😲
-
-😤
+😷 😓 😰 😥 😪 😨 😱 😵 😭 😠 😳 😲 😤
 Tongue out and winkingTongue out emoticonWinking EmoticonSad FaceUnamused EmoticonEmoticon crying tears of joyRed Angry EmoticonPurple Devil EmoticonAlien EmoticonGreen Monster EmoticonGhost EmoticonAngel EmojiGirl with bunny ears
 
-😜
-
-😝
-
-😉
-
-😔
-
-😒
-
-😂
-
-😡
-
-👿
-
-👽
-
-👾
-
-👻
-
-👼
-
-👯
+😜 😝 😉 😔 😒 😂 😡 👿 👽 👾 👻 👼 👯
 Guardsman EmoticonMan With TurbanSanta Claus EmoticonPoliceman EmoticonConstruction Worker EmoticonPrincess EmoticonOlder ManOlder womanMan emoticonEmoticon of womanBoy emoticonGirl emoticon for FacebookBaby Face
 
-💂
-
-👳
-
-🎅
-
-👮
-
-👷
-
-👸
-
-👴
-
-👵
-
-👨
-
-👩
-
-👦
-
-👧
-
-👶
+💂 👳 🎅 👮 👷 👸 👴 👵 👨 👩 👦 👧 👶
 Blonde Girl EmoticonBoy and girl holding handsMan and woman holding handsDancer EmoticonEar EmoticonNose EmoticonEyes EmoticonStar EmoticonMoon EmoticonFacebook Music Note EmoticonMusic Notes EmoticonZzz EmoticonFire Emoticon
 
-👱
-
-👫
-
-🎎
-
-💃
-
-👂
-
-👃
-
-👀
-
-🌟
-
-🌙
-
-🎵
-
-🎶
-
-💤
-
-🔥
+👱 👫 🎎 💃 👂 👃 👀 🌟 🌙 🎵 🎶 💤 🔥
 Bell EmoticonBalloon EmoticonHappy New Year EmoticonCocktail Glass EmoticonBeer EmoticonBeer EmojiBottle emoticonTeacup emoticonFork and knife emoticonBread emoticonFrying Pan - Cooking emoticonFrench fries emoticonThe food pot emoticon
 
-🔔
-
-🎈
-
-🎉
-
-🍸
-
-🍺
-
-🍻
-
-🍶
-
-🍵
-
-🍴
-
-🍞
-
-🍳
-
-🍟
-
-🍲
+🔔 🎈 🎉 🍸 🍺 🍻 🍶 🍵 🍴 🍞 🍳 🍟 🍲
 Bowl of sushiSpaghetti foodSteaming bowlFacebook cake emoticonShaved iceIce cream emoticonHamburger EmoticonRed Apple EmoticonStrawberry EmoticonOrange EmoticonWatermelon emoticonTomato iconAubergine
 
-🍣
-
-🍝
-
-🍜
-
-🍰
-
-🍧
-
-🍦
-
-🍔
-
-🍎
-
-🍓
-
-🍊
-
-🍉
-
-🍅
-
-🍆
+🍣 🍝 🍜 🍰 🍧 🍦 🍔 🍎 🍓 🍊 🍉 🍅 🍆
 Seedling EmoticonPalm EmoticonCactus EmoticonMaple Leaf EmoticonFallen Leaf EmoticonFluttering LeafCherry BlossomFacebook Rose EmoticonTulip EmoticonSunflower EmoticonHibiscus EmoticonBouquet EmoticonChristmas Tree Emoticon
 
-🌱
-
-🌴
-
-🌵
-
-🍁
-
-🍂
-
-🍃
-
-🌸
-
-🌹
-
-🌷
-
-🌻
-
-🌺
-
-💐
-
-🎄
+🌱 🌴 🌵 🍁 🍂 🍃 🌸 🌹 🌷 🌻 🌺 💐 🎄
 Puppy EmoticonTeddy Bear EmoticonMonkey FaceMouse EmoticonHamster EmoticonWolf EmoticonTiger EmoticonHorse facePig EmoticonCat EmoticonBunny EmoticonPoodle EmoticonSheep Emoticon
 
-🐶
-
-🐻
-
-🐵
-
-🐭
-
-🐹
-
-🐺
-
-🐯
-
-🐴
-
-🐷
-
-🐱
-
-🐰
-
-🐩
-
-🐑
+🐶 🐻 🐵 🐭 🐹 🐺 🐯 🐴 🐷 🐱 🐰 🐩 🐑
 Penguin faceKoala EmoticonCow EmoticonWild boar EmoticonChicken EmoticonYellow ChickBird EmoticonElephant EmoticonHorse EmoticonMonkey EmoticonCamel EmoticonDolphin EmoticonWhale emoticon
 
-🐧
-
-🐨
-
-🐮
-
-🐗
-
-🐔
-
-🐥
-
-🐦
-
-🐘
-
-🐎
-
-🐒
-
-🐫
-
-🐬
-
-🐳
+🐧 🐨 🐮 🐗 🐔 🐥 🐦 🐘 🐎 🐒 🐫 🐬 🐳
 Tropical FishFish EmoticonBlowfishOctopusSeashell EmoticonFrog FaceSnake EmoticonBug EmoticonWind EmoticonWave EmoticonDroplets EmoticonSnowflake Facebook EmoticonRainbow Facebook Emoticon
 
-🐠
-
-🐟
-
-🐡
-
-🐙
-
-🐚
-
-🐸
-
-🐍
-
-🐛
-
-💨
-
-🌊
-
-💦
-
-✴
-
-🌈
+🐠 🐟 🐡 🐙 🐚 🐸 🐍 🐛 💨 🌊 💦 ✴ 🌈
 Phone emoticonFax emoticonSpeakers emoticonEmoticon of radioCamera EmojiMovie emoticonVHS emoticonSatelliteFacebook TV EmoticonPC Facebook EmoticonFloppy disk emoticonCD or DVD EmoticonTablet or smartphone emoticon
 
-📞
-
-📠
-
-🔈
-
-📻
-
-📷
-
-🎥
-
-📼
-
-📡
-
-📺
-
-💻
-
-💾
-
-📀
-
-📱
+📞 📠 🔈 📻 📷 🎥 📼 📡 📺 💻 💾 📀 📱
 Present emoticonCarp streamersAnger symbol emoticonNail Polish EmoticonFootprints Facebook EmoticonClover EmoticonGraduation HatPumpkin EmoticonSkull emoticonAutomated Teller MachineMoney bag emoticonDollar emoticonYen bill
 
-🎁
-
-🎏
-
-💢
-
-💅
-
-🐾
-
-🍀
-
-🎓
-
-🎃
-
-💀
-
-🏧
-
-💰
-
-💵
-
-💴
+🎁 🎏 💢 💅 🐾 🍀 🎓 🎃 💀 🏧 💰 💵 💴
 Bicycle emoticonAutomobile emoticonCar Facebook emoticonTruck emoticonBus emoticonFire truck emoticonPolice car emoticonAmbulance emoticonTaxi emoticonTrain emoticonTram carSpeed trainStation emoji
 
-🚲
-
-🚗
-
-🚙
-
-🚚
-
-🚌
-
-🚒
-
-🚓
-
-🚑
-
-🚕
-
-🚄
-
-🚃
-
-🚅
-
-🚉
+🚲 🚗 🚙 🚚 🚌 🚒 🚓 🚑 🚕 🚄 🚃 🚅 🚉
 Speedboat emojiShip emoticonRoller coasterRocket emojiTicket emoticonBus stop signTraffic lightsConstruction sign on roadBarber signAntenna signalNo under 18 emoticonVibration mode emoticonPhone off emoticon
 
-🚤
-
-🚢
-
-🎢
-
-🚀
-
-🎫
-
-🚏
-
-🚥
-
-🚧
-
-💈
-
-📶
-
-🔞
-
-📳
-
-📴
+🚤 🚢 🎢 🚀 🎫 🚏 🚥 🚧 💈 📶 🔞 📳 📴
 Sunrise emoticonSunrise over mountainsSunset emoticonDusk emojiStarry night emoticonSnow mountain emoticonJapanese castle emojiJapanese building emojiCastle emoticonBank emoticonStatue of Liberty emoticon for FacebookFerris wheel emoticonTokyo tower emoji
 
-🌅
-
-🌄
-
-🌇
-
-🌆
-
-🌃
-
-🗻
-
-🏯
-
-🏣
-
-🏰
-
-🏦
-
-🗽
-
-🎡
-
-🗼
+🌅 🌄 🌇 🌆 🌃 🗻 🏯 🏣 🏰 🏦 🗽 🎡 🗼
 Hotel emoticonLove hotel emojiOffice emoticonSchool emoticonFactory emoticonHospital emoticonDepartment store emoticonConvenience storeWedding emoticonHouse emojiHouse emoticonMailbox emoticonMailbox with raised flag
 
-🏨
-
-🏩
-
-🏢
-
-🏫
-
-🏭
-
-🏥
-
-🏬
-
-🏪
-
-💒
-
-🏡
-
-🏠
-
-📪
-
-📫
+🏨 🏩 🏢 🏫 🏭 🏥 🏬 🏪 💒 🏡 🏠 📪 📫
 Postbox emojiMail emoticon for FacebookIncoming mail Facebok emoticonMemo signSchool bag emoticonOpen book emoticonPaint paletteMicrophone emoticonMegaphone emoticonHeadphones emoticonSaxophone emoticonTrumpet emoticonGuitar emoticon for Facebook
 
-📮
-
-📩
-
-📨
-
-📝
-
-🎒
-
-📖
-
-🎨
-
-🎤
-
-📣
-
-🎧
-
-🎷
-
-🎺
-
-🎸
+📮 📩 📨 📝 🎒 📖 🎨 🎤 📣 🎧 🎷 🎺 🎸
 Public address systemLock emojiClosed lock with a keyKey Facebook emoticonOpen lock emoticonMagnifying glass emoticonLight bulb emoticonDollar sign for Facebook Pistol emoticonBomb emoticonCigarette emoticonPill emoticonSyringe emoji
 
-📢
-
-🔒
-
-🔐
-
-🔑
-
-🔓
-
-🔎
-
-💡
-
-💲
-
-🔫
-
-💣
-
-🚬
-
-💊
-
-💉
+📢 🔒 🔐 🔑 🔓 🔎 💡 💲 🔫 💣 🚬 💊 💉
 Mask emoticonClapper boardFilm roleRestroomMens emoticonWomens emoticonChild emoticonVS emoticon versusUp emojiCool emoticon signWheelchair emoticonCurly loops signWC emoticon
 
-🎭
-
-🎬
-
-🎦
-
-🚻
-
-🚹
-
-🚺
-
-🚼
-
-🆚
-
-🆙
-
-🆒
-
-♿
-
-➿
-
-🚾
+🎭 🎬 🎦 🚻 🚹 🚺 🚼 🆚 🆙 🆒 ♿ ➿ 🚾
 Congratulations emoticonSecret Facebook emoticonFree service symbolAvailable Facebook symbolsDestination emoticonFinger pointFull emoticonSale emoticonHave nothing emoticonMonth symbolOwn emoticonRequest emoticonWorking emoticon for Facebook
 
-㊗
-
-㊙
-
-🈂
-
-🈳
-
-🈁
-
-🈯
-
-🈵
-
-🈹
-
-🈚
-
-🈷
-
-🈶
-
-🈸
-
-🈺
-Good bargain symbolSquare symbolCircleRightwards arrowDownwards arrowLeftwards arrowUpwards arrowNortheast arrowNorthwest arrowSoutheast arrowSouthwest arrowUp right arrowArrow pointing down right
-
-🉐
-
-⬜
-
-⚪
-
-➡
-
-⬇
-
-⬅
-
-⬆
-
-↗
-
-↖
-
-↘
-
-↙
-
-⤴
-
-⤵
+㊗ ㊙ 🈂 🈳 🈁 🈯 🈵 🈹 🈚 🈷 🈶 🈸 🈺
+Good bargain symbolSquare symbolCircleRightwards arrowDownwards arrowLeftwards arrowUpwards arrowNortheast arrowNorthwest arrowSoutheast arrowSouthwest arrowUp right arrowArrow pointing down right 
+🉐 ⬜ ⚪ ➡ ⬇ ⬅ ⬆ ↗ ↖ ↘ ↙ ⤴ ⤵
 Ribbon emoticonClosed umbrella emojiDroplet emojiHammer Facebook emoticonSeat emoticonPart alternation markTrident emoticonNoob signMahjong tile red dragonGem stoneDiamond emoticonBlue diamond emojiOrange diamond
 
-🎀
-
-🌂
-
-💧
-
-🔨
-
-💺
-
-〽
-
-🔱
-
-🔰
-
-🀄
-
-💎
-
-💠
-
-🔷
-
-🔶
+🎀 🌂 💧 🔨 💺 〽 🔱 🔰 🀄 💎 💠 🔷 🔶
 */
