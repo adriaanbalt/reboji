@@ -46,7 +46,8 @@ app.post('/webhook/', function (req, res) {
             let text = "" + event.message.text
             // TODO connect to DB 
             if ( text == "new" ){
-                sendTextMessage(sender, getPuzzle().question );
+                currentPuzzle = getPuzzle();
+                sendTextMessage(sender, currentPuzzle.question );
             } else if ( text == currentPuzzle.answer) {
                 sendTextMessage(sender, "Congratulations!" );
             } else {
