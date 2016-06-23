@@ -48,13 +48,13 @@ app.post('/webhook/', function (req, res) {
             // TODO connect to DB 
             sendTextMessage(sender, "msg: " + text.substring(0, 200))
             // compare text to current puzzle question answer
-            if ( checkPuzzleValidity( text ) ){
-                sendSuccess();
-            } else if ( text != "new" ) {
-                sendNewPuzzle();
-            } else {
-                sendFailure();
-            }
+            // if ( checkPuzzleValidity( text ) ){
+            //     sendSuccess();
+            // } else if ( text != "new" ) {
+            //     sendNewPuzzle();
+            // } else {
+            //     sendFailure();
+            // }
             // check the message that the user sent against the current emoji puzzle
             // sendTextMessage(sender, "👕 👘 👗 👢 👠 👡 💼 👜 👔 🎩 👒 👑 💍 ⛵ ⛽ ✈ ⛲ ⛺ ⛪ ☎ ✉ ✂ 🚽 🛀 👙 💄 ✌ ☀ ☁ ☔ ⚡ ✨ ⭐ ✳ ⛄ ☕ ♨ 🎀 🌂 💧 🔨 💺 〽 🔱 🔰 🀄 💎 💠 🔷 🔶 ✌ ☀ ☁ ☔ ⚡ ✨ ⭐ ✳ ⛄ ☕ ♨ 🏢 🏫 🏭 🏥 🏬 🏪 💒 : you said : " + text.substring(0, 200))
         }
