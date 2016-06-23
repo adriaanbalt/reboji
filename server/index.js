@@ -44,15 +44,13 @@ app.post('/webhook/', function (req, res) {
         let sender = event.sender.id
         if (event.message && event.message.text) {
             let text = "" + event.message.text
-            console.log ( 'text', text, currentPuzzle );
             // TODO connect to DB 
-            
-            if ( text == "1" ){
-                sendTextMessage(sender, currentPuzzle.question );
+            if ( text == "new" ){
+                sendTextMessage(sender, getPuzzle().question );
             } else if ( text == currentPuzzle.answer) {
                 sendTextMessage(sender, "Congratulations!" );
             } else {
-                sendTextMessage(sender, "Fail!  Press 1 to try again" );
+                sendTextMessage(sender, "Wrong" );
             }
             // compare text to current puzzle question answer
             // if ( checkPuzzleValidity( text ) ){
@@ -69,30 +67,13 @@ app.post('/webhook/', function (req, res) {
     res.sendStatus(200)
 })
 
-function checkPuzzleValidity( text ){
-    return (text == currentPuzzle.answer);
+
+function getPuzzle() {
+    return puzzles[ getRandom(0, puzzles.length ) ];
 }
 
-function sendSuccess(){
-    sendTextMessage(sender, "Congratulations!")
-    sendNewPuzzle();
-}
-
-function sendFailure(){
-    sendTextMessage(sender, "🍆🍆🍆🍆🍆")
-}
-
-function sendNewPuzzle() {
-    sendTextMessage(sender, getNewPuzzle() );
-}
-
-function getNewPuzzle() {
-    // get the new puzzle from the database
-    currentPuzzle = {
-        question: "👗👗👗👗👗",
-        answer: "girls"
-    };
-    return currentPuzzle;
+function getRandom( min, max ){
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 const token = "EAAF0MuSayRkBAPHrPoIX9MLbR9itpARYzI4dEBPEX8LVe3MmqZArZA0iJOtXNTqKwY4y1Qu11HEARGtqcxXjbcWNyUfyX7BocxtiDxg1KlLyu32VfyS9bkErZBayW8B7itHPntLZCMgMRW2ct7K2nynYBCQ3LloZD"
@@ -124,6 +105,29 @@ function sendTextMessage(sender, text) {
 app.listen(app.get('port'), function() {
     console.log('running on port', app.get('port'))
 })
+
+let puzzles = [
+    {
+        question: "☕",
+        answer: "coffee"
+    },
+    {
+        question: "👗",
+        answer: "dress"
+    },
+    currentPuzzle = {
+        question: "✨",
+        answer: "star"
+    },
+    currentPuzzle = {
+        question: "🐳🍆",
+        answer: "whale dick"
+    },
+    currentPuzzle = {
+        question: "👮💰🔫💊💉😵✊",
+        answer: "democracy"
+    }
+]
 
 /*
 Facebook Smiley FaceFacebook big smile - Grin emoticonFacebook Sad EmoticonFacebook Cry EmoticonFacebook Tounge Out EmoticonFacebook Angel Smiley EmoticonFacebook Devil EmoticonFacebook Confused SmileyFacebook Wink SmileyFacebook Gasp EmoticonFacebook squint emoticonFacebook angry smileyFacebook Kiss Emoticon
@@ -211,47 +215,19 @@ Couple in loveLip Mark EmoticonLips EmoticonEmoticon in loveEmoticon Blowing A K
 Medic Facebook smileyEmoticon with cold sweatFear EmoticonRelieved emoticonSleepy smileyScared Facebook EmoticonEmoticon screaming in fearDizzy emoticonEmoticon Shedding TearsAngry face emoticonEmoticon with eyes wide openAstonished EmoticonBig Grin Emoticon
 
 😷 😓 😰 😥 😪 😨 😱 😵 😭 😠 😳 😲 😤
-Tongue out and winkingTongue out emoticonWinking EmoticonSad FaceUnamused EmoticonEmoticon crying tears of joyRed Angry EmoticonPurple Devil EmoticonAlien EmoticonGreen Monster EmoticonGhost EmoticonAngel EmojiGirl with bunny ears
-
 😜 😝 😉 😔 😒 😂 😡 👿 👽 👾 👻 👼 👯
-Guardsman EmoticonMan With TurbanSanta Claus EmoticonPoliceman EmoticonConstruction Worker EmoticonPrincess EmoticonOlder ManOlder womanMan emoticonEmoticon of womanBoy emoticonGirl emoticon for FacebookBaby Face
-
 💂 👳 🎅 👮 👷 👸 👴 👵 👨 👩 👦 👧 👶
-Blonde Girl EmoticonBoy and girl holding handsMan and woman holding handsDancer EmoticonEar EmoticonNose EmoticonEyes EmoticonStar EmoticonMoon EmoticonFacebook Music Note EmoticonMusic Notes EmoticonZzz EmoticonFire Emoticon
-
 👱 👫 🎎 💃 👂 👃 👀 🌟 🌙 🎵 🎶 💤 🔥
-Bell EmoticonBalloon EmoticonHappy New Year EmoticonCocktail Glass EmoticonBeer EmoticonBeer EmojiBottle emoticonTeacup emoticonFork and knife emoticonBread emoticonFrying Pan - Cooking emoticonFrench fries emoticonThe food pot emoticon
-
 🔔 🎈 🎉 🍸 🍺 🍻 🍶 🍵 🍴 🍞 🍳 🍟 🍲
-Bowl of sushiSpaghetti foodSteaming bowlFacebook cake emoticonShaved iceIce cream emoticonHamburger EmoticonRed Apple EmoticonStrawberry EmoticonOrange EmoticonWatermelon emoticonTomato iconAubergine
-
 🍣 🍝 🍜 🍰 🍧 🍦 🍔 🍎 🍓 🍊 🍉 🍅 🍆
-Seedling EmoticonPalm EmoticonCactus EmoticonMaple Leaf EmoticonFallen Leaf EmoticonFluttering LeafCherry BlossomFacebook Rose EmoticonTulip EmoticonSunflower EmoticonHibiscus EmoticonBouquet EmoticonChristmas Tree Emoticon
-
 🌱 🌴 🌵 🍁 🍂 🍃 🌸 🌹 🌷 🌻 🌺 💐 🎄
-Puppy EmoticonTeddy Bear EmoticonMonkey FaceMouse EmoticonHamster EmoticonWolf EmoticonTiger EmoticonHorse facePig EmoticonCat EmoticonBunny EmoticonPoodle EmoticonSheep Emoticon
-
 🐶 🐻 🐵 🐭 🐹 🐺 🐯 🐴 🐷 🐱 🐰 🐩 🐑
-Penguin faceKoala EmoticonCow EmoticonWild boar EmoticonChicken EmoticonYellow ChickBird EmoticonElephant EmoticonHorse EmoticonMonkey EmoticonCamel EmoticonDolphin EmoticonWhale emoticon
-
 🐧 🐨 🐮 🐗 🐔 🐥 🐦 🐘 🐎 🐒 🐫 🐬 🐳
-Tropical FishFish EmoticonBlowfishOctopusSeashell EmoticonFrog FaceSnake EmoticonBug EmoticonWind EmoticonWave EmoticonDroplets EmoticonSnowflake Facebook EmoticonRainbow Facebook Emoticon
-
 🐠 🐟 🐡 🐙 🐚 🐸 🐍 🐛 💨 🌊 💦 ✴ 🌈
-Phone emoticonFax emoticonSpeakers emoticonEmoticon of radioCamera EmojiMovie emoticonVHS emoticonSatelliteFacebook TV EmoticonPC Facebook EmoticonFloppy disk emoticonCD or DVD EmoticonTablet or smartphone emoticon
-
 📞 📠 🔈 📻 📷 🎥 📼 📡 📺 💻 💾 📀 📱
-Present emoticonCarp streamersAnger symbol emoticonNail Polish EmoticonFootprints Facebook EmoticonClover EmoticonGraduation HatPumpkin EmoticonSkull emoticonAutomated Teller MachineMoney bag emoticonDollar emoticonYen bill
-
 🎁 🎏 💢 💅 🐾 🍀 🎓 🎃 💀 🏧 💰 💵 💴
-Bicycle emoticonAutomobile emoticonCar Facebook emoticonTruck emoticonBus emoticonFire truck emoticonPolice car emoticonAmbulance emoticonTaxi emoticonTrain emoticonTram carSpeed trainStation emoji
-
 🚲 🚗 🚙 🚚 🚌 🚒 🚓 🚑 🚕 🚄 🚃 🚅 🚉
-Speedboat emojiShip emoticonRoller coasterRocket emojiTicket emoticonBus stop signTraffic lightsConstruction sign on roadBarber signAntenna signalNo under 18 emoticonVibration mode emoticonPhone off emoticon
-
 🚤 🚢 🎢 🚀 🎫 🚏 🚥 🚧 💈 📶 🔞 📳 📴
-Sunrise emoticonSunrise over mountainsSunset emoticonDusk emojiStarry night emoticonSnow mountain emoticonJapanese castle emojiJapanese building emojiCastle emoticonBank emoticonStatue of Liberty emoticon for FacebookFerris wheel emoticonTokyo tower emoji
-
 🌅 🌄 🌇 🌆 🌃 🗻 🏯 🏣 🏰 🏦 🗽 🎡 🗼
 Hotel emoticonLove hotel emojiOffice emoticonSchool emoticonFactory emoticonHospital emoticonDepartment store emoticonConvenience storeWedding emoticonHouse emojiHouse emoticonMailbox emoticonMailbox with raised flag
 
