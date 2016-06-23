@@ -44,7 +44,9 @@ app.post('/webhook/', function (req, res) {
         let sender = event.sender.id
         if (event.message && event.message.text) {
             let text = event.message.text
+            console.log ( 'text', text, currentPuzzle );
             // TODO connect to DB 
+            sendTextMessage(sender, "msg: " + text.substring(0, 200))
             // compare text to current puzzle question answer
             if ( checkPuzzleValidity( text ) ){
                 sendSuccess();
