@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Index route
 // Serve index.html from root
 app.get('/', (req, res, next) => res.sendFile('/index.html', {
-  root: path.join(root, 'public')
+  root: path.join(__dirname, 'public')
 }));
 
 
