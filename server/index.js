@@ -46,17 +46,57 @@ app.post('/webhook/', function (req, res) {
             let text = event.message.text
             // TODO connect to DB 
             // compare text to current puzzle question answer
-            if (text === 'Generic') {
-                sendGenericMessage(sender)
-                continue
+            if ( checkPuzzleValidity( text ) ){
+                sendSuccess();
+            } else if ( text != "new" ) {
+                sendNewPuzzle();
+            } else {
+                sendFailure();
             }
-            sendTextMessage(sender, "👕 👘 👗 👢 👠 👡 💼 👜 👔 🎩 👒 👑 💍 ⛵ ⛽ ✈ ⛲ ⛺ ⛪ ☎ ✉ ✂ 🚽 🛀 👙 💄 ✌ ☀ ☁ ☔ ⚡ ✨ ⭐ ✳ ⛄ ☕ ♨ 🎀 🌂 💧 🔨 💺 〽 🔱 🔰 🀄 💎 💠 🔷 🔶 ✌ ☀ ☁ ☔ ⚡ ✨ ⭐ ✳ ⛄ ☕ ♨ 🏢 🏫 🏭 🏥 🏬 🏪 💒 : you said : " + text.substring(0, 200))
+            // check the message that the user sent against the current emoji puzzle
+            // sendTextMessage(sender, "👕 👘 👗 👢 👠 👡 💼 👜 👔 🎩 👒 👑 💍 ⛵ ⛽ ✈ ⛲ ⛺ ⛪ ☎ ✉ ✂ 🚽 🛀 👙 💄 ✌ ☀ ☁ ☔ ⚡ ✨ ⭐ ✳ ⛄ ☕ ♨ 🎀 🌂 💧 🔨 💺 〽 🔱 🔰 🀄 💎 💠 🔷 🔶 ✌ ☀ ☁ ☔ ⚡ ✨ ⭐ ✳ ⛄ ☕ ♨ 🏢 🏫 🏭 🏥 🏬 🏪 💒 : you said : " + text.substring(0, 200))
         }
     }
     res.sendStatus(200)
 })
 
+function checkPuzzleValidity( text ){
+    return (text == currentPuzzle.answer);
+}
+
+function sendSuccess(){
+    sendTextMessage(sender, "Congratulations!")
+    sendNewPuzzle();
+}
+
+function sendFailure(){
+    sendTextMessage(sender, "🍆🍆🍆🍆🍆")
+}
+
+function sendNewPuzzle() {
+    sendTextMessage(sender, getNewPuzzle() );
+}
+
+function getNewPuzzle() {
+    // get the new puzzle from the database
+    currentPuzzle = {
+        puzzle: "👗👗👗👗👗",
+        difficulty: 0,
+        answer: [
+            "girls"
+        ]
+    };
+    return currentPuzzle;
+}
+
 const token = "EAAF0MuSayRkBAPHrPoIX9MLbR9itpARYzI4dEBPEX8LVe3MmqZArZA0iJOtXNTqKwY4y1Qu11HEARGtqcxXjbcWNyUfyX7BocxtiDxg1KlLyu32VfyS9bkErZBayW8B7itHPntLZCMgMRW2ct7K2nynYBCQ3LloZD"
+let currentPuzzle = {
+    puzzle: "✨",
+    difficulty: 0,
+    answer: [
+        "star"
+    ]
+};
 
 function sendTextMessage(sender, text) {
     let messageData = { text:text }
