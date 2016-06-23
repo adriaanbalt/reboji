@@ -16,12 +16,12 @@ app.use(bodyParser.json())
 
 
 // Set static folder
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 // Index route
 // Serve index.html from root
 app.get('/', (req, res, next) => res.sendFile('/index.html', {
-  root: path.join(__dirname, 'public')
+  root: path.join(__dirname, '../public')
 }));
 
 
