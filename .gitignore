@@ -1,6 +1,5 @@
 .DS_Store
 .sass-cache
-public
 Desktop.ini
 *.log
 *.env
