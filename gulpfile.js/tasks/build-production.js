@@ -10,5 +10,5 @@ var serverType = ['dev','qa','prod'].indexOf(process.argv[2]) !== -1 ? process.a
 
 gulp.task('build:production', (cb) =>{
 	console.log ( "build production!" , serverType );
-    gulpSequence('clean', 'compass', 'mongo', 'webpack:production', 'html', cb);
+    gulpSequence('clean', 'mongo', 'webpack:production', cb);
 });
