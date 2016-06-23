@@ -6,9 +6,10 @@ var EmojiSchema = new mongoose.Schema({
         type: String,
         unique: true
     },
-    name: String,
-    icon: String,
-    words: Array
+    name: String, // the name of this puzzle
+    pictogram: String, // a combination of emojis
+    difficulty: Number, // 0
+    answer: Array // []
     
 });
 
