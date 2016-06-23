@@ -15,8 +15,6 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
 
-app.use(express.static(__dirname + '/public'));
-
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
