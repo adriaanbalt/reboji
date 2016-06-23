@@ -1,6 +1,6 @@
 'use strict'
 
-const   express = require('express')
+const   express = require('express'),
         path = require('path'),
         bodyParser = require('body-parser'),
         request = require('request'),
@@ -14,17 +14,20 @@ app.use(bodyParser.urlencoded({extended: false}))
 // Process application/json
 app.use(bodyParser.json())
 
-// Index route
 
+// Set static folder
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Index route
 // Serve index.html from root
-app.get('/*', (req, res, next) => res.sendFile('/index.html', {
+app.get('/', (req, res, next) => res.sendFile('/index.html', {
   root: path.join(root, 'public')
 }));
 
 
-app.get('/', function (req, res) {
-    res.send('Hello world, I am a chat bot')
-})
+// app.get('/', function (req, res) {
+//     res.send('Hello world, I am a chat bot')
+// })
 
 // for Facebook verification
 app.get('/webhook/', function (req, res) {
