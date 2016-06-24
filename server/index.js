@@ -47,15 +47,14 @@ app.post('/webhook/', function (req, res) {
             // TODO connect to DB 
             if ( !currentPuzzle || text == "new" ) {
                 currentPuzzle = getPuzzle();
-                sendTextMessage(sender, "new puzzle: " + currentPuzzle.question );
+                sendTextMessage(sender, "Here's a new puzzle: " + currentPuzzle.question );
             } else if ( text == currentPuzzle.answer) {
                 sendTextMessage(sender, "!!!!!!!!!!!!!!!!" );
-                sendTextMessage(sender, "Congratulations!" );
-                sendTextMessage(sender, "" );
+                sendTextMessage(sender, "Congratulations! Here's a new puzzle" );
                 currentPuzzle = getPuzzle();
-                sendTextMessage(sender, "new puzzle: " + currentPuzzle.question );
+                sendTextMessage(sender, currentPuzzle.question );
             } else if ( text != currentPuzzle.answer) {
-                sendTextMessage(sender, "Wrong. Try again. Respond 'new' for a different puzzle." );
+                sendTextMessage(sender, "Wrong. Try again or respond 'new' for a different puzzle." );
                 sendTextMessage(sender, "current puzzle: " + currentPuzzle.question );
             }
             // compare text to current puzzle question answer
@@ -122,21 +121,21 @@ let puzzles = [
         question: "✨",
         answer: "star"
     },
-    currentPuzzle = {
-        question: "🐳🍆",
-        answer: "whale dick"
-    },
-    currentPuzzle = {
-        question: "👮✊💰💃👯💊💉😵🔫",
-        answer: "democracy"
-    },
+    // currentPuzzle = {
+    //     question: "🐳🍆",
+    //     answer: "whale dick"
+    // },
+    // currentPuzzle = {
+    //     question: "👮✊💰💃👯💊💉😵🔫",
+    //     answer: "democracy"
+    // },
     currentPuzzle = {
         question: "💍",
         answer: "ring"
     },
     currentPuzzle = {
         question: "👾",
-        answer: "game"
+        answer: "octopus"
     },
     currentPuzzle = {
         question: "⚽",
@@ -148,7 +147,7 @@ let puzzles = [
     },
     currentPuzzle = {
         question: "👊",
-        answer: "pound"
+        answer: "fist"
     },
     currentPuzzle = {
         question: "👏",
@@ -157,10 +156,6 @@ let puzzles = [
     currentPuzzle = {
         question: "👎",
         answer: "boo"
-    },
-    currentPuzzle = {
-        question: "👯",
-        answer: "babes"
     }
     
 
