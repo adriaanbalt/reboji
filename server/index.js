@@ -43,19 +43,20 @@ app.post('/webhook/', function (req, res) {
         let event = req.body.entry[0].messaging[i]
         let sender = event.sender.id
         if (event.message && event.message.text) {
-            let text = "" + event.message.text
+            let text = "" + event.message.text.toLowercase();
             // TODO connect to DB 
-            console.log ( 'msg: ', currentPuzzle, text );
             if ( !currentPuzzle || text == "new" ) {
                 currentPuzzle = getPuzzle();
-                sendTextMessage(sender, currentPuzzle.question );
+                sendTextMessage(sender, "new puzzle: " + currentPuzzle.question );
             } else if ( text == currentPuzzle.answer) {
+                sendTextMessage(sender, "!!!!!!!!!!!!!!!!" );
                 sendTextMessage(sender, "Congratulations!" );
+                sendTextMessage(sender, "" );
                 currentPuzzle = getPuzzle();
-                sendTextMessage(sender, currentPuzzle.question );
+                sendTextMessage(sender, "new puzzle: " + currentPuzzle.question );
             } else if ( text != currentPuzzle.answer) {
-                sendTextMessage(sender, "Wrong. Try again. Respond 'new' for a puzzle." );
-                sendTextMessage(sender, currentPuzzle.question );
+                sendTextMessage(sender, "Wrong. Try again. Respond 'new' for a different puzzle." );
+                sendTextMessage(sender, "current puzzle: " + currentPuzzle.question );
             }
             // compare text to current puzzle question answer
             // if ( checkPuzzleValidity( text ) ){
@@ -74,7 +75,7 @@ app.post('/webhook/', function (req, res) {
 
 
 function getPuzzle() {
-    return puzzles[ getRandom(0, puzzles.length ) ];
+    return puzzles[ getRandom(0, puzzles.length ) ] == currentPuzzle ? getPuzzle() : puzzles[ getRandom(0, puzzles.length ) ];
 }
 
 function getRandom( min, max ){
@@ -124,6 +125,10 @@ let puzzles = [
     currentPuzzle = {
         question: "🐳🍆",
         answer: "whale dick"
+    },
+    currentPuzzle = {
+        question: "👮✊💰💃👯💊💉😵🔫",
+        answer: "democracy"
     },
     currentPuzzle = {
         question: "👮✊💰💃👯💊💉😵🔫",
