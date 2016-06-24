@@ -131,9 +131,41 @@ let puzzles = [
         answer: "democracy"
     },
     currentPuzzle = {
-        question: "👮✊💰💃👯💊💉😵🔫",
-        answer: "democracy"
+        question: "💍",
+        answer: "ring"
+    },
+    currentPuzzle = {
+        question: "👾",
+        answer: "game"
+    },
+    currentPuzzle = {
+        question: "⚽",
+        answer: "soccer"
+    },
+    currentPuzzle = {
+        question: "👌",
+        answer: "ok"
+    },
+    currentPuzzle = {
+        question: "👊",
+        answer: "pound"
+    },
+    currentPuzzle = {
+        question: "👏",
+        answer: "clap"
+    },
+    currentPuzzle = {
+        question: "👎",
+        answer: "boo"
+    },
+    currentPuzzle = {
+        question: "👯",
+        answer: "babes"
     }
+    
+
+
+
 ]
 
 /*
@@ -198,29 +230,13 @@ Chris Putnam emoticonFacebook Penguin EmoticonPeace Fingers EmoticonFacebook Sun
 <(")
 
 ✌ ☀ ☁ ☔ ⚡ ✨ ⭐ ✳ ⛄ ☕ ♨
-Boat emoticonFuel pump emoticonAirplane Facebook emoticonFountain emoticonTent emoticonFacebook church emoticonTelephone Facebook EmoticonEnvelope emoticonScissors emoticonToilet emoticon for FacebookBath emoticonRed bikini undearwear emoticon for FacebookLipstick emoticon
-
 ⛵ ⛽ ✈ ⛲ ⛺ ⛪ ☎ ✉ ✂ 🚽 🛀 👙 💄
-T-shirt emoticonKimono emojiDress emoticonBoots emoticonHigh heels emoticonSandal emoticonBriefcase emoticonHandbagTie emoticon for FacebookTop hat Facebook emoticonsWomans hat emojiCrown emoticonRing emoticon
-
 👕 👘 👗 👢 👠 👡 💼 👜 👔 🎩 👒 👑 💍
-No smoking Facebook emoticonSoccer ball emoticonBaseball emoticonGolf emoticonFootball emoticonBasketball emoticonTennis emoticonBilliard emoticonTarget emoticonSkis emoticonRacing flags emoticonFinish line emoticonTrophy emoticon
-
 🚭 ⚽ ⚾ ⛳ 🏈 🏀 🎾 🎱 🎯 🎿 🎌 🏁 🏆
-Warning sign emoticon for FacebookNo entry emoticonexclamation point EmojiExclamation mark emoticonRed exclamation point emoticonQuestion mark emoticonCross mark emoticonCross mark Facebook emojiMultiplication Facebook symbolHeart suit emoticonSpades emoticonDiamond suit emoticon for FacebookClubs suit emoticon
-
 ⚠ ⛔ ❕ ❓ ❗ ❔ ❌ ❎ ✖ ♥ ♠ ♦ ♣
-A-ok signDislike EmoticonFacebook Clenched Fist EmoticonIndex finger emoticonHigh Five EmoticonTwo hands reaching upMuscle armFist EmoticonA pair of hands clapping.Finger pointing upIndex fingerFinger pointing left emoticonFinger pointing down Emoticon
-
 👌 👎 ✊ ☝ ✋ 🙌 💪 👊 👏 👆 👉 👈 👇
-Broken Heart EmoticonFacebook Blue Heart IconGreen Heart EmoticonYellow Heart EmoticonPurple Heart EmoticonTriple Heart EmoticonStabbed HeartCool heart iconWrapped Heart EmoticonSparkling Heart IconRevolving hearts EmojiWhite heart in red squareLove letter Facebook emoticon
-
 💔 💙 💚 💛 💜 💗 💘 💓 💝 💖 💞 💟 💌
-Couple in loveLip Mark EmoticonLips EmoticonEmoticon in loveEmoticon Blowing A KissKiss emoticon for FacebookHappy Facebook smiley red in faceSmirking smileySatisfiedSmiling face for FacebookBig smile emoticonDisappointed emoticonCrying Emoji smiley for Facebook
-
 💑 💋 👄 😍 😘 😚 😊 😏 😌 😃 😄 😞 😢
-Medic Facebook smileyEmoticon with cold sweatFear EmoticonRelieved emoticonSleepy smileyScared Facebook EmoticonEmoticon screaming in fearDizzy emoticonEmoticon Shedding TearsAngry face emoticonEmoticon with eyes wide openAstonished EmoticonBig Grin Emoticon
-
 😷 😓 😰 😥 😪 😨 😱 😵 😭 😠 😳 😲 😤
 😜 😝 😉 😔 😒 😂 😡 👿 👽 👾 👻 👼 👯
 💂 👳 🎅 👮 👷 👸 👴 👵 👨 👩 👦 👧 👶
@@ -236,17 +252,9 @@ Medic Facebook smileyEmoticon with cold sweatFear EmoticonRelieved emoticonSleep
 🚲 🚗 🚙 🚚 🚌 🚒 🚓 🚑 🚕 🚄 🚃 🚅 🚉
 🚤 🚢 🎢 🚀 🎫 🚏 🚥 🚧 💈 📶 🔞 📳 📴
 🌅 🌄 🌇 🌆 🌃 🗻 🏯 🏣 🏰 🏦 🗽 🎡 🗼
-Hotel emoticonLove hotel emojiOffice emoticonSchool emoticonFactory emoticonHospital emoticonDepartment store emoticonConvenience storeWedding emoticonHouse emojiHouse emoticonMailbox emoticonMailbox with raised flag
-
 🏨 🏩 🏢 🏫 🏭 🏥 🏬 🏪 💒 🏡 🏠 📪 📫
-Postbox emojiMail emoticon for FacebookIncoming mail Facebok emoticonMemo signSchool bag emoticonOpen book emoticonPaint paletteMicrophone emoticonMegaphone emoticonHeadphones emoticonSaxophone emoticonTrumpet emoticonGuitar emoticon for Facebook
-
 📮 📩 📨 📝 🎒 📖 🎨 🎤 📣 🎧 🎷 🎺 🎸
-Public address systemLock emojiClosed lock with a keyKey Facebook emoticonOpen lock emoticonMagnifying glass emoticonLight bulb emoticonDollar sign for Facebook Pistol emoticonBomb emoticonCigarette emoticonPill emoticonSyringe emoji
-
 📢 🔒 🔐 🔑 🔓 🔎 💡 💲 🔫 💣 🚬 💊 💉
-Mask emoticonClapper boardFilm roleRestroomMens emoticonWomens emoticonChild emoticonVS emoticon versusUp emojiCool emoticon signWheelchair emoticonCurly loops signWC emoticon
-
 🎭 🎬 🎦 🚻 🚹 🚺 🚼 🆚 🆙 🆒 ♿ ➿ 🚾
 Congratulations emoticonSecret Facebook emoticonFree service symbolAvailable Facebook symbolsDestination emoticonFinger pointFull emoticonSale emoticonHave nothing emoticonMonth symbolOwn emoticonRequest emoticonWorking emoticon for Facebook
 
