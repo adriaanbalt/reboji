@@ -45,7 +45,8 @@ app.post('/webhook/', function (req, res) {
         if (event.message && event.message.text) {
             let text = "" + event.message.text
             // TODO connect to DB 
-            if ( !currentPuzzle  || text == "new ") {
+            console.log ( 'msg: ', currentPuzzle, text );
+            if ( !currentPuzzle || text == "new" ) {
                 currentPuzzle = getPuzzle();
                 sendTextMessage(sender, currentPuzzle.question );
             } else if ( text == currentPuzzle.answer) {
@@ -53,7 +54,7 @@ app.post('/webhook/', function (req, res) {
                 currentPuzzle = getPuzzle();
                 sendTextMessage(sender, currentPuzzle.question );
             } else if ( text != currentPuzzle.answer) {
-                sendTextMessage(sender, "Wrong. Try again.);
+                sendTextMessage(sender, "Wrong. Try again. Respond 'new' for a puzzle." );
                 sendTextMessage(sender, currentPuzzle.question );
             }
             // compare text to current puzzle question answer
