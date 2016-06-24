@@ -45,13 +45,16 @@ app.post('/webhook/', function (req, res) {
         if (event.message && event.message.text) {
             let text = "" + event.message.text
             // TODO connect to DB 
-            if ( text == "new" ){
+            if ( !currentPuzzle  || text == "new ") {
                 currentPuzzle = getPuzzle();
                 sendTextMessage(sender, currentPuzzle.question );
             } else if ( text == currentPuzzle.answer) {
                 sendTextMessage(sender, "Congratulations!" );
-            } else {
-                sendTextMessage(sender, "Wrong" );
+                currentPuzzle = getPuzzle();
+                sendTextMessage(sender, currentPuzzle.question );
+            } else if ( text != currentPuzzle.answer) {
+                sendTextMessage(sender, "Wrong. Try again.);
+                sendTextMessage(sender, currentPuzzle.question );
             }
             // compare text to current puzzle question answer
             // if ( checkPuzzleValidity( text ) ){
@@ -78,10 +81,7 @@ function getRandom( min, max ){
 }
 
 const token = "EAAF0MuSayRkBAPHrPoIX9MLbR9itpARYzI4dEBPEX8LVe3MmqZArZA0iJOtXNTqKwY4y1Qu11HEARGtqcxXjbcWNyUfyX7BocxtiDxg1KlLyu32VfyS9bkErZBayW8B7itHPntLZCMgMRW2ct7K2nynYBCQ3LloZD"
-let currentPuzzle = {
-    question: "✨",
-    answer: "star"
-};
+let currentPuzzle;
 
 function sendTextMessage(sender, text) {
     let messageData = { text:text }
@@ -125,7 +125,7 @@ let puzzles = [
         answer: "whale dick"
     },
     currentPuzzle = {
-        question: "👮💰🔫💊💉😵✊",
+        question: "👮✊💰💃👯💊💉😵🔫",
         answer: "democracy"
     }
 ]
