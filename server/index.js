@@ -43,7 +43,7 @@ app.post('/webhook/', function (req, res) {
         let event = req.body.entry[0].messaging[i]
         let sender = event.sender.id
         if (event.message && event.message.text) {
-            let text = "" + event.message.text.toLowercase();
+            let text = "" + event.message.text.toLowerCase();
             // TODO connect to DB 
             if ( !currentPuzzle || text == "new" ) {
                 currentPuzzle = getPuzzle();
