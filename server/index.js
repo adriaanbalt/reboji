@@ -109,6 +109,7 @@ app.listen(app.get('port'), function() {
 })
 
 let puzzles = [
+
     {
         question: "☕",
         answer: "coffee"
@@ -121,14 +122,14 @@ let puzzles = [
         question: "✨",
         answer: "star"
     },
-    // currentPuzzle = {
-    //     question: "🐳🍆",
-    //     answer: "whale dick"
-    // },
-    // currentPuzzle = {
-    //     question: "👮✊💰💃👯💊💉😵🔫",
-    //     answer: "democracy"
-    // },
+    currentPuzzle = {
+        question: "🐳🍆",
+        answer: "whale dick"
+    },
+    currentPuzzle = {
+        question: "👮✊💰💃👯💊💉😵🔫",
+        answer: "democracy"
+    },
     currentPuzzle = {
         question: "💍",
         answer: "ring"
@@ -156,75 +157,41 @@ let puzzles = [
     currentPuzzle = {
         question: "👎",
         answer: "boo"
+    },
+    currentPuzzle = {
+        question: "🐸",
+        answer: "frog"
+    },
+    currentPuzzle = {
+        question: "🏈",
+        answer: "football"
+    },
+    currentPuzzle = {
+        question: "🌹",
+        answer: "rose"
+    },
+    currentPuzzle = {
+        question: "🔪 🧀",
+        answer: "cut the cheese"
+    },
+    currentPuzzle = {
+        question: "👑 🐸",
+        answer: "cut the cheese"
+    },
+    currentPuzzle = {
+        question: "✈️ 🌙",
+        answer: "fly me to the moon"
     }
-    
-
-
 
 ]
 
 /*
-Facebook Smiley FaceFacebook big smile - Grin emoticonFacebook Sad EmoticonFacebook Cry EmoticonFacebook Tounge Out EmoticonFacebook Angel Smiley EmoticonFacebook Devil EmoticonFacebook Confused SmileyFacebook Wink SmileyFacebook Gasp EmoticonFacebook squint emoticonFacebook angry smileyFacebook Kiss Emoticon
 
-:)
+:)     :D     :(     :'(     :P     O:)     3:)     o.O     ;)     :O     -_-     >:O     :*
 
-:D
+<3     ^_^     8-)     8|     (^^^)     :|]     >:(     :v     :/     :3     ☺     (y)     <(")
 
-:(
-
-:'(
-
-:P
-
-O:)
-
-3:)
-
-o.O
-
-;)
-
-:O
-
--_-
-
->:O
-
-:*
-Facebook Heart EmoticonFacebook Kiki SmileyGlasses Smiley for FacebookFacebook Sunglasses SmileyFacebook Shark EmoticonFacebook Robot SmileyFacebook Grumpy SmileyFacebook Pacman EmoticonFacebook Unsure SmileyFacebook Curly Lips EmoticonFacebook Blush EmoticonThumb Up (y) Like Facebook EmoticonPoop - New Facebook Emoticon
-
-<3
-
-^_^
-
-8-)
-
-8|
-
-(^^^)
-
-:|]
-
->:(
-
-:v
-
-:/
-
-:3
-
-☺
-
-(y)
-
-:poop:
-Chris Putnam emoticonFacebook Penguin EmoticonPeace Fingers EmoticonFacebook Sun EmoticonFacebook Cloud IconUmbrella EmoticonFacebook Thunder EmoticonStars Facebook EmoticonsWhite star Facebook emoticonSnowflake Emoji for FacebookFacebook Snowman EmoticonCup Of Coffee Facebook EmoticonHot plate emoticon
-
-:putnam:
-
-<(")
-
-✌ ☀ ☁ ☔ ⚡ ✨ ⭐ ✳ ⛄ ☕ ♨
+ ✌ ☀ ☁ ☔ ⚡ ✨ ⭐ ✳ ⛄ ☕ ♨
 ⛵ ⛽ ✈ ⛲ ⛺ ⛪ ☎ ✉ ✂ 🚽 🛀 👙 💄
 👕 👘 👗 👢 👠 👡 💼 👜 👔 🎩 👒 👑 💍
 🚭 ⚽ ⚾ ⛳ 🏈 🏀 🎾 🎱 🎯 🎿 🎌 🏁 🏆
@@ -251,12 +218,7 @@ Chris Putnam emoticonFacebook Penguin EmoticonPeace Fingers EmoticonFacebook Sun
 📮 📩 📨 📝 🎒 📖 🎨 🎤 📣 🎧 🎷 🎺 🎸
 📢 🔒 🔐 🔑 🔓 🔎 💡 💲 🔫 💣 🚬 💊 💉
 🎭 🎬 🎦 🚻 🚹 🚺 🚼 🆚 🆙 🆒 ♿ ➿ 🚾
-Congratulations emoticonSecret Facebook emoticonFree service symbolAvailable Facebook symbolsDestination emoticonFinger pointFull emoticonSale emoticonHave nothing emoticonMonth symbolOwn emoticonRequest emoticonWorking emoticon for Facebook
-
 ㊗ ㊙ 🈂 🈳 🈁 🈯 🈵 🈹 🈚 🈷 🈶 🈸 🈺
-Good bargain symbolSquare symbolCircleRightwards arrowDownwards arrowLeftwards arrowUpwards arrowNortheast arrowNorthwest arrowSoutheast arrowSouthwest arrowUp right arrowArrow pointing down right 
 🉐 ⬜ ⚪ ➡ ⬇ ⬅ ⬆ ↗ ↖ ↘ ↙ ⤴ ⤵
-Ribbon emoticonClosed umbrella emojiDroplet emojiHammer Facebook emoticonSeat emoticonPart alternation markTrident emoticonNoob signMahjong tile red dragonGem stoneDiamond emoticonBlue diamond emojiOrange diamond
-
 🎀 🌂 💧 🔨 💺 〽 🔱 🔰 🀄 💎 💠 🔷 🔶
 */
