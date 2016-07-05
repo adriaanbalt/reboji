@@ -1,5 +1,7 @@
 'use strict'
 
+require( '../db' )('mongodb://heroku_jk541zkr:rrbc4u94f4kcegae7evbicj8t2@ds023074.mlab.com:23074/heroku_jk541zkr');
+
 const   express = require('express'),
         path = require('path'),
         cookieParser = require('cookie-parser'),
@@ -10,11 +12,10 @@ const   express = require('express'),
         Puzzle = mongoose.model('Puzzle'),
         Promise = require('bluebird');
 
+
 // promisifies methods on "Puzzle" and "Puzzle" instances
 Promise.promisifyAll(Puzzle);
 Promise.promisifyAll(Puzzle.prototype);
-
-require( '../db' )('mongodb://heroku_jk541zkr:rrbc4u94f4kcegae7evbicj8t2@ds023074.mlab.com:23074/heroku_jk541zkr');
 
 app.set('port', (process.env.PORT || 5000))
 
