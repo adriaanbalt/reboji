@@ -37,7 +37,6 @@
 
 	<script type="text/javascript">
 	 (function(){
-	 		var _this = this;
 			 document.getElementById('button').onclick = 
 					function () { 
 						var xmlhttp = new XMLHttpRequest();
@@ -46,21 +45,21 @@
 						xmlhttp.onload = function() {
 							if (xmlhttp.status === 200) {
 									console.log('response ' + xmlhttp.responseText);
-									this.document.getElementById("emojis").value = "";
-									this.document.getElementById("difficulty").value = "";
-									this.document.getElementById("answer").value = "";
-									this.document.getElementById("hint").value = "";
+									document.getElementById("emojis").value = "";
+									document.getElementById("difficulty").value = "";
+									document.getElementById("answer").value = "";
+									document.getElementById("hint").value = "";
 							} else {
 									console.log('Request failed.  Returned status of ' + xmlhttp.status);
 							}
 						};
-						console.log ( 'values: ', this.document.getElementById("name").value, this.document.getElementById("emojis").value, this.document.getElementById("answer").value, this.document.getElementById("hint").value );
+						console.log ( 'values: ', document.getElementById("name").value, document.getElementById("emojis").value, document.getElementById("answer").value, document.getElementById("hint").value );
 						xmlhttp.send(JSON.stringify({
 							_id: Number(new Date()).toString(),
-							pictogram: this.document.getElementById("emojis").value,
-							difficulty: this.document.getElementById("difficulty").value,
-							answer: this.document.getElementById("answer").value.split(','),
-							hint: this.document.getElementById("hint").value.split(',')
+							pictogram: document.getElementById("emojis").value,
+							difficulty: document.getElementById("difficulty").value,
+							answer: document.getElementById("answer").value.split(','),
+							hint: document.getElementById("hint").value.split(',')
 						}));
 					};
 
