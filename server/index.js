@@ -20,8 +20,6 @@ app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, '../public')));
 // allows cookie parsing (cookies are simple key value stores in the browser)
 app.use(cookieParser()); 
-// api routes
-app.use('/api', require('./routes')(app));
 
 // Index route - Serve index.html from root
 app.get('/', (req, res, next) => res.sendFile('/index.html', {
@@ -75,6 +73,9 @@ app.post('/webhook/', function (req, res) {
 app.listen(app.get('port'), function() {
     console.log('running on port', app.get('port'))
 });
+
+// api routes
+app.use('/api', require('./routes'));
 
 function getPuzzle() {
     return puzzles[ getRandom(0, puzzles.length ) ] == currentPuzzle ? getPuzzle() : puzzles[ getRandom(0, puzzles.length ) ];
