@@ -8,6 +8,8 @@ const   express = require('express'),
 
 require( '../db' )('mongodb://heroku_jk541zkr:rrbc4u94f4kcegae7evbicj8t2@ds023074.mlab.com:23074/heroku_jk541zkr');
 
+app.use('/api', require('./routes')(app));
+
 app.set('port', (process.env.PORT || 5000))
 
 // Process application/x-www-form-urlencoded
