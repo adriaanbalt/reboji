@@ -43,6 +43,8 @@
 						xmlhttp.open("POST", "/api/puzzle");
 						xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 						xmlhttp.onload = function() {
+							console.log( 'onload', document );
+							console.log( 'onload', document.getElementById("hint") );
 							if (xmlhttp.status === 200) {
 									console.log('response ' + xmlhttp.responseText);
 									document.getElementById("emojis").value = "";
