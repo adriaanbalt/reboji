@@ -76,13 +76,6 @@ module.exports = function(env) {
       new webpack.NoErrorsPlugin()
     );
   }
-
-
-  if(env === 'dev') {
-    webpackConfig.devtool = 'source-map';
-    webpack.debug = true;
-  }
-
 console.log ( 'env', env );
   if(env === 'prod') {
     webpackConfig.plugins.push(
