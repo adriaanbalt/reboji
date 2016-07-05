@@ -11,53 +11,84 @@
 	</head>
 	<body>
 		<h1>Reboji, a chat bot rebus emoji game</h1>
-		<h2>Add Puzzle:</h2>
-		<div>
-			<label>Name:</label>
-			<input type="text" id="name" name="name"/>
-		</div>
-		<div>
-			<label>Emojis:</label>
-			<input type="text" id="emojis" name="emojis"/>
-		</div>
-		<div>
-			<label>Answer:</label>
-			<input type="text" id="answer" name="answer"/>
-		</div>
-		<div>
-			<label>Hint:</label>
-			<input type="text" id="hint" name="hint"/>
-		</div>
-		<div>
-			<button id="button" onClick="">Add Puzzle</button>
-		</div>
+		<section>
+			<h2>Add Puzzle:</h2>
+			<div>
+				<label>Name:</label>
+				<input type="text" id="name" name="name"/>
+			</div>
+			<div>
+				<label>Emojis:</label>
+				<input type="text" id="emojis" name="emojis"/>
+			</div>
+			<div>
+				<label>Difficulty:</label>
+				<input type="text" id="difficulty" name="difficulty"/>
+			</div>
+			<div>
+				<label>Answer:</label>
+				<input type="text" id="answer" name="answer"/>
+			</div>
+			<div>
+				<label>Hint:</label>
+				<input type="text" id="hint" name="hint"/>
+			</div>
+			<div>
+				<button id="button" onClick="">Add Puzzle</button>
+			</div>
+		</section>
+		<section>
+			<h2>Current Puzzles:</h2>
+			<div>
+				
+			</div>
+		</section>
 	</body>
 
 	<script type="text/javascript">
 	 (function(){
 			 document.getElementById('button').onclick = 
 					function () { 
-						var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+						var xmlhttp = new XMLHttpRequest();
 						xmlhttp.open("POST", "/api/puzzle");
 						xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 						xmlhttp.onload = function() {
-							console.log ( 'xmlhttp', xmlhttp );
-								if (xmlhttp.status === 200) {
-										console.log('response ' + xmlhttp.responseText);
-								} else {
-										console.log('Request failed.  Returned status of ' + xmlhttp.status);
-								}
+							if (xmlhttp.status === 200) {
+									console.log('response ' + xmlhttp.responseText);
+							} else {
+									console.log('Request failed.  Returned status of ' + xmlhttp.status);
+							}
 						};
 						console.log ( 'values: ', document.getElementById("name").value, document.getElementById("emojis").value, document.getElementById("answer").value, document.getElementById("hint").value );
 						xmlhttp.send(JSON.stringify({
 							_id: Number(new Date()).toString(),
-							name:"Whale Dick", 
-							pictogram:"🐳🍆",
-							difficulty: 1,
-							answer: ['whale dick', 'moby dick'],
-							hint: ['whale', 'dick', 'adult']
+							name: document.getElementById("name").value, 
+							pictogram: document.getElementById("emojis").value,
+							difficulty: document.getElementById("difficulty").value,
+							answer: document.getElementById("answer").value.split(','),
+							hint: document.getElementById("hint").value.split(',')
 						}));
 					};
+
+				function getPuzzles() {
+					var xmlhttp = new XMLHttpRequest();
+					xmlhttp.open("GET", '/api/puzzle');
+					xmlhttp.onload = function() {
+							if (xmlhttp.status === 200) {
+									console.log('response ' + xmlhttp.responseText);
+							} else {
+									console.log('Request failed.  Returned status of ' + xmlhttp.status);
+							}
+					};
+					xmlhttp.send();
+					// var myStringArray = ["Hello","World"];
+					// var arrayLength = myStringArray.length;
+					// for (var i = 0; i < arrayLength; i++) {
+					// 	alert(myStringArray[i]);
+					//   //Do something
+					// }
+				}
+
 	 })();
 	</script>
 
