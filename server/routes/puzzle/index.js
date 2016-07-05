@@ -9,17 +9,17 @@ Promise.promisifyAll(Puzzle.prototype);
 module.exports = (router) => {
 
 	router.get('/puzzle', function(req, res, next) {
-		console.log ( "route api/puzzle");
+		console.log ( "route get api/puzzle");
 		Puzzle.findOneAsync({}, null, {})
 			.then(allPuzzles => res.json(allPuzzles))
 			.catch(err => !console.log(err) && next(err));
 	});
 
 	router.post('/puzzle', function(req, res, next) {
+		console.log ( "route POST api/puzzle", req.body);
 		var newObj = new Puzzle(req.body);
 	    newObj.saveAsync()
 	      .then( savedObj  => res.json(savedObj) );
 	});
-
 
 };
