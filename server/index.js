@@ -51,7 +51,7 @@ app.post('/webhook/', function (req, res) {
             console.log ( "allPuzzles", allPuzzles );
             return res.json(allPuzzles);
         })
-        .catch(err => !console.log(err) && next(err));
+        .catch(err => !console.log(err));
 
     for (let i = 0; i < messaging_events.length; i++) {
         let event = req.body.entry[0].messaging[i]
