@@ -2,6 +2,7 @@
 
 const   express = require('express'),
         path = require('path'),
+        cookieParser = require('cookie-parser'),
         bodyParser = require('body-parser'),
         request = require('request'),
         app = express();
@@ -15,10 +16,10 @@ app.use(bodyParser.urlencoded({extended: false}))
 
 // Process application/json
 app.use(bodyParser.json())
-
 // Set static folder
 app.use(express.static(path.join(__dirname, '../public')));
-
+// allows cookie parsing (cookies are simple key value stores in the browser)
+app.use(cookieParser()); 
 // api routes
 app.use('/api', require('./routes')(app));
 
@@ -70,6 +71,10 @@ app.post('/webhook/', function (req, res) {
     res.sendStatus(200)
 })
 
+// Spin up the server
+app.listen(app.get('port'), function() {
+    console.log('running on port', app.get('port'))
+});
 
 function getPuzzle() {
     return puzzles[ getRandom(0, puzzles.length ) ] == currentPuzzle ? getPuzzle() : puzzles[ getRandom(0, puzzles.length ) ];
@@ -100,12 +105,6 @@ function sendTextMessage(sender, text) {
         }
     })
 }
-
-// Spin up the server
-app.listen(app.get('port'), function() {
-    console.log('running on port', app.get('port'))
-});
-
 let puzzles = [
 
     {
