@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var EmojiSchema = new mongoose.Schema({
+var PuzzleSchema = new mongoose.Schema({
     
     _id: {
         type: String,
@@ -14,4 +14,4 @@ var EmojiSchema = new mongoose.Schema({
     
 });
 
-mongoose.model('Emoji', EmojiSchema);
+mongoose.model('Puzzle', PuzzleSchema);
