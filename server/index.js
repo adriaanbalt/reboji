@@ -8,8 +8,6 @@ const   express = require('express'),
 
 require( '../db' )('mongodb://heroku_jk541zkr:rrbc4u94f4kcegae7evbicj8t2@ds023074.mlab.com:23074/heroku_jk541zkr');
 
-app.use('/api', require('./routes')(app));
-
 app.set('port', (process.env.PORT || 5000))
 
 // Process application/x-www-form-urlencoded
@@ -18,20 +16,16 @@ app.use(bodyParser.urlencoded({extended: false}))
 // Process application/json
 app.use(bodyParser.json())
 
-
 // Set static folder
 app.use(express.static(path.join(__dirname, '../public')));
 
-// Index route
-// Serve index.html from root
+// api routes
+app.use('/api', require('./routes')(app));
+
+// Index route - Serve index.html from root
 app.get('/', (req, res, next) => res.sendFile('/index.html', {
   root: path.join(__dirname, '../public')
 }));
-
-
-// app.get('/', function (req, res) {
-//     res.send('Hello world, I am a chat bot')
-// })
 
 // for Facebook verification
 app.get('/webhook/', function (req, res) {
