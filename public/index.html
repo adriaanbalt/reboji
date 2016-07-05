@@ -1,47 +1,57 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Reboji</title>
-    <meta name="description" content="Emoji Rebus Puzzle Game Chat Bot For Facebook">
-    <meta name="author" content="Adriaan Balt Louis Scholvinck">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-    <meta charset="UTF-8">
-  </head>
-  <body>
-    <h1>Reboji, a chat bot rebus emoji game</h1>
-    <h2>Add Puzzle:</h2>
-    <div>
-      <label>Name:</label>
-      <input type="text" name="name"/>
-    </div>
-    <div>
-      <label>Emojis:</label>
-      <input type="text" name="emojis"/>
-    </div>
-    <div>
-      <label>Answer:</label>
-      <input type="text" name="answer"/>
-    </div>
-    <div>
-      <label>Hint:</label>
-      <input type="text" name="hint"/>
-    </div>
-    <div>
-      <button id="button" onClick="">Add Puzzle</button>
-    </div>
-  </body>
+	<head>
+		<title>Reboji</title>
+		<meta name="description" content="Emoji Rebus Puzzle Game Chat Bot For Facebook">
+		<meta name="author" content="Adriaan Balt Louis Scholvinck">
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes"/>
+		<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<h1>Reboji, a chat bot rebus emoji game</h1>
+		<h2>Add Puzzle:</h2>
+		<div>
+			<label>Name:</label>
+			<input type="text" name="name"/>
+		</div>
+		<div>
+			<label>Emojis:</label>
+			<input type="text" name="emojis"/>
+		</div>
+		<div>
+			<label>Answer:</label>
+			<input type="text" name="answer"/>
+		</div>
+		<div>
+			<label>Hint:</label>
+			<input type="text" name="hint"/>
+		</div>
+		<div>
+			<button id="button" onClick="">Add Puzzle</button>
+		</div>
+	</body>
 
-  <script type="text/javascript">
-   (function(){
-      console.log('hey' );
-      console.log('Hi', document.getElementById('button') );
-       document.getElementById('button').onclick = 
-          function () { 
-            console.log('Hi');
-          };
-   })();
-  </script>
+	<script type="text/javascript">
+	 (function(){
+			 document.getElementById('button').onclick = 
+					function () { 
+						var xhr = new XMLHttpRequest();
+						xhr.open('GET', encodeURI('api/puzzle'));
+						xhr.onload = function() {
+							console.log ( 'xhr', xhr );
+								if (xhr.status === 200) {
+										console.log('response ' + xhr.responseText);
+								}
+								else {
+										console.log('Request failed.  Returned status of ' + xhr.status);
+								}
+						};
+						xhr.send();
+						console.log('Hi');
+					};
+	 })();
+	</script>
 
 </html>
