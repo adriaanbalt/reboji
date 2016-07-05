@@ -41,11 +41,11 @@
 						xmlhttp.open("POST", "/json-handler");
 						xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 						xmlhttp.onload = function() {
-							console.log ( 'xhr', xhr );
-								if (xhr.status === 200) {
-										console.log('response ' + xhr.responseText);
+							console.log ( 'xmlhttp', xmlhttp );
+								if (xmlhttp.status === 200) {
+										console.log('response ' + xmlhttp.responseText);
 								} else {
-										console.log('Request failed.  Returned status of ' + xhr.status);
+										console.log('Request failed.  Returned status of ' + xmlhttp.status);
 								}
 						};
 						xmlhttp.send(JSON.stringify({
