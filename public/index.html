@@ -37,19 +37,24 @@
 	 (function(){
 			 document.getElementById('button').onclick = 
 					function () { 
-						var xhr = new XMLHttpRequest();
-						xhr.open('GET', encodeURI('api/puzzle'));
-						xhr.onload = function() {
+						var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+						xmlhttp.open("POST", "/json-handler");
+						xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+						xmlhttp.onload = function() {
 							console.log ( 'xhr', xhr );
 								if (xhr.status === 200) {
 										console.log('response ' + xhr.responseText);
-								}
-								else {
+								} else {
 										console.log('Request failed.  Returned status of ' + xhr.status);
 								}
 						};
-						xhr.send();
-						console.log('Hi');
+						xmlhttp.send(JSON.stringify({
+							name:"Whale Dick", 
+							pictogram:"🐳🍆",
+							difficulty: 1,
+							answer: ['whale dick', 'moby dick'],
+							hint: ['whale', 'dick', 'adult']
+						}));
 					};
 	 })();
 	</script>
