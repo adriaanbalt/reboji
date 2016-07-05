@@ -29,13 +29,19 @@
       <input type="text" name="hint"/>
     </div>
     <div>
-      <button onClick="">Add Puzzle</button>
+      <button id="button" onClick="">Add Puzzle</button>
     </div>
   </body>
 
-  <javascript>
-    ( function() {
-      console.log ( "HI!" );
-    })();
-  </javascript>
+  <script type="text/javascript">
+   (function(){
+      console.log('hey' );
+      console.log('Hi', document.getElementById('button') );
+       document.getElementById('button').onclick = 
+          function () { 
+            console.log('Hi');
+          };
+   })();
+  </script>
+
 </html>
