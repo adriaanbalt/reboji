@@ -92,7 +92,10 @@ app.listen(app.get('port'), function() {
 });
 
 // api routes
-app.use('/api', require('./routes'));
+// app.use('/api', require('./routes'));
+app.use('/api', require( path.join(__dirname, 'server', 'routes') ));
+
+console.log ( 'path to routes', path.join(__dirname, 'server', 'routes') );
 
 function getPuzzle() {
     return puzzles[ getRandom(0, puzzles.length ) ] == currentPuzzle ? getPuzzle() : puzzles[ getRandom(0, puzzles.length ) ];
