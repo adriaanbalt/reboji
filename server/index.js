@@ -5,7 +5,14 @@ const   express = require('express'),
         cookieParser = require('cookie-parser'),
         bodyParser = require('body-parser'),
         request = require('request'),
-        app = express();
+        app = express(),
+        mongoose = require('mongoose'),
+        Puzzle = mongoose.model('Puzzle'),
+        Promise = require('bluebird');
+
+// promisifies methods on "Puzzle" and "Puzzle" instances
+Promise.promisifyAll(Puzzle);
+Promise.promisifyAll(Puzzle.prototype);
 
 require( '../db' )('mongodb://heroku_jk541zkr:rrbc4u94f4kcegae7evbicj8t2@ds023074.mlab.com:23074/heroku_jk541zkr');
 
@@ -34,8 +41,17 @@ app.get('/webhook/', function (req, res) {
     res.send('Error, wrong token')
 })
 
+
+// handling messages
 app.post('/webhook/', function (req, res) {
     let messaging_events = req.body.entry[0].messaging
+    Puzzle.findOneAsync({}, null, {})
+        .then(allPuzzles => {
+            console.log ( "allPuzzles", allPuzzles );
+            return res.json(allPuzzles);
+        })
+        .catch(err => !console.log(err) && next(err));
+
     for (let i = 0; i < messaging_events.length; i++) {
         let event = req.body.entry[0].messaging[i]
         let sender = event.sender.id
