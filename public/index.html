@@ -40,15 +40,16 @@
 			 document.getElementById('button').onclick = 
 					function () { 
 						var xmlhttp = new XMLHttpRequest();
+	 					var _this = this;
 						xmlhttp.open("POST", "/api/puzzle");
 						xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 						xmlhttp.onload = function() {
 							if (xmlhttp.status === 200) {
 									console.log('response ' + xmlhttp.responseText);
-									document.getElementById("emojis").value = "";
-									document.getElementById("difficulty").value = "";
-									document.getElementById("answer").value = "";
-									document.getElementById("hint").value = "";
+									this.document.getElementById("emojis").value = "";
+									this.document.getElementById("difficulty").value = "";
+									this.document.getElementById("answer").value = "";
+									this.document.getElementById("hint").value = "";
 							} else {
 									console.log('Request failed.  Returned status of ' + xmlhttp.status);
 							}
