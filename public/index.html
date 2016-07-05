@@ -38,7 +38,7 @@
 			 document.getElementById('button').onclick = 
 					function () { 
 						var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-						xmlhttp.open("POST", "/json-handler");
+						xmlhttp.open("POST", "/api/puzzle");
 						xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 						xmlhttp.onload = function() {
 							console.log ( 'xmlhttp', xmlhttp );
