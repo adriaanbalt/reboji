@@ -45,6 +45,10 @@
 						xmlhttp.onload = function() {
 							if (xmlhttp.status === 200) {
 									console.log('response ' + xmlhttp.responseText);
+									document.getElementById("emojis").value = "";
+									document.getElementById("difficulty").value = "";
+									document.getElementById("answer").value = "";
+									document.getElementById("hint").value = "";
 							} else {
 									console.log('Request failed.  Returned status of ' + xmlhttp.status);
 							}
