@@ -4,8 +4,9 @@ const   express = require('express'),
         path = require('path'),
         bodyParser = require('body-parser'),
         request = require('request'),
-        mongoose = require('mongoose'),
         app = express();
+
+require( '../db' )('mongodb://heroku_jk541zkr:rrbc4u94f4kcegae7evbicj8t2@ds023074.mlab.com:23074/heroku_jk541zkr');
 
 app.set('port', (process.env.PORT || 5000))
 
@@ -108,8 +109,6 @@ function sendTextMessage(sender, text) {
 app.listen(app.get('port'), function() {
     console.log('running on port', app.get('port'))
 });
-
-mongoose.connect('mongodb://heroku_jk541zkr:rrbc4u94f4kcegae7evbicj8t2@ds023074.mlab.com:23074/heroku_jk541zkr');
 
 let puzzles = [
 
