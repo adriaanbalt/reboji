@@ -20,6 +20,7 @@
   "dependencies": {
     "bluebird": "^3.4.1",
     "body-parser": "^1.15.0",
+    "cookie-parser": "^1.4.3",
     "express": "^4.13.3",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
