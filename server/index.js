@@ -58,16 +58,18 @@ app.post('/webhook/', function (req, res) {
         let sender = event.sender.id
         if (event.message && event.message.text) {
             let text = "" + event.message.text.toLowerCase();
+
+            console.log ( 'checkPuzzleAnswer( text )', checkPuzzleAnswer( text ) );
             // TODO connect to DB 
             if ( !currentPuzzle || text == "new" ) {
                 currentPuzzle = getPuzzle();
                 sendTextMessage(sender, "Here's a new puzzle: " + currentPuzzle.question );
-            } else if ( text == currentPuzzle.answer) {
+            } else if ( checkPuzzleAnswer( text ) ) {
                 sendTextMessage(sender, "!!!!!!!!!!!!!!!!" );
                 sendTextMessage(sender, "Congratulations! Here's a new puzzle" );
                 currentPuzzle = getPuzzle();
                 sendTextMessage(sender, currentPuzzle.question );
-            } else if ( text != currentPuzzle.answer) {
+            } else if ( !checkPuzzleAnswer( text ) ) {
                 sendTextMessage(sender, "Wrong. Try again or respond 'new' for a different puzzle." );
                 sendTextMessage(sender, "current puzzle: " + currentPuzzle.question );
             }
@@ -103,6 +105,15 @@ function getPuzzle() {
 
 function getRandom( min, max ){
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function checkPuzzleAnswer( text ) {
+    for ( var i=0; i<currentPuzzle.answer.length; i++ ){
+        if ( currentPuzzle.answer[i] == text ) {
+            return true;
+        }
+    }
+    return false;
 }
 
 const token = "EAAF0MuSayRkBAPHrPoIX9MLbR9itpARYzI4dEBPEX8LVe3MmqZArZA0iJOtXNTqKwY4y1Qu11HEARGtqcxXjbcWNyUfyX7BocxtiDxg1KlLyu32VfyS9bkErZBayW8B7itHPntLZCMgMRW2ct7K2nynYBCQ3LloZD"
