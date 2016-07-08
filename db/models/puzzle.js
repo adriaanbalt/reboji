@@ -6,7 +6,6 @@ var PuzzleSchema = new mongoose.Schema({
         type: String,
         unique: true
     },
-    name: String, // the name of this puzzle
     pictogram: String, // a combination of emojis
     difficulty: String, // 0
     answer: String, // []
