@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const Puzzle = mongoose.model('Puzzle');
-const Promise = require('bluebird');
+var mongoose = require('mongoose');
+var Puzzle = mongoose.model('Puzzle');
+var Promise = require('bluebird');
 
 // promisifies methods on "Puzzle" and "Puzzle" instances
 Promise.promisifyAll(Puzzle);
@@ -18,7 +18,6 @@ module.exports = (router) => {
 	router.post('/puzzle', function(req, res, next) {
 		console.log ( "route POST api/puzzle", req.body, newObj);
 		var newObj = new Puzzle(req.body);
-		console.log ( " >> route POST after api/puzzle", req.body, newObj);
 	    newObj.saveAsync()
 	      .then( savedObj  => res.json(savedObj) );
 	});
