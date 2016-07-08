@@ -15,19 +15,19 @@
 			<h2>Add Puzzle:</h2>
 			<div>
 				<label>Emojis:</label>
-				<input type="text" id="emojis" name="emojis"/>
+				<input type="text" id="emojis" />
 			</div>
 			<div>
 				<label>Difficulty:</label>
-				<input type="text" id="difficulty" name="difficulty"/>
+				<input type="text" id="difficulty" />
 			</div>
 			<div>
 				<label>Answer:</label>
-				<input type="text" id="answer" name="answer"/>
+				<input type="text" id="answer" />
 			</div>
 			<div>
 				<label>Hint:</label>
-				<input type="text" id="hint" name="hint"/>
+				<input type="text" id="hint" />
 			</div>
 			<div>
 				<button id="button" onClick="">Add Puzzle</button>
@@ -43,8 +43,7 @@
 						xmlhttp.open("POST", "/api/puzzle");
 						xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 						xmlhttp.onload = function() {
-							console.log( 'onload', document );
-							console.log( 'onload', document.getElementById("hint") );
+							console.log( 'onload', xmlhttp.status, xmlhttp.responseText );
 							if (xmlhttp.status === 200) {
 									console.log('response ' + xmlhttp.responseText);
 									document.getElementById("emojis").value = "";
@@ -55,13 +54,13 @@
 									console.log('Request failed.  Returned status of ' + xmlhttp.status);
 							}
 						};
-						console.log ( 'values: ', document.getElementById("emojis").value, document.getElementById("difficulty").value , document.getElementById("answer").value, document.getElementById("hint").value );
+						console.log ( 'values: ',  document.getElementById("emojis").value, document.getElementById("answer").value, document.getElementById("hint").value );
 						xmlhttp.send(JSON.stringify({
 							_id: Number(new Date()).toString(),
 							pictogram: document.getElementById("emojis").value,
 							difficulty: document.getElementById("difficulty").value,
-							answer: document.getElementById("answer").value,
-							hint: document.getElementById("hint").value
+							answer: document.getElementById("answer").value.split(','),
+							hint: document.getElementById("hint").value.split(',')
 						}));
 					};
 
