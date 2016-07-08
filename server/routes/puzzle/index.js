@@ -16,8 +16,9 @@ module.exports = (router) => {
 	});
 
 	router.post('/puzzle', function(req, res, next) {
-		var newObj = new Puzzle(req.body);
 		console.log ( "route POST api/puzzle", req.body, newObj);
+		var newObj = new Puzzle(req.body);
+		console.log ( " >> route POST after api/puzzle", req.body, newObj);
 	    newObj.saveAsync()
 	      .then( savedObj  => res.json(savedObj) );
 	});
