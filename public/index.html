@@ -54,13 +54,13 @@
 									console.log('Request failed.  Returned status of ' + xmlhttp.status);
 							}
 						};
-						console.log ( 'values: ',  document.getElementById("emojis").value, document.getElementById("answer").value, document.getElementById("hint").value );
+						console.log ( 'values: ',  document.getElementById("emojis").value, document.getElementById("answer").value, document.getElementById("difficulty").value, document.getElementById("hint").value );
 						xmlhttp.send(JSON.stringify({
 							_id: Number(new Date()).toString(),
 							pictogram: document.getElementById("emojis").value,
 							difficulty: document.getElementById("difficulty").value,
-							answer: document.getElementById("answer").value.split(','),
-							hint: document.getElementById("hint").value.split(',')
+							answer: document.getElementById("answer").value,
+							hint: document.getElementById("hint").value
 						}));
 					};
 
