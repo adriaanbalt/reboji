@@ -18,7 +18,10 @@ Promise.promisifyAll(Puzzle);
 Promise.promisifyAll(Puzzle.prototype);
 
 let puzzles = Puzzle.findAsync({}, null, {})
-        .then(allPuzzles => allPuzzles)
+        .then(allPuzzles => {
+            console.log ( 'puzzles', allPuzzles);
+            return allPuzzles;
+        })
         .catch(err => !console.log(err) && next(err));
 
 
