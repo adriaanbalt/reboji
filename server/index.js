@@ -93,13 +93,15 @@ app.use('/api', require( path.join(__dirname, 'routes') ));
 console.log ( 'path to routes', path.join(__dirname, 'routes') );
 
 function getPuzzle() {
-    
-    return Puzzle.findOneAsync({}, null, {})
-            .then(currentPuzzle => {
-                return currentPuzzle;
+    let returnPuzzle;
+    Puzzle.findOneAsync({}, null, {})
+            .then(puzzle => {
+                returnPuzzle = puzzle;
             })
             .catch(err => !console.log(err) && next(err));
 
+    console.log ( 'returnPuzzle', returnPuzzle );
+    return returnPuzzle;
     // return puzzles[ getRandom(0, puzzles.length ) ] == currentPuzzle ? getPuzzle() : puzzles[ getRandom(0, puzzles.length ) ];
 }
 
