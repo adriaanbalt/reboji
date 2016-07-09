@@ -46,13 +46,6 @@ app.get('/webhook/', function (req, res) {
 // handling messages
 app.post('/webhook/', function (req, res) {
     let messaging_events = req.body.entry[0].messaging
-    Puzzle.findOneAsync({}, null, {})
-        .then(allPuzzles => {
-            console.log ( "allPuzzles", allPuzzles );
-            return res.json(allPuzzles);
-        })
-        .catch(err => !console.log(err));
-
     for (let i = 0; i < messaging_events.length; i++) {
         let event = req.body.entry[0].messaging[i]
         let sender = event.sender.id
@@ -100,7 +93,14 @@ app.use('/api', require( path.join(__dirname, 'routes') ));
 console.log ( 'path to routes', path.join(__dirname, 'routes') );
 
 function getPuzzle() {
-    return puzzles[ getRandom(0, puzzles.length ) ] == currentPuzzle ? getPuzzle() : puzzles[ getRandom(0, puzzles.length ) ];
+    
+    return Puzzle.findOneAsync({}, null, {})
+            .then(currentPuzzle => {
+                return currentPuzzle;
+            })
+            .catch(err => !console.log(err) && next(err));
+
+    // return puzzles[ getRandom(0, puzzles.length ) ] == currentPuzzle ? getPuzzle() : puzzles[ getRandom(0, puzzles.length ) ];
 }
 
 function getRandom( min, max ){
@@ -147,67 +147,67 @@ let puzzles = [
         question: "👗",
         answer: "dress"
     },
-    currentPuzzle = {
+    {
         question: "✨",
         answer: "star"
     },
-    currentPuzzle = {
+    {
         question: "🐳🍆",
         answer: "whale dick"
     },
-    currentPuzzle = {
+    {
         question: "👮✊💰💃👯💊💉😵🔫",
         answer: "democracy"
     },
-    currentPuzzle = {
+    {
         question: "💍",
         answer: "ring"
     },
-    currentPuzzle = {
+    {
         question: "👾",
         answer: "octopus"
     },
-    currentPuzzle = {
+    {
         question: "⚽",
         answer: "soccer"
     },
-    currentPuzzle = {
+    {
         question: "👌",
         answer: "ok"
     },
-    currentPuzzle = {
+    {
         question: "👊",
         answer: "fist"
     },
-    currentPuzzle = {
+    {
         question: "👏",
         answer: "clap"
     },
-    currentPuzzle = {
+    {
         question: "👎",
         answer: "boo"
     },
-    currentPuzzle = {
+    {
         question: "🐸",
         answer: "frog"
     },
-    currentPuzzle = {
+    {
         question: "🏈",
         answer: "football"
     },
-    currentPuzzle = {
+    {
         question: "🌹",
         answer: "rose"
     },
-    currentPuzzle = {
+    {
         question: "🔪 🧀",
         answer: "cut the cheese"
     },
-    currentPuzzle = {
+    {
         question: "👑 🐸",
         answer: "cut the cheese"
     },
-    currentPuzzle = {
+    {
         question: "✈️ 🌙",
         answer: "fly me to the moon"
     }
