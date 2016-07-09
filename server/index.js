@@ -17,6 +17,11 @@ const   express = require('express'),
 Promise.promisifyAll(Puzzle);
 Promise.promisifyAll(Puzzle.prototype);
 
+let puzzles = Puzzle.findAsync({}, null, {})
+        .then(allPuzzles => allPuzzles)
+        .catch(err => !console.log(err) && next(err));
+
+
 app.set('port', (process.env.PORT || 5000))
 
 // Process application/x-www-form-urlencoded
@@ -141,9 +146,6 @@ function sendTextMessage(sender, text) {
     })
 }
 
-let puzzles = Puzzle.findAsync({}, null, {})
-        .then(allPuzzles => allPuzzles)
-        .catch(err => !console.log(err) && next(err));
 
 // let puzzles = [
 
