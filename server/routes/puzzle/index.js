@@ -10,7 +10,7 @@ module.exports = (router) => {
 
 	router.get('/puzzle', function(req, res, next) {
 		console.log ( "route get api/puzzle");
-		Puzzle.findOneAsync({}, null, {})
+		Puzzle.findAsync({}, null, {})
 			.then(allPuzzles => res.json(allPuzzles))
 			.catch(err => !console.log(err) && next(err));
 	});
