@@ -93,16 +93,16 @@ app.use('/api', require( path.join(__dirname, 'routes') ));
 console.log ( 'path to routes', path.join(__dirname, 'routes') );
 
 function getPuzzle() {
-    let returnPuzzle;
-    Puzzle.findOneAsync({}, null, {})
-            .then(puzzle => {
-                returnPuzzle = puzzle;
-            })
-            .catch(err => !console.log(err) && next(err));
+    // let returnPuzzle;
+    // Puzzle.findOneAsync({}, null, {})
+    //         .then(puzzle => {
+    //             returnPuzzle = puzzle;
+    //         })
+    //         .catch(err => !console.log(err) && next(err));
 
-    console.log ( 'returnPuzzle', returnPuzzle );
-    return returnPuzzle;
-    // return puzzles[ getRandom(0, puzzles.length ) ] == currentPuzzle ? getPuzzle() : puzzles[ getRandom(0, puzzles.length ) ];
+    console.log ( 'puzzles', puzzles );
+    // return returnPuzzle;
+    return puzzles[ getRandom(0, puzzles.length ) ] == currentPuzzle ? getPuzzle() : puzzles[ getRandom(0, puzzles.length ) ];
 }
 
 function getRandom( min, max ){
@@ -139,82 +139,87 @@ function sendTextMessage(sender, text) {
         }
     })
 }
-let puzzles = [
 
-    {
-        question: "☕",
-        answer: "coffee"
-    },
-    {
-        question: "👗",
-        answer: "dress"
-    },
-    {
-        question: "✨",
-        answer: "star"
-    },
-    {
-        question: "🐳🍆",
-        answer: "whale dick"
-    },
-    {
-        question: "👮✊💰💃👯💊💉😵🔫",
-        answer: "democracy"
-    },
-    {
-        question: "💍",
-        answer: "ring"
-    },
-    {
-        question: "👾",
-        answer: "octopus"
-    },
-    {
-        question: "⚽",
-        answer: "soccer"
-    },
-    {
-        question: "👌",
-        answer: "ok"
-    },
-    {
-        question: "👊",
-        answer: "fist"
-    },
-    {
-        question: "👏",
-        answer: "clap"
-    },
-    {
-        question: "👎",
-        answer: "boo"
-    },
-    {
-        question: "🐸",
-        answer: "frog"
-    },
-    {
-        question: "🏈",
-        answer: "football"
-    },
-    {
-        question: "🌹",
-        answer: "rose"
-    },
-    {
-        question: "🔪 🧀",
-        answer: "cut the cheese"
-    },
-    {
-        question: "👑 🐸",
-        answer: "cut the cheese"
-    },
-    {
-        question: "✈️ 🌙",
-        answer: "fly me to the moon"
-    }
+let puzzles = Puzzle.findAsync({}, null, {})
+        .then(allPuzzles => allPuzzles)
+        .catch(err => !console.log(err) && next(err));
 
-]
+// let puzzles = [
+
+//     {
+//         question: "☕",
+//         answer: "coffee"
+//     },
+//     {
+//         question: "👗",
+//         answer: "dress"
+//     },
+//     {
+//         question: "✨",
+//         answer: "star"
+//     },
+//     {
+//         question: "🐳🍆",
+//         answer: "whale dick"
+//     },
+//     {
+//         question: "👮✊💰💃👯💊💉😵🔫",
+//         answer: "democracy"
+//     },
+//     {
+//         question: "💍",
+//         answer: "ring"
+//     },
+//     {
+//         question: "👾",
+//         answer: "octopus"
+//     },
+//     {
+//         question: "⚽",
+//         answer: "soccer"
+//     },
+//     {
+//         question: "👌",
+//         answer: "ok"
+//     },
+//     {
+//         question: "👊",
+//         answer: "fist"
+//     },
+//     {
+//         question: "👏",
+//         answer: "clap"
+//     },
+//     {
+//         question: "👎",
+//         answer: "boo"
+//     },
+//     {
+//         question: "🐸",
+//         answer: "frog"
+//     },
+//     {
+//         question: "🏈",
+//         answer: "football"
+//     },
+//     {
+//         question: "🌹",
+//         answer: "rose"
+//     },
+//     {
+//         question: "🔪 🧀",
+//         answer: "cut the cheese"
+//     },
+//     {
+//         question: "👑 🐸",
+//         answer: "cut the cheese"
+//     },
+//     {
+//         question: "✈️ 🌙",
+//         answer: "fly me to the moon"
+//     }
+
+// ]
 
 /*
 
