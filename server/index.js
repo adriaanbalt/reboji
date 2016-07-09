@@ -100,9 +100,10 @@ function getPuzzle() {
     //         })
     //         .catch(err => !console.log(err) && next(err));
 
-    console.log ( 'puzzles', puzzles );
     // return returnPuzzle;
-    return puzzles[ getRandom(0, puzzles.length ) ] == currentPuzzle ? getPuzzle() : puzzles[ getRandom(0, puzzles.length ) ];
+    let newPuzz = puzzles[ getRandom(0, puzzles.length ) ];// == currentPuzzle ? getPuzzle() : puzzles[ getRandom(0, puzzles.length ) ];
+    console.log ( 'puzzles', puzzles.length, newPuzz );
+    return newPuzz;
 }
 
 function getRandom( min, max ){
