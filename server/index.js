@@ -18,6 +18,16 @@ Promise.promisifyAll(Puzzle);
 Promise.promisifyAll(Puzzle.prototype);
 
 
+let puzzles = [];
+
+Puzzle.findAsync({}, null, {})
+    .then(allPuzzles => {
+        console.log ( 'puzzles b4', puzzles );
+        puzzles = allPuzzles;
+        console.log ( 'puzzles', puzzles, allPuzzles);
+        return allPuzzles;
+    })
+    .catch(err => !console.log(err) && next(err));
 
 app.set('port', (process.env.PORT || 5000))
 
@@ -47,16 +57,6 @@ app.get('/webhook/', function (req, res) {
 
 // handling messages
 app.post('/webhook/', function (req, res) {
-
-    let puzzles = Puzzle.findAsync({}, null, {})
-            .then(allPuzzles => {
-                console.log ( 'puzzles b4', puzzles );
-                puzzles = allPuzzles;
-                console.log ( 'puzzles', puzzles, allPuzzles);
-                return allPuzzles;
-            })
-            .catch(err => !console.log(err) && next(err));
-
     let messaging_events = req.body.entry[0].messaging
     for (let i = 0; i < messaging_events.length; i++) {
         let event = req.body.entry[0].messaging[i]
