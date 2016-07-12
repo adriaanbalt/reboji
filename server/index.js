@@ -64,7 +64,7 @@ app.post('/webhook/', function (req, res) {
         if (event.message && event.message.text) {
             let text = "" + event.message.text.toLowerCase();
 
-            // console.log ( 'checkPuzzleAnswer( text )', checkPuzzleAnswer( text ) );
+            console.log ( 'FB webbook > ', currentPuzzle, puzzles );
             // TODO connect to DB 
             if ( !currentPuzzle || text == "new" ) {
                 currentPuzzle = getPuzzle();
