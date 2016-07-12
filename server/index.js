@@ -62,7 +62,6 @@ app.post('/webhook/', function (req, res) {
         if (event.message && event.message.text) {
             let text = "" + event.message.text.toLowerCase();
 
-            console.log ( 'FB webbook > ', currentPuzzle, puzzles );
             // TODO connect to DB 
             if ( !currentPuzzle || text == "new" ) {
                 currentPuzzle = getPuzzle();
@@ -76,6 +75,9 @@ app.post('/webhook/', function (req, res) {
                 sendTextMessage(sender, "Wrong. Try again or respond 'new' for a different puzzle." );
                 sendTextMessage(sender, "current puzzle: " + currentPuzzle.question );
             }
+
+            console.log ( 'FB webbook > ', currentPuzzle );
+            
             // compare text to current puzzle question answer
             // if ( checkPuzzleValidity( text ) ){
             //     sendSuccess();
