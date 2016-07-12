@@ -77,7 +77,7 @@ app.post('/webhook/', function (req, res) {
             }
 
             console.log ( 'FB webbook > ', currentPuzzle );
-            
+
             // compare text to current puzzle question answer
             // if ( checkPuzzleValidity( text ) ){
             //     sendSuccess();
@@ -121,12 +121,13 @@ function getRandom( min, max ){
 }
 
 function checkPuzzleAnswer( text ) {
-    for ( var i=0; i<currentPuzzle.answer.length; i++ ){
-        if ( currentPuzzle.answer[i] == text ) {
-            return true;
-        }
-    }
-    return false;
+    return ( currentPuzzle.answer.toLowerCase() == text.toLowerCase() );
+    // for ( var i=0; i<currentPuzzle.answer.length; i++ ){
+    //     if ( currentPuzzle.answer[i] == text ) {
+    //         return true;
+    //     }
+    // }
+    // return false;
 }
 
 const token = "EAAF0MuSayRkBAMi8pb5w6X2qf3rsk1wF8UCD8Nhpho0yiBknETthNd2b8o4eM0bUXZBiar1jfSlfeBJneMfSoiFjZA77gMdroLnnai7ClsjU4ZBdpFz69ZAnX2Jx1uy1WzZAc7mJbCntbQkErviZCd2obVJ7MDMfQZD"
