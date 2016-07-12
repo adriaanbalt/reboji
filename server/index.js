@@ -22,9 +22,8 @@ let puzzles = [];
 
 Puzzle.findAsync({}, null, {})
     .then(allPuzzles => {
-        console.log ( 'puzzles b4', puzzles );
         puzzles = allPuzzles;
-        console.log ( 'puzzles', puzzles, allPuzzles);
+        console.log ( 'puzzles', puzzles);
         return allPuzzles;
     })
     .catch(err => !console.log(err) && next(err));
@@ -101,8 +100,6 @@ app.listen(app.get('port'), function() {
 // api routes
 // app.use('/api', require('./routes'));
 app.use('/api', require( path.join(__dirname, 'routes') ));
-
-console.log ( 'path to routes', path.join(__dirname, 'routes') );
 
 function getPuzzle() {
     // let returnPuzzle;
