@@ -23,7 +23,6 @@ let puzzles = [];
 Puzzle.findAsync({}, null, {})
     .then(allPuzzles => {
         puzzles = allPuzzles;
-        console.log ( 'puzzles', puzzles);
         return allPuzzles;
     })
     .catch(err => !console.log(err) && next(err));
