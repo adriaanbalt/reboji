@@ -65,15 +65,15 @@ app.post('/webhook/', function (req, res) {
             // TODO connect to DB 
             if ( !currentPuzzle || text == "new" ) {
                 currentPuzzle = getPuzzle();
-                sendTextMessage(sender, "Here's a new puzzle: " + currentPuzzle.question );
+                sendTextMessage(sender, "Here's a new puzzle: " + currentPuzzle.pictogram );
             } else if ( checkPuzzleAnswer( text ) ) {
                 sendTextMessage(sender, "!!!!!!!!!!!!!!!!" );
                 sendTextMessage(sender, "Congratulations! Here's a new puzzle" );
                 currentPuzzle = getPuzzle();
-                sendTextMessage(sender, currentPuzzle.question );
+                sendTextMessage(sender, currentPuzzle.pictogram );
             } else if ( !checkPuzzleAnswer( text ) ) {
                 sendTextMessage(sender, "Wrong. Try again or respond 'new' for a different puzzle." );
-                sendTextMessage(sender, "current puzzle: " + currentPuzzle.question );
+                sendTextMessage(sender, "current puzzle: " + currentPuzzle.pictogram );
             }
 
             console.log ( 'FB webbook > ', currentPuzzle );
