@@ -18,12 +18,12 @@ var UserSchema = new mongoose.Schema({
     guesses: Array,
     puzzles: [
         { 
-            type: mongoose.Schema.Types.ObjectId,
+            type: String,
             ref: 'Puzzle' 
         }
     ],
     currentPuzzle: { 
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref: 'Puzzle' 
     }
 });
