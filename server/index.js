@@ -64,13 +64,6 @@ var newObj = new User(
     }
 );
 
-.populate({
-  path: 'fans',
-  match: { age: { $gte: 21 }},
-  select: 'name -_id',
-  options: { limit: 5 }
-})
-
 newObj.saveAsync()
   .then( savedObj  => {
     console.log ( 'response from user save:', savedObj);
