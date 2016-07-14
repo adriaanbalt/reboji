@@ -70,9 +70,8 @@ app.get('/webhook/', function (req, res) {
 // });
 
 User.find({ fbId:"1064814340266637" })
-    .populate({ path: "puzzles" })
-    .then( populatedObj => {
-        console.log ( 'populatedObj',populatedObj );
+    .then( userObj => {
+        console.log ( 'userObj',userObj );
     })
 // webhook sender { sender: { id: '1064814340266637' },
 //   recipient: { id: '207689382963492' },
