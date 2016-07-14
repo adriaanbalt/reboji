@@ -65,10 +65,10 @@ var newObj = new User(
 );
 newObj.saveAsync()
   .then( savedObj  => {
-    console.log ( 'response frmo user save: ', savedObj);
-    User.populate(savedObj, {path:"puzzles"} )
+    console.log ( 'response from user save:', savedObj);
+    User.populate( savedObj, ["puzzles"] )
 }).then( populatedObj => {
-    console.log ( "USER populated puzzles", populatedObj )
+    console.log ( "USER populated puzzles:", populatedObj )
 });
 // webhook sender { sender: { id: '1064814340266637' },
 //   recipient: { id: '207689382963492' },
