@@ -71,12 +71,13 @@ app.get('/webhook/', function (req, res) {
 
 User.findAsync({ fbID:"1064814340266637" })
     .then( userObj => {
-        console.log ( 'userObj', userObj);
-        return User.populate({path:"currentPuzzle"})
+        console.log ( 'userObj!!!', userObj);
+        return User.populate(userObj, {path:"currentPuzzle"})
     })
     .then( populatedObj => {
-        console.log ( "populatedObj", populatedObj );
+        console.log ( "populatedObj!!", populatedObj );
     })
+    .catch((err) => console.log(err));
 
 // User.findOne({ fbID:"1064814340266637" })
 //     .populate('currentPuzzle') // only return the Persons name
@@ -101,7 +102,6 @@ app.post('/webhook/', function (req, res) {
         let sender = event.sender.id
 
         console.log ( 'webhook sender', event );
-
 
         // User.findAsync({}, null, {})
         //     .then(allUsers => {
