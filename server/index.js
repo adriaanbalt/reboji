@@ -71,11 +71,20 @@ app.get('/webhook/', function (req, res) {
 
 User.findAsync({ fbID:"1064814340266637" })
     .then( userObj => {
-        User.populate( userObj._id, {path:"currentPuzzle"})
+        console.log ( 'userObj', userObj);
+        return User.populate({path:"currentPuzzle"})
     })
     .then( populatedObj => {
         console.log ( "populatedObj", populatedObj );
     })
+
+// User.findOne({ fbID:"1064814340266637" })
+//     .populate('currentPuzzle') // only return the Persons name
+//     .exec(function (err, story) {
+//      if (err) return handleError(err);
+//      console.log('The creator is %s', story.currentPuzzle);
+//     })
+
 // webhook sender { sender: { id: '1064814340266637' },
 //   recipient: { id: '207689382963492' },
 //   timestamp: 0,
