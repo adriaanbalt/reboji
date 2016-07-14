@@ -63,10 +63,18 @@ var newObj = new User(
         currentPuzzle: ["1234"]
     }
 );
+
+.populate({
+  path: 'fans',
+  match: { age: { $gte: 21 }},
+  select: 'name -_id',
+  options: { limit: 5 }
+})
+
 newObj.saveAsync()
   .then( savedObj  => {
     console.log ( 'response from user save:', savedObj);
-    User.populate( savedObj, ["puzzles"] )
+    User.find({ fbId:"1064814340266637" }).populate({ path: "puzzles" })
 }).then( populatedObj => {
     console.log ( "USER populated puzzles:", populatedObj )
 });
