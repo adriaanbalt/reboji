@@ -69,7 +69,7 @@ app.get('/webhook/', function (req, res) {
 //     console.log ( 'response from user save:', savedObj);
 // });
 
-User.find({ fbId:"1064814340266637" })
+User.findAsync({ fbId:"1064814340266637" })
     .then( userObj => {
         console.log ( 'userObj',userObj );
     })
