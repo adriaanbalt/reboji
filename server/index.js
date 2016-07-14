@@ -71,7 +71,10 @@ app.get('/webhook/', function (req, res) {
 
 User.findAsync({ fbID:"1064814340266637" })
     .then( userObj => {
-        console.log ( 'userObj',userObj );
+        User.populate( userObj, ["puzzles"])
+    })
+    .then( populatedObj => {
+        console.log ( "populatedObj", populatedObj );
     })
 // webhook sender { sender: { id: '1064814340266637' },
 //   recipient: { id: '207689382963492' },
