@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 
 var UserSchema = new mongoose.Schema({
-    email: String,
     createdDate: {
         type: Date,
         default: new Date()
@@ -14,19 +13,20 @@ var UserSchema = new mongoose.Schema({
         type: Date,
         default: new Date()
     },
-    highscore:{
-      _id: String,
-      score: Number
-    },
-    facebook: {
-      _id: String,
-      photo: String,
-      link: String
+    fbID: String,
+    email: String,
+    guesses: Array,
+    puzzles: [
+        { 
+            type: Schema.Types.ObjectId,
+            ref: 'Puzzle' 
+        }
+    ],
+    currentPuzzle: { 
+        type: Schema.Types.ObjectId,
+        ref: 'Puzzle' 
     }
 });
 
 // set user schema on mongoose
 mongoose.model('User', UserSchema);
-
-
-

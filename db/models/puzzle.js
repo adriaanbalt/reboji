@@ -6,10 +6,11 @@ var PuzzleSchema = new mongoose.Schema({
         type: String,
         unique: true
     },
-    pictogram: String, // a combination of emojis
     difficulty: String, // 0
+    question: String, // a combination of emojis
     answer: String, // []
-    hint: String // []
+    hint: String, // []
+    guesses: Array
     
 });
 

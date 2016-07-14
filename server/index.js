@@ -10,13 +10,15 @@ const   express = require('express'),
         app = express(),
         mongoose = require('mongoose'),
         Puzzle = mongoose.model('Puzzle'),
+        User = mongoose.model('User'),
         Promise = require('bluebird');
 
 
 // promisifies methods on "Puzzle" and "Puzzle" instances
 Promise.promisifyAll(Puzzle);
 Promise.promisifyAll(Puzzle.prototype);
-
+Promise.promisifyAll(User);
+Promise.promisifyAll(User.prototype);
 
 let puzzles = [];
 
@@ -52,6 +54,13 @@ app.get('/webhook/', function (req, res) {
     res.send('Error, wrong token')
 })
 
+// webhook sender { sender: { id: '1064814340266637' },
+//   recipient: { id: '207689382963492' },
+//   timestamp: 0,
+//   delivery:
+//    { mids: [ 'mid.1468522377278:e70784c99fb6337e66' ],
+//      watermark: 1468522377355,
+//      seq: 3120 } } 1064814340266637
 
 // handling messages
 app.post('/webhook/', function (req, res) {
@@ -59,7 +68,20 @@ app.post('/webhook/', function (req, res) {
     for (let i = 0; i < messaging_events.length; i++) {
         let event = req.body.entry[0].messaging[i]
         let sender = event.sender.id
-    console.log ( 'webhook sender', event, sender );
+    console.log ( 'webhook sender', event );
+
+        User.findAsync({ facebookID : req.body.fbID }, null, {})
+            .then(user => {
+                console.log( 'USER:', user );
+            })
+            .catch(err => !console.log(err) && next(err));
+
+        User.findAsync({}, null, {})
+            .then(allUsers => {
+                console.log( 'ALLUSERS:', allUsers );
+            })
+            .catch(err => !console.log(err) && next(err));
+
         if (event.message && event.message.text) {
             let text = "" + event.message.text.toLowerCase();
 
@@ -138,10 +160,14 @@ function sendTextMessage(sender, text) {
     let messageData = { text:text }
     request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
+        qs: {
+            access_token:token
+        },
         method: 'POST',
         json: {
-            recipient: {id:sender},
+            recipient: {
+                id:sender
+            },
             message: messageData,
         }
     }, function(error, response, body) {
