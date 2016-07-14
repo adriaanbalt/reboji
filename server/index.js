@@ -54,6 +54,22 @@ app.get('/webhook/', function (req, res) {
     res.send('Error, wrong token')
 })
 
+var newObj = new User(
+    {
+        createdDate: new Date(),
+        lastLoginDate: new Date(),
+        lastUpdateDate: new Date(),
+        fbID: "1064814340266637",
+        email: "adriaan@liquidium.com",
+        guesses: [ "hi", "test" ],
+        puzzles: {},
+        currentPuzzle: {}
+    }
+);
+newObj.saveAsync()
+  .then( savedObj  => {
+    console.log ( 'response frmo user save: ', savedObj);
+});
 // webhook sender { sender: { id: '1064814340266637' },
 //   recipient: { id: '207689382963492' },
 //   timestamp: 0,
@@ -68,19 +84,15 @@ app.post('/webhook/', function (req, res) {
     for (let i = 0; i < messaging_events.length; i++) {
         let event = req.body.entry[0].messaging[i]
         let sender = event.sender.id
-    console.log ( 'webhook sender', event );
 
-        User.findAsync({ facebookID : req.body.fbID }, null, {})
-            .then(user => {
-                console.log( 'USER:', user );
-            })
-            .catch(err => !console.log(err) && next(err));
+        console.log ( 'webhook sender', event );
 
-        User.findAsync({}, null, {})
-            .then(allUsers => {
-                console.log( 'ALLUSERS:', allUsers );
-            })
-            .catch(err => !console.log(err) && next(err));
+
+        // User.findAsync({}, null, {})
+        //     .then(allUsers => {
+        //         console.log( 'ALLUSERS:', allUsers );
+        //     })
+        //     .catch(err => !console.log(err) && next(err));
 
         if (event.message && event.message.text) {
             let text = "" + event.message.text.toLowerCase();
