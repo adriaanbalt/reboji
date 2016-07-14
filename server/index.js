@@ -69,14 +69,13 @@ app.get('/webhook/', function (req, res) {
 //     console.log ( 'response from user save:', savedObj);
 // });
 
-User.findAsync({ fbID:"1064814340266637" }).populate( "currentPuzzle")
-    .then( populatedObj => {
-        console.log ( "populatedObj", populatedObj );
-        // User.populate( userObj, {path:"currentPuzzle"} )
-    })
-    // .then( populatedObj => {
-    //     console.log ( "populatedObj", populatedObj );
-    // })
+// User.findAsync({ fbID:"1064814340266637" })
+//     .then( userObj => {
+//         User.populate( userObj, {path:"currentPuzzle"})
+//     })
+//     .then( populatedObj => {
+//         console.log ( "populatedObj", populatedObj );
+//     })
 // webhook sender { sender: { id: '1064814340266637' },
 //   recipient: { id: '207689382963492' },
 //   timestamp: 0,
