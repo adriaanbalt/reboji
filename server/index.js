@@ -55,6 +55,7 @@ app.get('/webhook/', function (req, res) {
 
 // handling messages
 app.post('/webhook/', function (req, res) {
+    console.log ( 'webhook req', req );
     let messaging_events = req.body.entry[0].messaging
     for (let i = 0; i < messaging_events.length; i++) {
         let event = req.body.entry[0].messaging[i]
@@ -76,7 +77,7 @@ app.post('/webhook/', function (req, res) {
                 sendTextMessage(sender, "current puzzle: " + currentPuzzle.pictogram );
             }
 
-            console.log ( 'FB webbook > ', currentPuzzle );
+            // console.log ( 'FB webbook > ', currentPuzzle );
 
             // compare text to current puzzle question answer
             // if ( checkPuzzleValidity( text ) ){
@@ -112,7 +113,7 @@ function getPuzzle() {
 
     // return returnPuzzle;
     let newPuzz = puzzles[ getRandom(0, puzzles.length ) ];// == currentPuzzle ? getPuzzle() : puzzles[ getRandom(0, puzzles.length ) ];
-    console.log ( 'puzzles', puzzles.length, newPuzz );
+    // console.log ( 'puzzles', puzzles.length, newPuzz );
     return newPuzz;
 }
 
