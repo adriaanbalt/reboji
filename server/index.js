@@ -54,21 +54,26 @@ app.get('/webhook/', function (req, res) {
     res.send('Error, wrong token')
 })
 
-var newObj = new User(
-    {
-        fbID: "1064814340266637",
-        email: "adriaan@liquidium.com",
-        guesses: [ "hi", "test" ],
-        puzzles: ["1468083290053", "1468083397541"],
-        currentPuzzle: ["5432"]
-    }
-);
+// var newObj = new User(
+//     {
+//         fbID: "1064814340266637",
+//         email: "adriaan@liquidium.com",
+//         guesses: [ "hi", "test" ],
+//         puzzles: ["1468083290053", "1468083397541"],
+//         currentPuzzle: ["5432"]
+//     }
+// );
 
-newObj.saveAsync()
-  .then( savedObj  => {
-    console.log ( 'response from user save:', savedObj);
-});
-  
+// newObj.saveAsync()
+//   .then( savedObj  => {
+//     console.log ( 'response from user save:', savedObj);
+// });
+
+User.find({ fbId:"1064814340266637" })
+    .populateAsync({ path: "puzzles" })
+    .then( populatedObj => {
+        console.log ( 'populatedObj',populatedObj );
+    })
 // webhook sender { sender: { id: '1064814340266637' },
 //   recipient: { id: '207689382963492' },
 //   timestamp: 0,
