@@ -56,14 +56,11 @@ app.get('/webhook/', function (req, res) {
 
 var newObj = new User(
     {
-        createdDate: new Date(),
-        lastLoginDate: new Date(),
-        lastUpdateDate: new Date(),
         fbID: "1064814340266637",
         email: "adriaan@liquidium.com",
         guesses: [ "hi", "test" ],
-        puzzles: {},
-        currentPuzzle: {}
+        puzzles: ["1234"],
+        currentPuzzle: ["1234"]
     }
 );
 newObj.saveAsync()
