@@ -59,13 +59,16 @@ var newObj = new User(
         fbID: "1064814340266637",
         email: "adriaan@liquidium.com",
         guesses: [ "hi", "test" ],
-        puzzles: ["1234"],
+        puzzles: ["1468083290053", "1468083397541"],
         currentPuzzle: ["1234"]
     }
 );
 newObj.saveAsync()
   .then( savedObj  => {
     console.log ( 'response frmo user save: ', savedObj);
+    User.populate(savedObj, {path:"puzzles"} )
+}).then( populatedObj => {
+    console.log ( "USER populated puzzles", populatedObj )
 });
 // webhook sender { sender: { id: '1064814340266637' },
 //   recipient: { id: '207689382963492' },
