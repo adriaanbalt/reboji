@@ -10,6 +10,7 @@ module.exports = (URI) => {
 
     //initialize models
     require('./models/puzzle');
+    require('./models/user');
     require('./models/emoji');
 
     return new Promise((resolve, reject) => {
