@@ -72,7 +72,7 @@ app.get('/webhook/', function (req, res) {
 User.findAsync({ fbID:"1064814340266637" })
     .then( userObj => {
         console.log ( 'userObj!!!', userObj);
-        return User.populate({path:"currentPuzzle"})
+        return User.populate(userObj, {path:"currentPuzzle"})
     })
     .then( populatedObj => {
         console.log ( "populatedObj!!", populatedObj );
