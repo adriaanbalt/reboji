@@ -113,6 +113,7 @@ app.post('/webhook/', function (req, res) {
             // TODO connect to DB 
             if ( !currentPuzzle || text == "new" ) {
                 currentPuzzle = getPuzzle();
+                console.log ( 'currentPuzzle.pictogram', puzzles.length, currentPuzzle, currentPuzzle.pictogram );
                 sendTextMessage(sender, "Here's a new puzzle: " + currentPuzzle.pictogram );
             } else if ( checkPuzzleAnswer( text ) ) {
                 sendTextMessage(sender, "!!!!!!!!!!!!!!!!" );
@@ -160,7 +161,7 @@ function getPuzzle() {
 
     // return returnPuzzle;
     let newPuzz = puzzles[ getRandom(0, puzzles.length ) ];// == currentPuzzle ? getPuzzle() : puzzles[ getRandom(0, puzzles.length ) ];
-    console.log ( 'puzzles', puzzles.length, newPuzz );
+    // console.log ( 'puzzles', puzzles.length, newPuzz );
     return newPuzz;
 }
 
