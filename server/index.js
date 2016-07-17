@@ -113,7 +113,7 @@ app.post('/webhook/', function (req, res) {
             // TODO connect to DB 
             if ( !currentPuzzle || text == "new" ) {
                 currentPuzzle = getPuzzle();
-                console.log ( 'currentPuzzle.pictogram', puzzles.length, currentPuzzle, currentPuzzle.pictogram );
+                console.log ( 'currentPuzzle.pictogram', JSON.parse(currentPuzzle), currentPuzzle, currentPuzzle.pictogram );
                 sendTextMessage(sender, "Here's a new puzzle: " + currentPuzzle.pictogram );
             } else if ( checkPuzzleAnswer( text ) ) {
                 sendTextMessage(sender, "!!!!!!!!!!!!!!!!" );
