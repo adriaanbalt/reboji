@@ -161,7 +161,7 @@ function getPuzzle() {
     // return returnPuzzle;
     let newPuzz = puzzles[ getRandom(0, puzzles.length ) ];// == currentPuzzle ? getPuzzle() : puzzles[ getRandom(0, puzzles.length ) ];
     console.log ( 'puzzles', puzzles.length, typeof newPuzz );
-    return JSON.parse(newPuzz);
+    return newPuzz;
 }
 
 function getRandom( min, max ){
