@@ -160,7 +160,7 @@ function getPuzzle() {
 
     // return returnPuzzle;
     let newPuzz = puzzles[ getRandom(0, puzzles.length ) ];// == currentPuzzle ? getPuzzle() : puzzles[ getRandom(0, puzzles.length ) ];
-    console.log ( 'getPuzzle', newPuzz, typeof newPuzz, newPuzz['answer'], newPuzz['pictogram'] ); 
+    console.log ( 'getPuzzle', newPuzz, typeof newPuzz, newPuzz['answer'], newPuzz['difficulty'], newPuzz['hint'], newPuzz['_id'], newPuzz['pictogram'] ); 
     // console.log ( 'puzzles', puzzles.length, typeof newPuzz );
     return newPuzz;
 }
