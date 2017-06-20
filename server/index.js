@@ -21,6 +21,12 @@ Promise.promisifyAll(User);
 Promise.promisifyAll(User.prototype);
 
 let puzzles = [];
+let seenPuzzles = [];
+let successfulPuzzles = [];
+let failedPuzzles = [];
+let currentPuzzle;
+let currentIndex;
+const token = "EAAF0MuSayRkBAMi8pb5w6X2qf3rsk1wF8UCD8Nhpho0yiBknETthNd2b8o4eM0bUXZBiar1jfSlfeBJneMfSoiFjZA77gMdroLnnai7ClsjU4ZBdpFz69ZAnX2Jx1uy1WzZAc7mJbCntbQkErviZCd2obVJ7MDMfQZD"
 
 Puzzle.findAsync({}, null, {})
     .then(allPuzzles => {
@@ -113,15 +119,17 @@ app.post('/webhook/', function (req, res) {
             // TODO connect to DB 
             if ( !currentPuzzle || text == "new" ) {
                 currentPuzzle = getPuzzle();
-                sendTextMessage(sender, "Here's a new puzzle: " + currentPuzzle.pictogram );
+                sendTextMessage(sender, "Here's a puzzle: " + currentPuzzle.pictogram );
+            } else if ( currentPuzzle || text == "hint" ) {
+                sendTextMessage(sender, "Here's this puzzle's hint: " + currentPuzzle.hint );
             } else if ( checkPuzzleAnswer( text ) ) {
                 sendTextMessage(sender, "!!!!!!!!!!!!!!!!" );
-                sendTextMessage(sender, "Congratulations! Here's a new puzzle" );
+                sendTextMessage(sender, `Congratulations! You have ${puzzle.length} puzzles left to complete. Here's a new puzzle` );
                 currentPuzzle = getPuzzle();
                 sendTextMessage(sender, currentPuzzle.pictogram );
             } else if ( !checkPuzzleAnswer( text ) ) {
-                sendTextMessage(sender, "Wrong. Try again or respond 'new' for a different puzzle." );
-                sendTextMessage(sender, "current puzzle: " + currentPuzzle.pictogram );
+                sendTextMessage(sender, "Sorry that was incorrect. Try again or respond 'new' for a different puzzle or respond 'hint' for this puzzle's hint." );
+                sendTextMessage(sender, "Reminder of your current puzzle: " + currentPuzzle.pictogram );
             }
 
             // console.log ( 'FB webbook > ', currentPuzzle );
@@ -159,8 +167,14 @@ function getPuzzle() {
     //         .catch(err => !console.log(err) && next(err));
 
     // return returnPuzzle;
-    let newPuzz = puzzles[ getRandom(0, puzzles.length ) ];// == currentPuzzle ? getPuzzle() : puzzles[ getRandom(0, puzzles.length ) ];
-    console.log ( 'getPuzzle', newPuzz, typeof newPuzz, newPuzz['answer'], newPuzz['difficulty'], newPuzz['hint'], newPuzz['_id'], newPuzz['pictogram'] ); 
+
+    currentIndex = getRandom(0, puzzles.length );
+    let newPuzz = puzzles[ currentIndex ];// == currentPuzzle ? getPuzzle() : puzzles[ getRandom(0, puzzles.length ) ];
+    if ( currentIndex && newPuzz ) {
+        // new puzzle has been found and will be returned, so remove it from the possible puzzles to be seen.
+        puzzles.splice(currentIndex,1)
+    }
+    console.log ( 'getPuzzle', newPuzz, puzzles.length, typeof newPuzz, newPuzz['answer'], newPuzz['difficulty'], newPuzz['hint'], newPuzz['_id'], newPuzz['pictogram'] ); 
     // console.log ( 'puzzles', puzzles.length, typeof newPuzz );
     return newPuzz;
 }
@@ -178,9 +192,6 @@ function checkPuzzleAnswer( text ) {
     // }
     // return false;
 }
-
-const token = "EAAF0MuSayRkBAMi8pb5w6X2qf3rsk1wF8UCD8Nhpho0yiBknETthNd2b8o4eM0bUXZBiar1jfSlfeBJneMfSoiFjZA77gMdroLnnai7ClsjU4ZBdpFz69ZAnX2Jx1uy1WzZAc7mJbCntbQkErviZCd2obVJ7MDMfQZD"
-let currentPuzzle;
 
 function sendTextMessage(sender, text) {
     let messageData = { text:text }
