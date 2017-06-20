@@ -129,9 +129,9 @@ app.post('/webhook/', function (req, res) {
             } else if ( checkPuzzleAnswer( text ) ) {
                 // removePuzzle( currentIndex );
                 currentPuzzle = getPuzzle();
-                sendTextMessage(sender, "Congratulations! You have " + puzzle.length + "puzzles left to complete. Here's a new puzzle" + currentPuzzle.pictogram );
+                sendTextMessage(sender, "Congratulations! You have " + puzzles.length + "puzzles left to complete. Here's a new puzzle" + currentPuzzle.pictogram );
             } else if ( !checkPuzzleAnswer( text ) ) {
-                sendTextMessage(sender, "Sorry that was incorrect. You have " + puzzle.length + "puzzles left to complete. Try again or respond 'new' for a different puzzle or respond 'hint' for this puzzle's hint. Reminder of your current puzzle: " + currentPuzzle.pictogram );
+                sendTextMessage(sender, "Sorry that was incorrect. You have " + puzzles.length + "puzzles left to complete. Try again or respond 'new' for a different puzzle or respond 'hint' for this puzzle's hint. Reminder of your current puzzle: " + currentPuzzle.pictogram );
             }
             // compare text to current puzzle question answer
             // if ( checkPuzzleValidity( text ) ){
