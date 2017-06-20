@@ -96,6 +96,8 @@
 					xmlhttp.onload = (res) => {
 						console.log ( 'res', res)
 						if (xmlhttp.status === 200) {
+
+							document.getElementById("puzzles").innerHTML = ""
 							
 							allPuzzles = JSON.parse(xmlhttp.response)
 							for ( let i=allPuzzles.length-1; i>=0; i-- ){
