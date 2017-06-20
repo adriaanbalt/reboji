@@ -1,5 +1,5 @@
-# reboji
-## "rebus puzzles with emoji"
+# REBOJI
+#### "rebus puzzles with emoji"
 
 Built using NodeJS and Facebook Messenger API on Heroku.
 
