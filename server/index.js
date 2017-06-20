@@ -120,7 +120,7 @@ app.post('/webhook/', function (req, res) {
             if ( !currentPuzzle || text == "new" ) {
                 currentPuzzle = getPuzzle();
                 sendTextMessage(sender, "Here's a puzzle: " + currentPuzzle.pictogram );
-            } else if ( currentPuzzle || text == "hint" ) {
+            } else if ( text == "hint" || currentPuzzle ) {
                 sendTextMessage(sender, "Here's this puzzle's hint: " + currentPuzzle.hint );
             } else if ( checkPuzzleAnswer( text ) ) {
                 sendTextMessage(sender, "!!!!!!!!!!!!!!!!" );
