@@ -120,16 +120,17 @@ app.post('/webhook/', function (req, res) {
             if ( !currentPuzzle ) {
                 currentPuzzle = getPuzzle();
                 sendTextMessage(sender, '-' );
-                sendTextMessage(sender, "Here is your first puzzle of " + puzzles.length + " puzzles." );
-                sendTextMessage(sender, currentPuzzle.pictogram );
+                setTimeout( ()=>sendTextMessage(sender, "Here is your first puzzle of " + puzzles.length + " puzzles." ), 100 )
+                setTimeout( ()=>sendTextMessage(sender, currentPuzzle.pictogram ), 200 )
             } else if ( text == "new" ) {
                 currentPuzzle = getPuzzle();
                 sendTextMessage(sender, '-' );
-                sendTextMessage(sender, "Here is a new puzzle" );
-                sendTextMessage(sender, currentPuzzle.pictogram );
+                setTimeout( ()=>sendTextMessage(sender, "Here is a new puzzle" ), 100 )
+                setTimeout( ()=>sendTextMessage(sender, currentPuzzle.pictogram ), 200 )
             } else if ( text == "hint" ) {
                 if ( currentPuzzle.hint ) {
-                    sendTextMessage(sender, "Here's this puzzle's hint: " + currentPuzzle.hint );    
+                    sendTextMessage(sender, "Here is this puzzle's hint:" );
+                    setTimeout( ()=>sendTextMessage(sender, currentPuzzle.hint ), 200 )
                 } else {
                     sendTextMessage(sender, "Sorry, this puzzle does not have a hint." );
                 }
@@ -137,13 +138,13 @@ app.post('/webhook/', function (req, res) {
                 removePuzzle( currentIndex );
                 correctPuzzle( currentPuzzle );
                 currentPuzzle = getPuzzle();
-                setTimeout( ()=>sendTextMessage(sender, "-" ), 10 )
+                sendTextMessage(sender, "-" )
                 setTimeout( ()=>sendTextMessage(sender, "Congratulations! You have completed " + successfulPuzzles.length + " of " + puzzles.length + " puzzles. Here's a new puzzle" ), 100 )
                 setTimeout( ()=>sendTextMessage(sender, currentPuzzle.pictogram ), 200 )
             } else if ( !checkPuzzleAnswer( text ) ) {
                 sendTextMessage(sender, '-' );
-                sendTextMessage(sender, "Sorry that was incorrect. You have " + puzzles.length + " puzzles left to complete. Try again or respond 'new' for a different puzzle or respond 'hint' for this puzzle's hint. Reminder of your current puzzle" );
-                sendTextMessage(sender, currentPuzzle.pictogram );
+                setTimeout( ()=>sendTextMessage(sender, "Sorry that was incorrect. You have " + successfulPuzzles.length + " of " + puzzles.length + " puzzles left to complete. Try again or respond 'new' for a different puzzle or respond 'hint' for this puzzle's hint. Reminder of your current puzzle" ), 100 )
+                setTimeout( ()=>sendTextMessage(sender, currentPuzzle.pictogram ), 200 )
             }
             // compare text to current puzzle question answer
             // if ( checkPuzzleValidity( text ) ){
