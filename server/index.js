@@ -117,10 +117,15 @@ app.post('/webhook/', function (req, res) {
             let text = "" + event.message.text.toLowerCase();
 
             // TODO connect to DB 
-            if ( !currentPuzzle || text == "new" ) {
+            if ( !currentPuzzle ) {
                 currentPuzzle = getPuzzle();
                 sendTextMessage(sender, '-' );
-                sendTextMessage(sender, "Here is your first puzzle" );
+                sendTextMessage(sender, "Here is your first puzzle of " + puzzles.length + " puzzles." );
+                sendTextMessage(sender, currentPuzzle.pictogram );
+            } else if ( text == "new" ) {
+                currentPuzzle = getPuzzle();
+                sendTextMessage(sender, '-' );
+                sendTextMessage(sender, "Here is a new puzzle" );
                 sendTextMessage(sender, currentPuzzle.pictogram );
             } else if ( text == "hint" ) {
                 if ( currentPuzzle.hint ) {
@@ -135,8 +140,7 @@ app.post('/webhook/', function (req, res) {
                 sendTextMessage(sender, '-' );
                 sendTextMessage(sender, "Congratulations! You have " + puzzles.length + " puzzles left to complete. Here's a new puzzle");
                 sendTextMessage(sender, currentPuzzle.pictogram );
-                let timeout = setTimeout( ()=>sendTextMessage(sender, successfulPuzzles.length + " of " + puzzles.length ), 100 )
-                clearTimeout( timeout )
+                setTimeout( ()=>sendTextMessage(sender, successfulPuzzles.length + " of " + puzzles.length ), 1000 )
             } else if ( !checkPuzzleAnswer( text ) ) {
                 sendTextMessage(sender, '-' );
                 sendTextMessage(sender, "Sorry that was incorrect. You have " + puzzles.length + " puzzles left to complete. Try again or respond 'new' for a different puzzle or respond 'hint' for this puzzle's hint. Reminder of your current puzzle" );
