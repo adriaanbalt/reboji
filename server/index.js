@@ -119,7 +119,9 @@ app.post('/webhook/', function (req, res) {
             // TODO connect to DB 
             if ( !currentPuzzle || text == "new" ) {
                 currentPuzzle = getPuzzle();
-                sendTextMessage(sender, "Here's a puzzle: " + currentPuzzle.pictogram );
+                sendTextMessage(sender, '-' );
+                sendTextMessage(sender, "Here is your first puzzle" );
+                sendTextMessage(sender, currentPuzzle.pictogram );
             } else if ( text == "hint" ) {
                 if ( currentPuzzle.hint ) {
                     sendTextMessage(sender, "Here's this puzzle's hint: " + currentPuzzle.hint );    
@@ -130,12 +132,15 @@ app.post('/webhook/', function (req, res) {
                 removePuzzle( currentIndex );
                 correctPuzzle( currentPuzzle );
                 currentPuzzle = getPuzzle();
+                sendTextMessage(sender, '-' );
                 sendTextMessage(sender, "Congratulations! You have " + puzzles.length + " puzzles left to complete. Here's a new puzzle");
                 sendTextMessage(sender, currentPuzzle.pictogram );
                 let timeout = setTimeout( ()=>sendTextMessage(sender, successfulPuzzles.length + " of " + puzzles.length ), 100 )
                 clearTimeout( timeout )
             } else if ( !checkPuzzleAnswer( text ) ) {
-                sendTextMessage(sender, "Sorry that was incorrect. You have " + puzzles.length + " puzzles left to complete. Try again or respond 'new' for a different puzzle or respond 'hint' for this puzzle's hint. Reminder of your current puzzle: " + currentPuzzle.pictogram );
+                sendTextMessage(sender, '-' );
+                sendTextMessage(sender, "Sorry that was incorrect. You have " + puzzles.length + " puzzles left to complete. Try again or respond 'new' for a different puzzle or respond 'hint' for this puzzle's hint. Reminder of your current puzzle" );
+                sendTextMessage(sender, currentPuzzle.pictogram );
             }
             // compare text to current puzzle question answer
             // if ( checkPuzzleValidity( text ) ){
