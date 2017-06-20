@@ -116,48 +116,53 @@ app.post('/webhook/', function (req, res) {
         if (event.message && event.message.text) {
             let text = "" + event.message.text.toLowerCase();
 
-            // TODO connect to DB 
+            // starting the game
             if ( !currentPuzzle ) {
                 currentPuzzle = getPuzzle();
                 sendTextMessage(sender, '-' );
                 setTimeout( ()=>sendTextMessage(sender, "Here is your first puzzle of " + puzzles.length + " puzzles." ), 100 )
                 setTimeout( ()=>sendTextMessage(sender, currentPuzzle.pictogram ), 200 )
-            } else if ( text == "new" ) {
+            }
+            // get a new puzzle
+            else if ( text == "new" ) {
                 currentPuzzle = getPuzzle();
                 sendTextMessage(sender, '-' );
                 setTimeout( ()=>sendTextMessage(sender, "Here is a new puzzle" ), 100 )
                 setTimeout( ()=>sendTextMessage(sender, currentPuzzle.pictogram ), 200 )
-            } else if ( text == "hint" ) {
+            }
+            // get a hint
+            else if ( text == "hint" ) {
                 if ( currentPuzzle.hint ) {
                     sendTextMessage(sender, "Here is this puzzle's hint:" );
                     setTimeout( ()=>sendTextMessage(sender, currentPuzzle.hint ), 200 )
                 } else {
                     sendTextMessage(sender, "Sorry, this puzzle does not have a hint." );
                 }
-            } else if ( text == "status" ) {
+            }
+            // check your info
+            else if ( text == "status" || text == "info" ) {
                 sendTextMessage(sender, "You have completed " + successfulPuzzles.length + " of " + puzzles.length + " puzzles." );
-            } else if ( checkPuzzleAnswer( text ) ) {
-                removePuzzle( currentIndex );
-                correctPuzzle( currentPuzzle );
-                currentPuzzle = getPuzzle();
+            }
+            // get current puzzle
+            else if ( text == "current" ) {
+                sendTextMessage(sender, "Your current puzzle is");
+                setTimeout( ()=>sendTextMessage(sender, currentPuzzle.pictogram ), 200 )
+            }
+            // successful puzzle response
+            else if ( checkPuzzleAnswer( text ) ) {
+                removePuzzle( currentIndex ); // delete a puzzle that was successfully answered
+                correctPuzzle( currentPuzzle ); // add successful puzzles to a separate array for logging
+                currentPuzzle = getPuzzle(); // get a new puzzle
                 sendTextMessage(sender, "-" )
                 setTimeout( ()=>sendTextMessage(sender, "Congratulations! You have completed " + successfulPuzzles.length + " of " + puzzles.length + " puzzles. Here's a new puzzle" ), 100 )
                 setTimeout( ()=>sendTextMessage(sender, currentPuzzle.pictogram ), 200 )
-            } else if ( !checkPuzzleAnswer( text ) ) {
+            }
+            // incorrect puzzle response
+            else if ( !checkPuzzleAnswer( text ) ) {
                 sendTextMessage(sender, '-' );
                 setTimeout( ()=>sendTextMessage(sender, "Sorry that was incorrect. You have " + successfulPuzzles.length + " of " + puzzles.length + " puzzles left to complete. Try again or respond 'new' for a different puzzle or respond 'hint' for this puzzle's hint. Reminder of your current puzzle" ), 100 )
                 setTimeout( ()=>sendTextMessage(sender, currentPuzzle.pictogram ), 200 )
             }
-            // compare text to current puzzle question answer
-            // if ( checkPuzzleValidity( text ) ){
-            //     sendSuccess();
-            // } else if ( text != "new" ) {
-            //     sendNewPuzzle();
-            // } else {
-            //     sendFailure();
-            // }
-            // check the message that the user sent against the current emoji puzzle
-            // sendTextMessage(sender, "👕 👘 👗 👢 👠 👡 💼 👜 👔 🎩 👒 👑 💍 ⛵ ⛽ ✈ ⛲ ⛺ ⛪ ☎ ✉ ✂ 🚽 🛀 👙 💄 ✌ ☀ ☁ ☔ ⚡ ✨ ⭐ ✳ ⛄ ☕ ♨ 🎀 🌂 💧 🔨 💺 〽 🔱 🔰 🀄 💎 💠 🔷 🔶 ✌ ☀ ☁ ☔ ⚡ ✨ ⭐ ✳ ⛄ ☕ ♨ 🏢 🏫 🏭 🏥 🏬 🏪 💒 : you said : " + text.substring(0, 200))
         }
     }
     res.sendStatus(200)
