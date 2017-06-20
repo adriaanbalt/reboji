@@ -76,7 +76,9 @@
 							if (xmlhttp.status === 200) {
 								
 								document.getElementById("puzzles").innerHTML = xmlhttp.responseText;
-								console.log('response ' + xmlhttp.responseText, document.getElementById("puzzles").innerHTML);
+								forEach( let puzzle in xmlhttp.responseText ) {
+									console.log('response ' + puzzle);
+								}
 							} else {
 								console.log('Request failed.  Returned status of ' + xmlhttp.status);
 							}
