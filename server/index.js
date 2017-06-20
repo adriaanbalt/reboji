@@ -127,14 +127,12 @@ app.post('/webhook/', function (req, res) {
                     sendTextMessage(sender, "Sorry, this puzzle does not have a hint." );
                 }
             } else if ( checkPuzzleAnswer( text ) ) {
+                removePuzzle( currentIndex );
                 currentPuzzle = getPuzzle();
                 sendTextMessage(sender, "Congratulations! You have " + puzzle.length + "puzzles left to complete. Here's a new puzzle" + currentPuzzle.pictogram );
             } else if ( !checkPuzzleAnswer( text ) ) {
                 sendTextMessage(sender, "Sorry that was incorrect. Try again or respond 'new' for a different puzzle or respond 'hint' for this puzzle's hint. Reminder of your current puzzle: " + currentPuzzle.pictogram );
             }
-
-            // console.log ( 'FB webbook > ', currentPuzzle );
-
             // compare text to current puzzle question answer
             // if ( checkPuzzleValidity( text ) ){
             //     sendSuccess();
@@ -159,6 +157,9 @@ app.listen(app.get('port'), function() {
 // app.use('/api', require('./routes'));
 app.use('/api', require( path.join(__dirname, 'routes') ));
 
+function removePuzzle( index ) {
+    puzzles.splice(index, 1)
+}
 function getPuzzle() {
     // let returnPuzzle;
     // Puzzle.findOneAsync({}, null, {})
@@ -168,15 +169,8 @@ function getPuzzle() {
     //         .catch(err => !console.log(err) && next(err));
 
     // return returnPuzzle;
-
     currentIndex = getRandom(0, puzzles.length );
     let newPuzz = puzzles[ currentIndex ];// == currentPuzzle ? getPuzzle() : puzzles[ getRandom(0, puzzles.length ) ];
-    if ( currentIndex && newPuzz ) {
-        // new puzzle has been found and will be returned, so remove it from the possible puzzles to be seen.
-        puzzles.splice(currentIndex,1)
-    }
-    console.log ( 'getPuzzle', newPuzz, puzzles.length, typeof newPuzz, newPuzz['answer'], newPuzz['difficulty'], newPuzz['hint'], newPuzz['_id'], newPuzz['pictogram'] ); 
-    // console.log ( 'puzzles', puzzles.length, typeof newPuzz );
     return newPuzz;
 }
 
