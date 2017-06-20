@@ -8,6 +8,23 @@
 		<meta name="apple-mobile-web-app-capable" content="yes"/>
 		<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
 		<meta charset="UTF-8">
+		<style type="text/css">
+			h5 {
+				font-size: 20px;
+				margin: 0;
+				padding: 0;
+			}
+			p {
+				margin: 0;
+				padding: 0;
+			}
+			.puzzle {
+				margin: 1em 0;
+			}
+			.puzzle .inner {
+				margin: 0 1em;
+			}
+		</style>
 	</head>
 	<body>
 		<h1>Reboji, a chat bot rebus emoji game</h1>
@@ -34,6 +51,7 @@
 			</div>
 		</section>
 		<section>
+			<h2 id="total"></h2>
 			<h2>All Puzzles:</h2>
 			<div id="puzzles"></div>
 		</section>
@@ -70,21 +88,24 @@
 					};
 
 				function getPuzzles() {
-					var xmlhttp = new XMLHttpRequest();
+					let xmlhttp = new XMLHttpRequest();
+					let allPuzzles = [];
 					xmlhttp.open("GET", '/api/puzzle');
-					xmlhttp.onload = function() {
-							if (xmlhttp.status === 200) {
-								
-								document.getElementById("puzzles").innerHTML = xmlhttp.responseText;
-
-								console.log ( 'xmlhttp.responseText', xmlhttp, xmlhttp.responseText, xmlhttp.responseText.length )
-
-								for ( let i=0; i<xmlhttp.responseText.length; i++ ){
-									// console.log('response ' + xmlhttp.responseText[i]);
-								}
-							} else {
-								console.log('Request failed.  Returned status of ' + xmlhttp.status);
+					xmlhttp.setRequestHeader("Content-Type", "application/json");
+					xmlhttp.setRequestHeader('Accept', 'application/json');
+					xmlhttp.onload = (res) => {
+						console.log ( 'res', res)
+						if (xmlhttp.status === 200) {
+							
+							allPuzzles = JSON.parse(xmlhttp.response)
+							for ( let i=allPuzzles.length-1; i>=0; i-- ){
+								document.getElementById("puzzles").innerHTML += `<div class="puzzle"><h5>${i+1}: ${allPuzzles[i].pictogram}</h5><div class="inner"><p>answer: ${allPuzzles[i].answer}</p><p>difficulty: ${allPuzzles[i].difficulty}</p><p><i>hint: ${allPuzzles[i].hint}<i></p></div></div>`;
+								console.log('response ' + allPuzzles[i]);
 							}
+							document.getElementById("total").innerHTML = `Total Number of Puzzles: ${allPuzzles.length}`
+						} else {
+							console.log('Request failed.  Returned status of ' + xmlhttp.status);
+						}
 					};
 					xmlhttp.send();
 					// var myStringArray = ["Hello","World"];
