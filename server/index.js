@@ -134,6 +134,8 @@ app.post('/webhook/', function (req, res) {
                 } else {
                     sendTextMessage(sender, "Sorry, this puzzle does not have a hint." );
                 }
+            } else if ( text == "status" ) {
+                sendTextMessage(sender, "You have completed " + successfulPuzzles.length + " of " + puzzles.length + " puzzles." );
             } else if ( checkPuzzleAnswer( text ) ) {
                 removePuzzle( currentIndex );
                 correctPuzzle( currentPuzzle );
