@@ -137,10 +137,9 @@ app.post('/webhook/', function (req, res) {
                 removePuzzle( currentIndex );
                 correctPuzzle( currentPuzzle );
                 currentPuzzle = getPuzzle();
-                sendTextMessage(sender, '-' );
-                sendTextMessage(sender, "Congratulations! You have " + puzzles.length + " puzzles left to complete. Here's a new puzzle");
-                sendTextMessage(sender, currentPuzzle.pictogram );
-                setTimeout( ()=>sendTextMessage(sender, successfulPuzzles.length + " of " + puzzles.length ), 1000 )
+                setTimeout( ()=>sendTextMessage(sender, "-" ), 10 )
+                setTimeout( ()=>sendTextMessage(sender, "Congratulations! You have completed " + successfulPuzzles.length + " of " + puzzles.length + " puzzles. Here's a new puzzle" ), 100 )
+                setTimeout( ()=>sendTextMessage(sender, currentPuzzle.pictogram ), 200 )
             } else if ( !checkPuzzleAnswer( text ) ) {
                 sendTextMessage(sender, '-' );
                 sendTextMessage(sender, "Sorry that was incorrect. You have " + puzzles.length + " puzzles left to complete. Try again or respond 'new' for a different puzzle or respond 'hint' for this puzzle's hint. Reminder of your current puzzle" );
