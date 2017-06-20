@@ -120,16 +120,18 @@ app.post('/webhook/', function (req, res) {
             if ( !currentPuzzle || text == "new" ) {
                 currentPuzzle = getPuzzle();
                 sendTextMessage(sender, "Here's a puzzle: " + currentPuzzle.pictogram );
-            } else if ( text == "hint" && currentPuzzle ) {
-                sendTextMessage(sender, "Here's this puzzle's hint: " + currentPuzzle.hint );
+            } else if ( text == "hint" ) {
+                if ( currentPuzzle.hint ) {
+                    sendTextMessage(sender, "Here's this puzzle's hint: " + currentPuzzle.hint );    
+                } else {
+                    sendTextMessage(sender, "Sorry, this puzzle doesn't have a hint." );
+                }
             } else if ( checkPuzzleAnswer( text ) ) {
-                sendTextMessage(sender, "!!!!!!!!!!!!!!!!" );
                 sendTextMessage(sender, `Congratulations! You have ${puzzle.length} puzzles left to complete. Here's a new puzzle` );
                 currentPuzzle = getPuzzle();
                 sendTextMessage(sender, currentPuzzle.pictogram );
             } else if ( !checkPuzzleAnswer( text ) ) {
-                sendTextMessage(sender, "Sorry that was incorrect. Try again or respond 'new' for a different puzzle or respond 'hint' for this puzzle's hint." );
-                sendTextMessage(sender, "Reminder of your current puzzle: " + currentPuzzle.pictogram );
+                sendTextMessage(sender, "Sorry that was incorrect. Try again or respond 'new' for a different puzzle or respond 'hint' for this puzzle's hint. Reminder of your current puzzle: " + currentPuzzle.pictogram );
             }
 
             // console.log ( 'FB webbook > ', currentPuzzle );
