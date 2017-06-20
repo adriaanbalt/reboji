@@ -127,11 +127,12 @@ app.post('/webhook/', function (req, res) {
                     sendTextMessage(sender, "Sorry, this puzzle does not have a hint." );
                 }
             } else if ( checkPuzzleAnswer( text ) ) {
-                // removePuzzle( currentIndex );
+                removePuzzle( currentIndex );
                 currentPuzzle = getPuzzle();
-                sendTextMessage(sender, "Congratulations! You have " + puzzles.length + "puzzles left to complete. Here's a new puzzle" + currentPuzzle.pictogram );
+                sendTextMessage(sender, "Congratulations! You have " + puzzles.length + " puzzles left to complete. Here's a new puzzle");
+                this.setTimeout( ()=> sendTextMessage(sender, currentPuzzle.pictogram ), 1000 )
             } else if ( !checkPuzzleAnswer( text ) ) {
-                sendTextMessage(sender, "Sorry that was incorrect. You have " + puzzles.length + "puzzles left to complete. Try again or respond 'new' for a different puzzle or respond 'hint' for this puzzle's hint. Reminder of your current puzzle: " + currentPuzzle.pictogram );
+                sendTextMessage(sender, "Sorry that was incorrect. You have " + puzzles.length + " puzzles left to complete. Try again or respond 'new' for a different puzzle or respond 'hint' for this puzzle's hint. Reminder of your current puzzle: " + currentPuzzle.pictogram );
             }
             // compare text to current puzzle question answer
             // if ( checkPuzzleValidity( text ) ){
