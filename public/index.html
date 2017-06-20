@@ -65,9 +65,7 @@
 						xmlhttp.open("POST", "/api/puzzle");
 						xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 						xmlhttp.onload = function() {
-							console.log( 'onload', xmlhttp.status, xmlhttp.responseText );
 							if (xmlhttp.status === 200) {
-									console.log('response ' + xmlhttp.responseText);
 									document.getElementById("emojis").value = "";
 									document.getElementById("difficulty").value = "";
 									document.getElementById("answer").value = "";
@@ -77,7 +75,6 @@
 									console.log('Request failed.  Returned status of ' + xmlhttp.status);
 							}
 						};
-						console.log ( 'values: ',  document.getElementById("emojis").value, document.getElementById("answer").value, document.getElementById("difficulty").value, document.getElementById("hint").value );
 						xmlhttp.send(JSON.stringify({
 							_id: Number(new Date()).toString(),
 							pictogram: document.getElementById("emojis").value,
@@ -94,29 +91,25 @@
 					xmlhttp.setRequestHeader("Content-Type", "application/json");
 					xmlhttp.setRequestHeader('Accept', 'application/json');
 					xmlhttp.onload = (res) => {
-						console.log ( 'res', res)
 						if (xmlhttp.status === 200) {
-
-							document.getElementById("puzzles").innerHTML = ""
-							
 							allPuzzles = JSON.parse(xmlhttp.response)
+							document.getElementById("puzzles").innerHTML = ""
+							document.getElementById("total").innerHTML = `Total Number of Puzzles: ${allPuzzles.length}`
 							for ( let i=allPuzzles.length-1; i>=0; i-- ){
 								document.getElementById("puzzles").innerHTML += `<div class="puzzle"><h5>${i+1}: ${allPuzzles[i].pictogram}</h5><div class="inner"><p>answer: ${allPuzzles[i].answer}</p><p>difficulty: ${allPuzzles[i].difficulty}</p><p><i>hint: ${allPuzzles[i].hint}<i></p></div></div>`;
-								console.log('response ' + allPuzzles[i]);
 							}
-							document.getElementById("total").innerHTML = `Total Number of Puzzles: ${allPuzzles.length}`
 						} else {
 							console.log('Request failed.  Returned status of ' + xmlhttp.status);
 						}
 					};
 					xmlhttp.send();
-					// var myStringArray = ["Hello","World"];
-					// var arrayLength = myStringArray.length;
-					// for (var i = 0; i < arrayLength; i++) {
-					// 	alert(myStringArray[i]);
-					//   //Do something
-					// }
 				}
+
+
+				function deletePuzzle() {
+					console.log ( 'deletePuzzle')
+				}
+
 				getPuzzles();
 
 	 })();
