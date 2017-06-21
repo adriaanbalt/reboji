@@ -209,11 +209,12 @@ function getPuzzle() {
     //         .catch(err => !console.log(err) && next(err));
 
     // return returnPuzzle;
-    // User.update({ fbID:"1064814340266637" }, {
-    //     currentPuzzle: 
-    // })
     currentIndex = getRandom(0, puzzles.length );
     let newPuzz = puzzles[ currentIndex ];// == currentPuzzle ? getPuzzle() : puzzles[ getRandom(0, puzzles.length ) ];
+    User.updateAsync({ fbID:"1064814340266637" }, { currentPuzzle: newPuzz._id})
+        .then( userObj => {
+            console.log ( 'update successful', userObj)
+        })
     console.log ( 'newPuzz', newPuzz )
     return newPuzz;
 }
