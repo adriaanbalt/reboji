@@ -106,10 +106,10 @@ app.post('/webhook/', function (req, res) {
     for (let i = 0; i < messaging_events.length; i++) {
         let event = req.body.entry[0].messaging[i]
         facebookUserId = event.sender.id
+        let puzzy = checkIfUserHasCurrentPuzzle()
+        console.log ( 'puzzy', puzzy )
         handleMessages(event, facebookUserId)
     }
-
-    // TODO > add help command
     // TODO > pair with a specific user in the database
     res.sendStatus(200)
 })
@@ -135,7 +135,7 @@ function handleMessages( event ) {
             setTimeout( ()=>sendTextMessage( "Here is your first puzzle of " + puzzles.length + " puzzles." ), firstMessageTime )
             setTimeout( ()=>sendTextMessage( currentPuzzle.pictogram ), firstMessageTime+(messageDelay*1) )
         }
-        // get a new puzzle
+        // help command
         else if ( text == "help" ) {
             currentPuzzle = getPuzzle();
             sendTextMessage( '-' );
@@ -212,7 +212,7 @@ function checkIfUserHasCurrentPuzzle() {
     new Promise((resolve, reject) => {
         User.findOne({ fbID:facebookUserId })
             .populate('currentPuzzle') // only return the Persons name
-            .exec(function (err, story) {
+            .exec( (err, story) => {
                 if (err) return reject(err);
                 console.log('currentPuzzle is ', story );
                 // currentPuzzle = story.currentPuzzle
