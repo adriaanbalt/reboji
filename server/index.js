@@ -209,12 +209,12 @@ function getPuzzle() {
 }
 
 function checkIfUserHasCurrentPuzzle() {
-    new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         User.findOne({ fbID:facebookUserId })
             .populate('currentPuzzle') // only return the Persons name
-            .exec( (err, story) => {
+            .exec( (err, user) => {
                 if (err) return reject(err);
-                console.log('currentPuzzle is ', story );
+                console.log('currentPuzzle is ', user.currentPuzzle );
                 // currentPuzzle = story.currentPuzzle
                 resolve( story.currentPuzzle )
             })    
