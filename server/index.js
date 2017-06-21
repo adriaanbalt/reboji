@@ -106,9 +106,12 @@ app.post('/webhook/', function (req, res) {
     for (let i = 0; i < messaging_events.length; i++) {
         let event = req.body.entry[0].messaging[i]
         facebookUserId = event.sender.id
-        let puzzy = checkIfUserHasCurrentPuzzle()
+        checkIfUserHasCurrentPuzzle()
+            .then( (userCurrentPuzzle) => {
+                currentPuzzle = userCurrentPuzzle
+                handleMessages(event, facebookUserId)
+            })
         console.log ( 'puzzy', puzzy )
-        handleMessages(event, facebookUserId)
     }
     // TODO > pair with a specific user in the database
     res.sendStatus(200)
@@ -128,16 +131,15 @@ function handleMessages( event ) {
     if (event.message && event.message.text) {
         let text = "" + event.message.text.toLowerCase();
 
+        console.log ( 'handleMessages', currentPuzzle )
         // starting the game
         if ( !currentPuzzle ) {
-            currentPuzzle = getPuzzle();
             sendTextMessage( '-' );
             setTimeout( ()=>sendTextMessage( "Here is your first puzzle of " + puzzles.length + " puzzles." ), firstMessageTime )
             setTimeout( ()=>sendTextMessage( currentPuzzle.pictogram ), firstMessageTime+(messageDelay*1) )
         }
         // help command
         else if ( text == "help" ) {
-            currentPuzzle = getPuzzle();
             sendTextMessage( '-' );
             setTimeout( ()=>sendTextMessage( "Commands:" ), firstMessageTime )
             setTimeout( ()=>sendTextMessage( "'new' : a new puzzle." ), firstMessageTime+(messageDelay*1) )
@@ -148,7 +150,6 @@ function handleMessages( event ) {
         }
         // get a new puzzle
         else if ( text == "new" ) {
-            currentPuzzle = getPuzzle();
             sendTextMessage( '-' );
             setTimeout( ()=>sendTextMessage( "Here is a new puzzle" ), firstMessageTime )
             setTimeout( ()=>sendTextMessage( currentPuzzle.pictogram ), firstMessageTime+(messageDelay*1) )
@@ -175,7 +176,7 @@ function handleMessages( event ) {
         else if ( checkPuzzleAnswer( text ) ) {
             removePuzzle( currentPuzzle ); // delete a puzzle that was successfully answered
             correctPuzzle( currentPuzzle ); // add successful puzzles to a separate array for logging
-            currentPuzzle = getPuzzle(); // get a new puzzle
+            
             sendTextMessage( "-" )
             setTimeout( ()=>sendTextMessage( "Congratulations! You have completed " + successfulPuzzles.length + " of " + puzzles.length + " puzzles. Here's a new puzzle" ), 100 )
             setTimeout( ()=>sendTextMessage( currentPuzzle.pictogram ), firstMessageTime+(messageDelay*1) )
@@ -203,9 +204,9 @@ function getPuzzle() {
     //         .catch(err => !console.log(err) && next(err));
 
     // return returnPuzzle;
-    let newPuzz = puzzles[ getRandom(0, puzzles.length ) ];// == currentPuzzle ? getPuzzle() : puzzles[ getRandom(0, puzzles.length ) ];
-    User.updateAsync({ fbID:facebookUserId }, { currentPuzzle: newPuzz._id,  })
-    return newPuzz;
+    // let newPuzz = puzzles[ getRandom(0, puzzles.length ) ];// == currentPuzzle ? getPuzzle() : puzzles[ getRandom(0, puzzles.length ) ];
+    // User.updateAsync({ fbID:facebookUserId }, { currentPuzzle: newPuzz._id,  })
+    return currentPuzzle;
 }
 
 function checkIfUserHasCurrentPuzzle() {
@@ -216,7 +217,7 @@ function checkIfUserHasCurrentPuzzle() {
                 if (err) return reject(err);
                 console.log('currentPuzzle is ', user.currentPuzzle );
                 // currentPuzzle = story.currentPuzzle
-                resolve( story.currentPuzzle )
+                resolve( user.currentPuzzle )
             })    
     })
     // User.findAsync({ fbID:"1064814340266637" })
