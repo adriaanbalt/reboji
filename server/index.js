@@ -123,7 +123,7 @@ app.listen(app.get('port'), function() {
 // app.use('/api', require('./routes'));
 app.use('/api', require( path.join(__dirname, 'routes') ));
 
-function handleMessages() {
+function handleMessages(event) {
 
     if (event.message && event.message.text) {
         let text = "" + event.message.text.toLowerCase();
