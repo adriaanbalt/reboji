@@ -87,6 +87,7 @@ User.findAsync({ fbID:"1064814340266637" })
     })
     .catch((err) => console.log(err));
 
+
 // User.findOne({ fbID:"1064814340266637" })
 //     .populate('currentPuzzle') // only return the Persons name
 //     .exec(function (err, story) {
@@ -208,8 +209,12 @@ function getPuzzle() {
     //         .catch(err => !console.log(err) && next(err));
 
     // return returnPuzzle;
+    // User.update({ fbID:"1064814340266637" }, {
+    //     currentPuzzle: 
+    // })
     currentIndex = getRandom(0, puzzles.length );
     let newPuzz = puzzles[ currentIndex ];// == currentPuzzle ? getPuzzle() : puzzles[ getRandom(0, puzzles.length ) ];
+    console.log ( 'newPuzz', newPuzz )
     return newPuzz;
 }
 
