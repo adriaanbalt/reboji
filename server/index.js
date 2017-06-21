@@ -77,15 +77,15 @@ app.get('/webhook/', function (req, res) {
 //     console.log ( 'response from user save:', savedObj);
 // });
 
-// User.findAsync({ fbID:"1064814340266637" })
-//     .then( userObj => {
-//         console.log ( 'userObj!!!', userObj);
-//         return User.populate(userObj, {path:"currentPuzzle"})
-//     })
-//     .then( populatedObj => {
-//         console.log ( "populatedObj!!", populatedObj );
-//     })
-//     .catch((err) => console.log(err));
+User.findAsync({ fbID:"1064814340266637" })
+    .then( userObj => {
+        console.log ( 'userObj!!!', userObj);
+        return User.populate(userObj, {path:"currentPuzzle"})
+    })
+    .then( populatedObj => {
+        console.log ( "populatedObj!!", populatedObj );
+    })
+    .catch((err) => console.log(err));
 
 // User.findOne({ fbID:"1064814340266637" })
 //     .populate('currentPuzzle') // only return the Persons name
@@ -133,7 +133,8 @@ app.post('/webhook/', function (req, res) {
                 setTimeout( ()=>sendTextMessage(sender, "'new' : a new puzzle." ), firstMessageTime+(messageDelay*1) )
                 setTimeout( ()=>sendTextMessage(sender, "'hint' : hint of the current puzzle, if there is one." ), firstMessageTime+(messageDelay*2) )
                 setTimeout( ()=>sendTextMessage(sender, "'score' : your current score." ), firstMessageTime+(messageDelay*3) )
-                setTimeout( ()=>sendTextMessage(sender, "'help' : available commands." ), firstMessageTime+(messageDelay*4) )
+                setTimeout( ()=>sendTextMessage(sender, "'current' : your current puzzle." ), firstMessageTime+(messageDelay*4) )
+                setTimeout( ()=>sendTextMessage(sender, "'help' : available commands." ), firstMessageTime+(messageDelay*5) )
             }
             // get a new puzzle
             else if ( text == "new" ) {
