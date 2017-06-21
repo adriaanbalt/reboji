@@ -111,7 +111,6 @@ app.post('/webhook/', function (req, res) {
                 currentPuzzle = userCurrentPuzzle
                 handleMessages(event, facebookUserId)
             })
-        console.log ( 'puzzy', puzzy )
     }
     // TODO > pair with a specific user in the database
     res.sendStatus(200)
