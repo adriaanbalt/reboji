@@ -78,15 +78,12 @@ app.get('/webhook/', function (req, res) {
 //     console.log ( 'response from user save:', savedObj);
 // });
 
-User.findAsync({ fbID:"1064814340266637" })
-    .then( userObj => {
-        return User.populate(userObj, {path:"currentPuzzle"})
-    })
-    .then( populatedObj => {
-        console.log ( "populatedObj!!", populatedObj );
-    })
-    .catch((err) => console.log(err));
 
+// User.findAsync({}, null, {})
+//     .then(allUsers => {
+//         console.log( 'ALLUSERS:', allUsers );
+//     })
+//     .catch(err => !console.log(err) && next(err));
 
 // User.findOne({ fbID:"1064814340266637" })
 //     .populate('currentPuzzle') // only return the Persons name
@@ -110,11 +107,17 @@ app.post('/webhook/', function (req, res) {
         let event = req.body.entry[0].messaging[i]
         let sender = event.sender.id
 
-        // User.findAsync({}, null, {})
-        //     .then(allUsers => {
-        //         console.log( 'ALLUSERS:', allUsers );
-        //     })
-        //     .catch(err => !console.log(err) && next(err));
+        console.log ( 'event.sender.id', event.sender.id )
+
+        User.findAsync({ fbID:"1064814340266637" })
+            .then( userObj => {
+                return User.populate(userObj, {path:"currentPuzzle"})
+            })
+            .then( populatedObj => {
+                console.log ( "populatedObj!!", populatedObj );
+            })
+            .catch((err) => console.log(err));
+            
 
         if (event.message && event.message.text) {
             let text = "" + event.message.text.toLowerCase();
