@@ -56,6 +56,7 @@ app.get('/', (req, res, next) => res.sendFile('/index.html', {
 
 // for Facebook verification
 app.get('/webhook/', function (req, res) {
+    console.log ( 'webhook verification', req, res )
     if (req.query['hub.verify_token'] === 'obi_wan_dies') {
         res.send(req.query['hub.challenge'])
     }
@@ -79,7 +80,6 @@ app.get('/webhook/', function (req, res) {
 
 User.findAsync({ fbID:"1064814340266637" })
     .then( userObj => {
-        console.log ( 'userObj!!!', userObj);
         return User.populate(userObj, {path:"currentPuzzle"})
     })
     .then( populatedObj => {
