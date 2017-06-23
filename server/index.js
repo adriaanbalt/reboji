@@ -186,9 +186,13 @@ function handleMessages( event ) {
         }
         // successful puzzle response
         else if ( checkPuzzleAnswer( text ) ) {
-            removePuzzle( currentPuzzle ); // delete a puzzle that was successfully answered
-            correctPuzzle( currentPuzzle ); // add successful puzzles to a separate array for logging
-            
+            // delete a puzzle that was successfully answered
+            removePuzzle( currentPuzzle ); 
+            // add successful puzzles to a separate array for logging
+            correctPuzzle( currentPuzzle );
+            // update user on database to a new puzzle
+            setUserCurrentPuzzle( getPuzzleFromList() )
+
             sendTextMessage( "-" )
             setTimeout( ()=>sendTextMessage( "Congratulations! You have completed " + successfulPuzzles.length + " of " + puzzles.length + " puzzles. Here's a new puzzle" ), 100 )
             setTimeout( ()=>sendTextMessage( currentPuzzle.pictogram ), firstMessageTime+(messageDelay*1) )
@@ -226,11 +230,13 @@ function getPuzzleFromList() {
 }
 
 function setUserCurrentPuzzle(puzzle) {
+    currentPuzzle = puzzle
     return new Promise((resolve, reject) => {
         User.findOne({ fbID:facebookUserId })
             .updateAsync({ currentPuzzle: puzzle._id })
             .then( (userObj) => {
-                console.log ( ' setUserCurrentPuzzle: ', userObj )
+                console.log ( 'setUserCurrentPuzzle(): ', userObj )
+                console.log ( ' >currentPuzzle: ', currentPuzzle )
                 return resolve( user.currentPuzzle )
             })
     })
