@@ -232,12 +232,11 @@ function getPuzzleFromList() {
 function setUserCurrentPuzzle(puzzle) {
     currentPuzzle = puzzle
     return new Promise((resolve, reject) => {
-        User.findOne({ fbID:facebookUserId })
-            .updateAsync({ currentPuzzle: puzzle._id })
+        User.updateAsync({ fbID:facebookUserId }, { currentPuzzle: puzzle })
             .then( (userObj) => {
                 console.log ( 'setUserCurrentPuzzle(): ', userObj )
                 console.log ( ' >currentPuzzle: ', currentPuzzle )
-                return resolve( user.currentPuzzle )
+                return resolve( currentPuzzle )
             })
     })
 }
