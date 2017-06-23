@@ -106,11 +106,25 @@ app.post('/webhook/', function (req, res) {
     for (let i = 0; i < messaging_events.length; i++) {
         let event = req.body.entry[0].messaging[i]
         facebookUserId = event.sender.id
-        checkIfUserHasCurrentPuzzle()
-            .then( (userCurrentPuzzle) => {
-                currentPuzzle = userCurrentPuzzle
-                handleMessages(event, facebookUserId)
-            })
+        // if this session doesnt have a current puzzle yet, then get it off the user
+        if ( !currentPuzzle ) {
+            getUserCurrentPuzzle()
+                .then( (userCurrentPuzzle) => {
+                    if ( userCurrentPuzzle ) {
+                        // there is a user puzzle already
+                        currentPuzzle = userCurrentPuzzle
+                    } else {
+                        // if there is no set user puzzle, get a random puzzle from the list
+                        currentPuzzle = getPuzzleFromList()
+                        // set the user's current puzzle to the randomly selected puzzle
+                        setUserCurrentPuzzle( currentPuzzle )
+                    }
+                    console.log ( '>>first request: ', currentPuzzle, ' user puzzle', userCurrentPuzzle )
+                    handleMessages(event, facebookUserId)
+                })
+        } else {
+            handleMessages(event, facebookUserId)
+        }
     }
     // TODO > pair with a specific user in the database
     res.sendStatus(200)
@@ -130,7 +144,6 @@ function handleMessages( event ) {
     if (event.message && event.message.text) {
         let text = "" + event.message.text.toLowerCase();
 
-        console.log ( 'handleMessages', currentPuzzle )
         // starting the game
         if ( !currentPuzzle ) {
             sendTextMessage( '-' );
@@ -208,7 +221,22 @@ function getPuzzle() {
     return currentPuzzle;
 }
 
-function checkIfUserHasCurrentPuzzle() {
+function getPuzzleFromList() {
+    return puzzles[ getRandom(0, puzzles.length ) ];
+}
+
+function setUserCurrentPuzzle(puzzle) {
+    return new Promise((resolve, reject) => {
+        User.findOne({ fbID:facebookUserId })
+            .updateAsync({ currentPuzzle: puzzle._id })
+            .then( (userObj) => {
+                console.log ( ' setUserCurrentPuzzle: ', userObj )
+                return resolve( user.currentPuzzle )
+            })
+    })
+}
+
+function getUserCurrentPuzzle() {
     return new Promise((resolve, reject) => {
         User.findOne({ fbID:facebookUserId })
             .populate('currentPuzzle') // only return the Persons name
