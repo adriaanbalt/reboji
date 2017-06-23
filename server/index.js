@@ -32,7 +32,8 @@ let facebookUserId;
 
 Puzzle.findAsync({}, null, {})
     .then(allPuzzles => {
-        puzzles = allPuzzles;
+        puzzles = allPuzzles.filter( item => item.pictogram != "" );
+        console.log ( 'all puzzles', puzzles)
         return allPuzzles;
     })
     .catch(err => !console.log(err) && next(err));
