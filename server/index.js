@@ -101,11 +101,17 @@ app.post('/webhook/', function (req, res) {
         let event = req.body.entry[0].messaging[i]
         let sender = event.sender.id
 
-        // User.findAsync({}, null, {})
-        //     .then(allUsers => {
-        //         console.log( 'ALLUSERS:', allUsers );
-        //     })
-        //     .catch(err => !console.log(err) && next(err));
+
+        // TODO
+        //      check if user exists
+        //          NO
+        //              create a new user and set current puzzle with FB ID
+        //          YES
+        //              get currentpuzzle for user
+        //              set guesses to user.currentpuzzle
+        //              add currentpuzzle to user.puzzlesComplete
+        //      puzzles
+        //          save guesses to puzzles.currentPuzzle._id
 
         if (event.message && event.message.text) {
             let text = "" + event.message.text.toLowerCase();
@@ -158,10 +164,7 @@ function getPuzzle() {
     //         })
     //         .catch(err => !console.log(err) && next(err));
 
-    // return returnPuzzle;
     let newPuzz = puzzles[ getRandom(0, puzzles.length ) ];// == currentPuzzle ? getPuzzle() : puzzles[ getRandom(0, puzzles.length ) ];
-    console.log ( 'getPuzzle', newPuzz, typeof newPuzz, newPuzz['answer'], newPuzz['difficulty'], newPuzz['hint'], newPuzz['_id'], newPuzz['pictogram'] ); 
-    // console.log ( 'puzzles', puzzles.length, typeof newPuzz );
     return newPuzz;
 }
 

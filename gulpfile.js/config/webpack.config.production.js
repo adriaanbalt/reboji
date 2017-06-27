@@ -76,7 +76,7 @@ module.exports = function(env) {
       new webpack.NoErrorsPlugin()
     );
   }
-console.log ( 'env', env );
+
   if(env === 'prod') {
     webpackConfig.plugins.push(
       new webpackManifest(publicPath, config.root + '/public'),

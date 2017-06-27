@@ -16,6 +16,12 @@ var UserSchema = new mongoose.Schema({
     fbID: String,
     email: String,
     guesses: Array,
+    puzzlesComplete: [
+        { 
+            type: String,
+            ref: 'Puzzle' 
+        }
+    ],
     puzzles: [
         { 
             type: String,
