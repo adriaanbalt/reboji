@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "Reboji is a facebook chat bot to place a puzzle guessing game for rebusy emoji.",
   "engines": {
-    "node": "7.10.1",
-    "npm": "2.14.7"
+    "node": "7.10.1"
   },
   "repository": {
     "type": "git",
