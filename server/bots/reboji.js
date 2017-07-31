@@ -51,6 +51,7 @@ class Reboji {
 
     constructor(app) {
 
+        console.log ( "REBOJI CONSTRUCOTR" );
         this.puzzles = [];
         this.seenPuzzles = [];
         this.successfulPuzzles = [];
