@@ -58,8 +58,8 @@ class Reboji {
         this.failedPuzzles = [];
         this.currentPuzzle;
         this.token = "EAAF0MuSayRkBAMi8pb5w6X2qf3rsk1wF8UCD8Nhpho0yiBknETthNd2b8o4eM0bUXZBiar1jfSlfeBJneMfSoiFjZA77gMdroLnnai7ClsjU4ZBdpFz69ZAnX2Jx1uy1WzZAc7mJbCntbQkErviZCd2obVJ7MDMfQZD"
-        this.this.firstMessageTime = 100;
-        this.this.messageDelay = 300;
+        this.firstMessageTime = 100;
+        this.messageDelay = 300;
         this.facebookUserId;
         this.currentUser;
 
