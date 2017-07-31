@@ -49,18 +49,18 @@ Promise.promisifyAll(User.prototype);
 
 class Reboji {
 
-    let puzzles = [];
-    let seenPuzzles = [];
-    let successfulPuzzles = [];
-    let failedPuzzles = [];
-    let currentPuzzle;
-    const token = "EAAF0MuSayRkBAMi8pb5w6X2qf3rsk1wF8UCD8Nhpho0yiBknETthNd2b8o4eM0bUXZBiar1jfSlfeBJneMfSoiFjZA77gMdroLnnai7ClsjU4ZBdpFz69ZAnX2Jx1uy1WzZAc7mJbCntbQkErviZCd2obVJ7MDMfQZD"
-    const firstMessageTime = 100;
-    const messageDelay = 300;
-    let facebookUserId;
-    let currentUser;
-
     constructor(app) {
+
+        this.puzzles = [];
+        this.seenPuzzles = [];
+        this.successfulPuzzles = [];
+        this.failedPuzzles = [];
+        this.currentPuzzle;
+        this.token = "EAAF0MuSayRkBAMi8pb5w6X2qf3rsk1wF8UCD8Nhpho0yiBknETthNd2b8o4eM0bUXZBiar1jfSlfeBJneMfSoiFjZA77gMdroLnnai7ClsjU4ZBdpFz69ZAnX2Jx1uy1WzZAc7mJbCntbQkErviZCd2obVJ7MDMfQZD"
+        this.firstMessageTime = 100;
+        this.messageDelay = 300;
+        this.facebookUserId;
+        this.currentUser;
 
         console.log ( 'Reboji.constructor() ', app )
 
@@ -308,6 +308,7 @@ class Reboji {
     }
 
     sendTextMessage( text ) {
+        console.log ( "sendTextMessage", token )
         let messageData = { text:text }
         request({
             url: 'https://graph.facebook.com/v2.6/me/messages',
