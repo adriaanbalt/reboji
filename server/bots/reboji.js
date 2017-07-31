@@ -140,11 +140,11 @@ class Reboji {
     }
 
     start() {
-        console.log( 'getAllPuzzles()')
+        console.log( 'getAllPuzzles()' , this.puzzles )
         Puzzle.findAsync({}, null, {})
             .then(allPuzzles => {
-                puzzles = allPuzzles.filter( item => item.pictogram != "" );
-                console.log ( 'all puzzles response >> ', puzzles)
+                this.puzzles = allPuzzles.filter( item => item.pictogram != "" );
+                console.log ( 'all puzzles response >> ', this.puzzles)
                 return allPuzzles;
             })
             .catch(err => !console.log(err) && next(err));
