@@ -83,11 +83,11 @@ class Reboji {
                 
                 if ( this.currentUser != this.facebookUserId ) {
                     // if user doesn't exist, create a user in the database
-                    getUserByFbId( this.facebookUserId )
+                    this.getUserByFbId( this.facebookUserId )
                         .then( ( userObj )=> {
                             console.log ( 'userObj', userObj )
                             if ( !userObj ) {
-                                createUser( this.facebookUserId )
+                                this.createUser( this.facebookUserId )
                             } else {
                                 this.currentUser = this.facebookUserId
                             }
@@ -98,7 +98,7 @@ class Reboji {
 
                 // if this session doesnt have a current puzzle yet, then get it off the user
                 if ( !currentPuzzle ) {
-                    getUserCurrentPuzzle()
+                    this.getUserCurrentPuzzle()
                         .then( (userCurrentPuzzle) => {
                             if ( userCurrentPuzzle ) {
                                 // there is a user puzzle already
@@ -107,18 +107,30 @@ class Reboji {
                                 // if there is no set user puzzle, get a random puzzle from the list
                                 currentPuzzle = getPuzzleFromList()
                                 // set the user's current puzzle to the randomly selected puzzle
-                                setUserCurrentPuzzle( currentPuzzle )
+                                this.setUserCurrentPuzzle( currentPuzzle )
                             }
                             console.log ( '>>first request: ', currentPuzzle, ' user puzzle', userCurrentPuzzle )
-                            handleMessages(event, this.facebookUserId)
+                            this.handleMessages(event, this.facebookUserId)
                         })
                 } else {
-                    handleMessages(event, this.facebookUserId)
+                    this.handleMessages(event, this.facebookUserId)
                 }
             }
             // TODO > pair with a specific user in the database
             res.sendStatus(200)
         })
+    }
+
+    createUser( fbId ) {
+        var newObj = new User(
+            {
+                fbID: fbId,
+            }
+        );
+        newObj.saveAsync()
+          .then( savedObj  => {
+            console.log ( 'response from user save:', savedObj);
+        });
     }
 
     getUserByFbId( fbId ) {
