@@ -162,46 +162,46 @@ class Reboji {
             let text = "" + event.message.text.toLowerCase();
 
             // starting the game
-            if ( !currentPuzzle ) {
-                sendTextMessage( '-' );
-                setTimeout( ()=>sendTextMessage( "Here is your first puzzle of " + puzzles.length + " puzzles." ), firstMessageTime )
-                setTimeout( ()=>sendTextMessage( currentPuzzle.pictogram ), firstMessageTime+(messageDelay*1) )
+            if ( !this.currentPuzzle ) {
+                this.sendTextMessage( '-' );
+                setTimeout( ()=>this.sendTextMessage( "Here is your first puzzle of " + puzzles.length + " puzzles." ), firstMessageTime )
+                setTimeout( ()=>this.sendTextMessage( this.currentPuzzle.pictogram ), firstMessageTime+(messageDelay*1) )
             }
             // help command
             else if ( text == "help" ) {
-                sendTextMessage( '-' );
-                setTimeout( ()=>sendTextMessage( "Commands:" ), firstMessageTime )
-                setTimeout( ()=>sendTextMessage( "'new' : a new puzzle." ), firstMessageTime+(messageDelay*1) )
-                setTimeout( ()=>sendTextMessage( "'hint' : hint of the current puzzle, if there is one." ), firstMessageTime+(messageDelay*2) )
-                setTimeout( ()=>sendTextMessage( "'score' : your current score." ), firstMessageTime+(messageDelay*3) )
-                setTimeout( ()=>sendTextMessage( "'current' : your current puzzle." ), firstMessageTime+(messageDelay*4) )
-                setTimeout( ()=>sendTextMessage( "'help' : available commands." ), firstMessageTime+(messageDelay*5) )
+                this.sendTextMessage( '-' );
+                setTimeout( ()=>this.sendTextMessage( "Commands:" ), firstMessageTime )
+                setTimeout( ()=>this.sendTextMessage( "'new' : a new puzzle." ), firstMessageTime+(messageDelay*1) )
+                setTimeout( ()=>this.sendTextMessage( "'hint' : hint of the current puzzle, if there is one." ), firstMessageTime+(messageDelay*2) )
+                setTimeout( ()=>this.sendTextMessage( "'score' : your current score." ), firstMessageTime+(messageDelay*3) )
+                setTimeout( ()=>this.sendTextMessage( "'current' : your current puzzle." ), firstMessageTime+(messageDelay*4) )
+                setTimeout( ()=>this.sendTextMessage( "'help' : available commands." ), firstMessageTime+(messageDelay*5) )
             }
             // get a new puzzle
             else if ( text == "new" ) {
-                sendTextMessage( '-' );
+                this.sendTextMessage( '-' );
                 // update user on database to a new puzzle
                 setUserCurrentPuzzle( getPuzzleFromList() )
-                setTimeout( ()=>sendTextMessage( "Here is a new puzzle" ), firstMessageTime )
-                setTimeout( ()=>sendTextMessage( currentPuzzle.pictogram ), firstMessageTime+(messageDelay*1) )
+                setTimeout( ()=>this.sendTextMessage( "Here is a new puzzle" ), firstMessageTime )
+                setTimeout( ()=>this.sendTextMessage( currentPuzzle.pictogram ), firstMessageTime+(messageDelay*1) )
             }
             // get a hint
             else if ( text == "hint" ) {
                 if ( currentPuzzle.hint ) {
-                    sendTextMessage( "Here is this puzzle's hint:" );
-                    setTimeout( ()=>sendTextMessage( currentPuzzle.hint ), firstMessageTime+(messageDelay*1) )
+                    this.sendTextMessage( "Here is this puzzle's hint:" );
+                    setTimeout( ()=>this.sendTextMessage( currentPuzzle.hint ), firstMessageTime+(messageDelay*1) )
                 } else {
-                    sendTextMessage( "Sorry, this puzzle does not have a hint." );
+                    this.sendTextMessage( "Sorry, this puzzle does not have a hint." );
                 }
             }
             // check your info
             else if ( text == "score" ) {
-                sendTextMessage( "You have completed " + successfulPuzzles.length + " of " + puzzles.length + " puzzles." );
+                this.sendTextMessage( "You have completed " + successfulPuzzles.length + " of " + puzzles.length + " puzzles." );
             }
             // get current puzzle
             else if ( text == "current" ) {
-                sendTextMessage( "Your current puzzle is");
-                setTimeout( ()=>sendTextMessage( currentPuzzle.pictogram ), firstMessageTime+(messageDelay*1) )
+                this.sendTextMessage( "Your current puzzle is");
+                setTimeout( ()=>this.sendTextMessage( currentPuzzle.pictogram ), firstMessageTime+(messageDelay*1) )
             }
             // successful puzzle response
             else if ( checkPuzzleAnswer( text ) ) {
@@ -212,15 +212,15 @@ class Reboji {
                 // update user on database to a new puzzle
                 setUserCurrentPuzzle( getPuzzleFromList() )
 
-                sendTextMessage( "-" )
-                setTimeout( ()=>sendTextMessage( "Congratulations! You have completed " + successfulPuzzles.length + " of " + puzzles.length + " puzzles. Here's a new puzzle" ), 100 )
-                setTimeout( ()=>sendTextMessage( currentPuzzle.pictogram ), firstMessageTime+(messageDelay*1) )
+                this.sendTextMessage( "-" )
+                setTimeout( ()=>this.sendTextMessage( "Congratulations! You have completed " + this.successfulPuzzles.length + " of " + puzzles.length + " puzzles. Here's a new puzzle" ), 100 )
+                setTimeout( ()=>this.sendTextMessage( currentPuzzle.pictogram ), firstMessageTime+(messageDelay*1) )
             }
             // incorrect puzzle response
             else if ( !checkPuzzleAnswer( text ) ) {
-                sendTextMessage( '-' );
-                setTimeout( ()=>sendTextMessage( "Sorry that was incorrect. You have " + successfulPuzzles.length + " of " + puzzles.length + " puzzles left to complete. Try again or respond 'help' for available commands." ), 100 )
-                setTimeout( ()=>sendTextMessage( currentPuzzle.pictogram ), firstMessageTime+(messageDelay*1) )
+                this.sendTextMessage( '-' );
+                setTimeout( ()=>this.sendTextMessage( "Sorry that was incorrect. You have " + this.successfulPuzzles.length + " of " + puzzles.length + " puzzles left to complete. Try again or respond 'help' for available commands." ), 100 )
+                setTimeout( ()=>this.sendTextMessage( currentPuzzle.pictogram ), firstMessageTime+(messageDelay*1) )
             }
         }
     }
@@ -230,9 +230,9 @@ class Reboji {
     }
     updateUserSuccessfulPuzzles( newPuzzle ) {
         console.log ( 'updateUserSuccessfulPuzzles()', newPuzzle)
-        successfulPuzzles.push( newPuzzle )
+        this.successfulPuzzles.push( newPuzzle )
         return new Promise((resolve, reject) => {
-            User.updateAsync({ fbID:this.facebookUserId }, { successfulPuzzles: successfulPuzzles })
+            User.updateAsync({ fbID:this.facebookUserId }, { successfulPuzzles: this.successfulPuzzles })
                 .then( (userObj) => {
                     console.log ( ' ' )
                     console.log ( 'correctPuzzle(): ')
@@ -261,19 +261,19 @@ class Reboji {
     }
 
     getPuzzleFromList() {
-        return puzzles[ getRandom(0, puzzles.length ) ];
+        return this.puzzles[ getRandom(0, this.puzzles.length ) ];
     }
 
     setUserCurrentPuzzle(puzzle) {
-        currentPuzzle = puzzle
+        this.currentPuzzle = puzzle
         return new Promise((resolve, reject) => {
             User.findByIdAndUpdate({ fbID:this.facebookUserId }, { $set: { currentPuzzle: puzzle }})
                 .then( (userObj) => {
                     console.log ( ' ' )
                     console.log ( 'setUserCurrentPuzzle(): ')
                     console.log ( 'user:', userObj );
-                    console.log ( 'currentPuzzle: ', currentPuzzle )
-                    return resolve( currentPuzzle )
+                    console.log ( 'currentPuzzle: ', this.currentPuzzle )
+                    return resolve( this.currentPuzzle )
                 })
         })
     }
