@@ -321,7 +321,7 @@ class Reboji {
         request({
             url: 'https://graph.facebook.com/v2.6/me/messages',
             qs: {
-                access_token:token
+                access_token:this.token
             },
             method: 'POST',
             json: {
