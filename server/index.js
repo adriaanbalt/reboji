@@ -218,7 +218,7 @@ function handleMessages( event ) {
 }
 function correctPuzzle( puzzle ) {
     console.log ( 'correctPuzzle()')
-    updateUserSuccessfulPuzzles( newPuzzle );
+    updateUserSuccessfulPuzzles( puzzle );
 }
 function updateUserSuccessfulPuzzles( newPuzzle ) {
     console.log ( 'updateUserSuccessfulPuzzles(), newPuzzle')
