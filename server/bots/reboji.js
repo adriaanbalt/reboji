@@ -226,7 +226,7 @@ class Reboji {
     }
     correctPuzzle( puzzle ) {
         console.log ( 'correctPuzzle()', puzzle)
-        updateUserSuccessfulPuzzles( puzzle );
+        this.updateUserSuccessfulPuzzles( puzzle );
     }
     updateUserSuccessfulPuzzles( newPuzzle ) {
         console.log ( 'updateUserSuccessfulPuzzles()', newPuzzle)
