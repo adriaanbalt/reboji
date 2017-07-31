@@ -1,7 +1,8 @@
 const mongoose = require('mongoose'),
-     Puzzle = mongoose.model('Puzzle'),
-     User = mongoose.model('User'),
-     Promise = require('bluebird')
+      request = require('request'),
+      Puzzle = mongoose.model('Puzzle'),
+      User = mongoose.model('User'),
+      Promise = require('bluebird')
 
 // var newObj = new User(
 //     {

@@ -6,7 +6,6 @@ const   express = require('express'),
         path = require('path'),
         cookieParser = require('cookie-parser'),
         bodyParser = require('body-parser'),
-        request = require('request'),
         app = express(),
         Workers = require('./workers');
 
