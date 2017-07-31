@@ -2,13 +2,13 @@
 
 var _ = require("lodash");
 
-var Workers = function() {
-    console.log ( "Workers init ")
+var Workers = function( app ) {
 	var srv = require ("./config");
 	var logger = srv.logger;
 	var self = this;
     self.me = "workers";
     self.workers = [];
+    serl.app = app;
 
 	var startWorker = function (worker) {
 		if(_.isFunction(worker.start)) {
@@ -20,8 +20,11 @@ var Workers = function() {
 		}
 	};
 
-    self.start = function ( socket ) {
-        startWorker( reboji );        
+    self.start = function () {
+        var Reboji = require("../bots/reboji");
+        var bot = new Reboji( self.app );
+
+        startWorker(bot);        
     };
 
     self.closeGracefully = function (signal) {

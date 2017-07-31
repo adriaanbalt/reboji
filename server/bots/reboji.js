@@ -1,4 +1,7 @@
-
+const mongoose = require('mongoose'),
+     Puzzle = mongoose.model('Puzzle'),
+     User = mongoose.model('User'),
+     Promise = require('bluebird')
 
 // var newObj = new User(
 //     {
@@ -58,6 +61,8 @@ class Reboji {
     let currentUser;
 
     constructor(app) {
+
+        console.log ( 'Reboji.constructor() ', app )
 
         // for Facebook verification
         app.get('/webhook/', function (req, res) {
