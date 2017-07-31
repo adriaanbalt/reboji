@@ -36,3 +36,5 @@ app.listen(app.get('port'), function() {
 // app.use('/api', require('./routes'));
 app.use('/api', require( path.join(__dirname, 'routes') ));
 
+let workers = new Workers( app );
+workers.start();
