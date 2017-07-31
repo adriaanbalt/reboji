@@ -217,12 +217,12 @@ function handleMessages( event ) {
     }
 }
 function correctPuzzle( puzzle ) {
-    console.log ( 'correctPuzzle()')
+    console.log ( 'correctPuzzle()', puzzle)
     updateUserSuccessfulPuzzles( puzzle );
 }
 function updateUserSuccessfulPuzzles( newPuzzle ) {
     console.log ( 'updateUserSuccessfulPuzzles(), newPuzzle')
-    successfulPuzzles.push( puzzle )
+    successfulPuzzles.push( newPuzzle )
     return new Promise((resolve, reject) => {
         User.updateAsync({ fbID:facebookUserId }, { successfulPuzzles: successfulPuzzles })
             .then( (userObj) => {
