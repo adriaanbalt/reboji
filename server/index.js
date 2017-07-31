@@ -271,7 +271,6 @@ function getUserCurrentPuzzle() {
                 console.log( ' ' );
                 console.log('getUserCurrentPuzzle() >>');
                 console.log('user: ', user );
-                console.log('user.currentPuzzle: ', user.currentPuzzle );
                 // currentPuzzle = story.currentPuzzle
                 resolve( user.currentPuzzle )
             })    
