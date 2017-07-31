@@ -3,8 +3,6 @@
 var _ = require("lodash");
 
 var Workers = function( app ) {
-	var srv = require ("./config");
-	var logger = srv.logger;
 	var self = this;
     self.me = "workers";
     self.workers = [];
@@ -23,6 +21,7 @@ var Workers = function( app ) {
     self.start = function () {
         var Reboji = require("../bots/reboji");
         var bot = new Reboji( self.app );
+        console.log ( 'start', bot)
 
         startWorker(bot);        
     };
