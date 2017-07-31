@@ -13,23 +13,6 @@ const   express = require('express'),
         User = mongoose.model('User'),
         Promise = require('bluebird');
 
-
-// promisifies methods on "Puzzle" and "Puzzle" instances
-Promise.promisifyAll(Puzzle);
-Promise.promisifyAll(Puzzle.prototype);
-Promise.promisifyAll(User);
-Promise.promisifyAll(User.prototype);
-
-let puzzles = [];
-let seenPuzzles = [];
-let successfulPuzzles = [];
-let failedPuzzles = [];
-let currentPuzzle;
-const token = "EAAF0MuSayRkBAMi8pb5w6X2qf3rsk1wF8UCD8Nhpho0yiBknETthNd2b8o4eM0bUXZBiar1jfSlfeBJneMfSoiFjZA77gMdroLnnai7ClsjU4ZBdpFz69ZAnX2Jx1uy1WzZAc7mJbCntbQkErviZCd2obVJ7MDMfQZD"
-const firstMessageTime = 100;
-const messageDelay = 300;
-let facebookUserId;
-
 app.set('port', (process.env.PORT || 5000))
 
 // Process application/x-www-form-urlencoded
@@ -47,14 +30,16 @@ app.get('/', (req, res, next) => res.sendFile('/index.html', {
   root: path.join(__dirname, '../public')
 }));
 
-// for Facebook verification
-app.get('/webhook/', function (req, res) {
-    console.log ( 'webhook verification', req, res )
-    if (req.query['hub.verify_token'] === 'obi_wan_dies') {
-        res.send(req.query['hub.challenge'])
-    }
-    res.send('Error, wrong token')
-})
+// Spin up the server
+app.listen(app.get('port'), function() {
+    console.log('running on port', app.get('port'))
+});
+
+// api routes
+// app.use('/api', require('./routes'));
+app.use('/api', require( path.join(__dirname, 'routes') ));
+
+
 
 // var newObj = new User(
 //     {
@@ -93,6 +78,23 @@ app.get('/webhook/', function (req, res) {
 //      watermark: 1468522377355,
 //      seq: 3120 } } 1064814340266637
 
+// promisifies methods on "Puzzle" and "Puzzle" instances
+Promise.promisifyAll(Puzzle);
+Promise.promisifyAll(Puzzle.prototype);
+Promise.promisifyAll(User);
+Promise.promisifyAll(User.prototype);
+
+
+// for Facebook verification
+app.get('/webhook/', function (req, res) {
+    console.log ( 'webhook verification', req, res )
+    if (req.query['hub.verify_token'] === 'obi_wan_dies') {
+        res.send(req.query['hub.challenge'])
+    }
+    res.send('Error, wrong token')
+})
+
+
 // handling messages
 app.post('/webhook/', function (req, res) {
     let messaging_events = req.body.entry[0].messaging
@@ -123,23 +125,24 @@ app.post('/webhook/', function (req, res) {
     res.sendStatus(200)
 })
 
-// Spin up the server
-app.listen(app.get('port'), function() {
-    console.log('running on port', app.get('port'))
-});
+let puzzles = [];
+let seenPuzzles = [];
+let successfulPuzzles = [];
+let failedPuzzles = [];
+let currentPuzzle;
+const token = "EAAF0MuSayRkBAMi8pb5w6X2qf3rsk1wF8UCD8Nhpho0yiBknETthNd2b8o4eM0bUXZBiar1jfSlfeBJneMfSoiFjZA77gMdroLnnai7ClsjU4ZBdpFz69ZAnX2Jx1uy1WzZAc7mJbCntbQkErviZCd2obVJ7MDMfQZD"
+const firstMessageTime = 100;
+const messageDelay = 300;
+let facebookUserId;
 
-// api routes
-// app.use('/api', require('./routes'));
-app.use('/api', require( path.join(__dirname, 'routes') ));
-
-getAllPuzzles();
+this.getAllPuzzles();
 
 function getAllPuzzles() {
-
+    console.log( 'getAllPuzzles()')
     Puzzle.findAsync({}, null, {})
         .then(allPuzzles => {
             puzzles = allPuzzles.filter( item => item.pictogram != "" );
-            console.log ( 'all puzzles', puzzles)
+            console.log ( 'all puzzles response >> ', puzzles)
             return allPuzzles;
         })
         .catch(err => !console.log(err) && next(err));
