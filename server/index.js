@@ -101,13 +101,16 @@ app.post('/webhook/', function (req, res) {
     for (let i = 0; i < messaging_events.length; i++) {
         let event = req.body.entry[0].messaging[i]
         facebookUserId = event.sender.id
+        
         // if user doesn't exist, create a user in the database
-        // if ( !checkUserExists( facebookUserId ) ){
-        //     createUser();
-        // }
-        checkUserExists( facebookUserId )
-            .then( ( checkUserExistsRes )=> {
-                console.log ( 'checkUserExistsRes', checkUserExistsRes )
+        getUserByFbId( facebookUserId )
+            .then( ( userObj )=> {
+                console.log ( 'userObj', userObj )
+                if ( !userObj ) {
+                    createUser( facebookUserId )
+                }
+            }).then( ( newUserObj ) => {
+                console.log ('user created?', newUserObj)
             })
 
         // if this session doesnt have a current puzzle yet, then get it off the user
@@ -145,12 +148,15 @@ const messageDelay = 300;
 let facebookUserId;
 
 
-function checkUserExists( fbId ) {
-    console.log ( 'checkUserExists()' )
+function getUserByFbId( fbId ) {
+    console.log ( 'getUserByFbId()' )
     return new Promise((resolve, reject) => {
         User.findOneAsync({ fbID:facebookUserId })
             .then( ( user ) => {
                 console.log ( 'checkUserExists response', user )
+                if ( !user ) {
+
+                }
                 resolve( user ) 
             }) 
         })
