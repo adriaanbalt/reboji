@@ -62,10 +62,8 @@ class Reboji {
         this.facebookUserId;
         this.currentUser;
 
-        console.log ( 'Reboji.constructor() ', app )
-
         // for Facebook verification
-        app.get('/webhook/', function (req, res) {
+        app.get('/webhook/', (req, res) => {
             console.log ( 'webhook verification', req, res )
             if (req.query['hub.verify_token'] === 'obi_wan_dies') {
                 res.send(req.query['hub.challenge'])
@@ -75,7 +73,7 @@ class Reboji {
 
 
         // handling messages
-        app.post('/webhook/', function (req, res) {
+        app.post('/webhook/',  (req, res) => {
             let messaging_events = req.body.entry[0].messaging
             for (let i = 0; i < messaging_events.length; i++) {
                 let event = req.body.entry[0].messaging[i]
@@ -131,18 +129,12 @@ class Reboji {
                     resolve( user ) 
                 }) 
             })
-
-        // User.findOne()
-
-        // User.findOne({ fbID:this.facebookUserId })
     }
 
     start() {
-        console.log( 'getAllPuzzles()' , this.puzzles )
         Puzzle.findAsync({}, null, {})
             .then(allPuzzles => {
                 this.puzzles = allPuzzles.filter( item => item.pictogram != "" );
-                console.log ( 'all puzzles response >> ', this)
                 return allPuzzles;
             })
             .catch(err => !console.log(err) && next(err));
@@ -322,7 +314,7 @@ class Reboji {
                 },
                 message: messageData,
             }
-        }, function(error, response, body) {
+        }, (error, response, body) => {
             if (error) {
                 console.log('Error sending messages: ', error)
             } else if (response.body.error) {
