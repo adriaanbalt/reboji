@@ -79,17 +79,17 @@ class Reboji {
             let messaging_events = req.body.entry[0].messaging
             for (let i = 0; i < messaging_events.length; i++) {
                 let event = req.body.entry[0].messaging[i]
-                facebookUserId = event.sender.id
+                this.facebookUserId = event.sender.id
 
-                console.log ( 'webhook', facebookUserId )
+                console.log ( 'webhook', this.facebookUserId )
                 
-                if ( currentUser != facebookUserId ) {
+                if ( currentUser != this.facebookUserId ) {
                     // if user doesn't exist, create a user in the database
-                    getUserByFbId( facebookUserId )
+                    getUserByFbId( this.facebookUserId )
                         .then( ( userObj )=> {
                             console.log ( 'userObj', userObj )
                             if ( !userObj ) {
-                                createUser( facebookUserId )
+                                createUser( this.facebookUserId )
                             }
                         }).then( ( newUserObj ) => {
                             console.log ('user created?', newUserObj)
@@ -110,10 +110,10 @@ class Reboji {
                                 setUserCurrentPuzzle( currentPuzzle )
                             }
                             console.log ( '>>first request: ', currentPuzzle, ' user puzzle', userCurrentPuzzle )
-                            handleMessages(event, facebookUserId)
+                            handleMessages(event, this.facebookUserId)
                         })
                 } else {
-                    handleMessages(event, facebookUserId)
+                    handleMessages(event, this.facebookUserId)
                 }
             }
             // TODO > pair with a specific user in the database
@@ -124,7 +124,7 @@ class Reboji {
     getUserByFbId( fbId ) {
         console.log ( 'getUserByFbId()' )
         return new Promise((resolve, reject) => {
-            User.findOneAsync({ fbID:facebookUserId })
+            User.findOneAsync({ fbID:this.facebookUserId })
                 .then( ( user ) => {
                     console.log ( 'checkUserExists response', user )
                     if ( !user ) {
@@ -136,7 +136,7 @@ class Reboji {
 
         // User.findOne()
 
-        // User.findOne({ fbID:facebookUserId })
+        // User.findOne({ fbID:this.facebookUserId })
     }
 
     start() {
@@ -226,7 +226,7 @@ class Reboji {
         console.log ( 'updateUserSuccessfulPuzzles()', newPuzzle)
         successfulPuzzles.push( newPuzzle )
         return new Promise((resolve, reject) => {
-            User.updateAsync({ fbID:facebookUserId }, { successfulPuzzles: successfulPuzzles })
+            User.updateAsync({ fbID:this.facebookUserId }, { successfulPuzzles: successfulPuzzles })
                 .then( (userObj) => {
                     console.log ( ' ' )
                     console.log ( 'correctPuzzle(): ')
@@ -250,7 +250,7 @@ class Reboji {
 
         // return returnPuzzle;
         // let newPuzz = puzzles[ getRandom(0, puzzles.length ) ];// == currentPuzzle ? getPuzzle() : puzzles[ getRandom(0, puzzles.length ) ];
-        // User.updateAsync({ fbID:facebookUserId }, { currentPuzzle: newPuzz._id,  })
+        // User.updateAsync({ fbID:this.facebookUserId }, { currentPuzzle: newPuzz._id,  })
         return currentPuzzle;
     }
 
@@ -261,7 +261,7 @@ class Reboji {
     setUserCurrentPuzzle(puzzle) {
         currentPuzzle = puzzle
         return new Promise((resolve, reject) => {
-            User.findByIdAndUpdate({ fbID:facebookUserId }, { $set: { currentPuzzle: puzzle }})
+            User.findByIdAndUpdate({ fbID:this.facebookUserId }, { $set: { currentPuzzle: puzzle }})
                 .then( (userObj) => {
                     console.log ( ' ' )
                     console.log ( 'setUserCurrentPuzzle(): ')
@@ -274,7 +274,7 @@ class Reboji {
 
     getUserCurrentPuzzle() {
         return new Promise((resolve, reject) => {
-            User.findOne({ fbID:facebookUserId })
+            User.findOne({ fbID:this.facebookUserId })
                 .populate('currentPuzzle') // only return the Persons name
                 .exec( (err, user) => {
                     if (err) return reject(err);
@@ -320,7 +320,7 @@ class Reboji {
             method: 'POST',
             json: {
                 recipient: {
-                    id:facebookUserId
+                    id:this.facebookUserId
                 },
                 message: messageData,
             }
