@@ -51,7 +51,7 @@ class Reboji {
 
     constructor(app) {
 
-        console.log ( "REBOJI CONSTRUCOTR" );
+        console.log ( "REBOJI CONSTRUCTOR" );
         this.puzzles = [];
         this.seenPuzzles = [];
         this.successfulPuzzles = [];
@@ -79,14 +79,17 @@ class Reboji {
             for (let i = 0; i < messaging_events.length; i++) {
                 let event = req.body.entry[0].messaging[i]
                 this.facebookUserId = event.sender.id
-                console.log ( 'webhook', this.facebookUserId )
-                if ( currentUser != this.facebookUserId ) {
+                console.log ( 'webhook', this.facebookUserId, this.currentUser )
+                
+                if ( this.currentUser != this.facebookUserId ) {
                     // if user doesn't exist, create a user in the database
                     getUserByFbId( this.facebookUserId )
                         .then( ( userObj )=> {
                             console.log ( 'userObj', userObj )
                             if ( !userObj ) {
                                 createUser( this.facebookUserId )
+                            } else {
+                                this.currentUser = this.facebookUserId
                             }
                         }).then( ( newUserObj ) => {
                             console.log ('user created?', newUserObj)
