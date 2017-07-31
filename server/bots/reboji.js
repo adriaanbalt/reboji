@@ -102,14 +102,14 @@ class Reboji {
                         .then( (userCurrentPuzzle) => {
                             if ( userCurrentPuzzle ) {
                                 // there is a user puzzle already
-                                currentPuzzle = userCurrentPuzzle
+                                this.currentPuzzle = userCurrentPuzzle
                             } else {
                                 // if there is no set user puzzle, get a random puzzle from the list
-                                currentPuzzle = getPuzzleFromList()
+                                this.currentPuzzle = getPuzzleFromList()
                                 // set the user's current puzzle to the randomly selected puzzle
-                                this.setUserCurrentPuzzle( currentPuzzle )
+                                this.setUserCurrentPuzzle( this.currentPuzzle )
                             }
-                            console.log ( '>>first request: ', currentPuzzle, ' user puzzle', userCurrentPuzzle )
+                            console.log ( '>>first request: ', this.currentPuzzle, ' user puzzle', userCurrentPuzzle )
                             this.handleMessages(event, this.facebookUserId)
                         })
                 } else {
