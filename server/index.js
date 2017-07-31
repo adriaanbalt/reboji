@@ -101,6 +101,15 @@ app.post('/webhook/', function (req, res) {
     for (let i = 0; i < messaging_events.length; i++) {
         let event = req.body.entry[0].messaging[i]
         facebookUserId = event.sender.id
+        // if user doesn't exist, create a user in the database
+        // if ( !checkUserExists( facebookUserId ) ){
+        //     createUser();
+        // }
+        checkUserExists( facebookUserId )
+            .then( ( checkUserExistsRes )=> {
+                console.log ( 'checkUserExistsRes', checkUserExistsRes )
+            })
+
         // if this session doesnt have a current puzzle yet, then get it off the user
         if ( !currentPuzzle ) {
             getUserCurrentPuzzle()
@@ -136,6 +145,19 @@ const messageDelay = 300;
 let facebookUserId;
 
 
+function checkUserExists( fbId ) {
+    console.log ( 'checkUserExists()' )
+    return new Promise((resolve, reject) => {
+        User.findOneAsync({ fbID:facebookUserId })
+            .then( ( user ) => {
+                console.log ( 'checkUserExists response', user )
+                resolve( user ) 
+            })
+
+    // User.findOne()
+
+    // User.findOne({ fbID:facebookUserId })
+}
 
 function getAllPuzzles() {
     console.log( 'getAllPuzzles()')
@@ -221,7 +243,7 @@ function correctPuzzle( puzzle ) {
     updateUserSuccessfulPuzzles( puzzle );
 }
 function updateUserSuccessfulPuzzles( newPuzzle ) {
-    console.log ( 'updateUserSuccessfulPuzzles(), newPuzzle')
+    console.log ( 'updateUserSuccessfulPuzzles()', newPuzzle)
     successfulPuzzles.push( newPuzzle )
     return new Promise((resolve, reject) => {
         User.updateAsync({ fbID:facebookUserId }, { successfulPuzzles: successfulPuzzles })
