@@ -209,7 +209,23 @@ function handleMessages( event ) {
     }
 }
 function correctPuzzle( puzzle ) {
+    console.log ( 'correctPuzzle()')
+    updateUserSuccessfulPuzzles( newPuzzle );
+}
+function updateUserSuccessfulPuzzles( newPuzzle ) {
+    console.log ( 'updateUserSuccessfulPuzzles(), newPuzzle')
     successfulPuzzles.push( puzzle )
+    return new Promise((resolve, reject) => {
+        User.updateAsync({ fbID:facebookUserId }, { successfulPuzzles: successfulPuzzles })
+            .then( (userObj) => {
+                console.log ( ' ' )
+                console.log ( 'correctPuzzle(): ')
+                console.log ( 'user:', userObj );
+                console.log ( 'currentPuzzle: ', currentPuzzle )
+                return resolve( currentPuzzle )
+            })
+    })
+
 }
 function removePuzzle( puzzleToRemove ) {
     puzzles.filter( puzzle => puzzle === puzzleToRemove )
@@ -237,8 +253,10 @@ function setUserCurrentPuzzle(puzzle) {
     return new Promise((resolve, reject) => {
         User.updateAsync({ fbID:facebookUserId }, { currentPuzzle: puzzle })
             .then( (userObj) => {
-                console.log ( 'setUserCurrentPuzzle(): ', userObj )
-                console.log ( ' >currentPuzzle: ', currentPuzzle )
+                console.log ( ' ' )
+                console.log ( 'setUserCurrentPuzzle(): ')
+                console.log ( 'user:', userObj );
+                console.log ( 'currentPuzzle: ', currentPuzzle )
                 return resolve( currentPuzzle )
             })
     })
