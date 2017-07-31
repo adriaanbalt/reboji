@@ -217,7 +217,7 @@ class Reboji {
                 setTimeout( ()=>this.sendTextMessage( this.currentPuzzle.pictogram ), this.firstMessageTime+(this.messageDelay*1) )
             }
             // incorrect puzzle response
-            else if ( !checkPuzzleAnswer( text ) ) {
+            else if ( !this.checkPuzzleAnswer( text ) ) {
                 this.sendTextMessage( '-' );
                 setTimeout( ()=>this.sendTextMessage( "Sorry that was incorrect. You have " + this.successfulPuzzles.length + " of " + this.puzzles.length + " puzzles left to complete. Try again or respond 'help' for available commands." ), 100 )
                 setTimeout( ()=>this.sendTextMessage( this.currentPuzzle.pictogram ), this.firstMessageTime+(this.messageDelay*1) )
