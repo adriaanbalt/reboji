@@ -250,7 +250,10 @@ function getUserCurrentPuzzle() {
             .populate('currentPuzzle') // only return the Persons name
             .exec( (err, user) => {
                 if (err) return reject(err);
-                console.log('currentPuzzle is ', user.currentPuzzle );
+                console.log( ' ' );
+                console.log('getUserCurrentPuzzle() >>');
+                console.log('user: ', user );
+                console.log('user.currentPuzzle: ', user.currentPuzzle );
                 // currentPuzzle = story.currentPuzzle
                 resolve( user.currentPuzzle )
             })    
