@@ -47,7 +47,6 @@ Promise.promisifyAll(Puzzle.prototype);
 Promise.promisifyAll(User);
 Promise.promisifyAll(User.prototype);
 
-
 class Reboji {
 
     constructor(app) {
@@ -106,7 +105,7 @@ class Reboji {
                                 this.currentPuzzle = userCurrentPuzzle
                             } else {
                                 // if there is no set user puzzle, get a random puzzle from the list
-                                this.currentPuzzle = getPuzzleFromList()
+                                this.currentPuzzle = this.getPuzzleFromList()
                                 // set the user's current puzzle to the randomly selected puzzle
                                 this.setUserCurrentPuzzle( this.currentPuzzle )
                             }
@@ -182,7 +181,7 @@ class Reboji {
             else if ( text == "new" ) {
                 this.sendTextMessage( '-' );
                 // update user on database to a new puzzle
-                this.setUserCurrentPuzzle( getPuzzleFromList() )
+                this.setUserCurrentPuzzle( this.getPuzzleFromList() )
                 setTimeout( ()=>this.sendTextMessage( "Here is a new puzzle" ), this.firstMessageTime )
                 setTimeout( ()=>this.sendTextMessage( this.currentPuzzle.pictogram ), this.firstMessageTime+(this.messageDelay*1) )
             }
