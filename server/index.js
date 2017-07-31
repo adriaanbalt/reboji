@@ -256,8 +256,7 @@ function getPuzzleFromList() {
 function setUserCurrentPuzzle(puzzle) {
     currentPuzzle = puzzle
     return new Promise((resolve, reject) => {
-        User.findOne({ fbID:facebookUserId })
-            .updateAsync({ currentPuzzle: puzzle })
+        User.findByIdAndUpdate({ fbID:facebookUserId }, { $set: { currentPuzzle: puzzle }})
             .then( (userObj) => {
                 console.log ( ' ' )
                 console.log ( 'setUserCurrentPuzzle(): ')
