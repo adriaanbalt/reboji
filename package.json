@@ -29,6 +29,7 @@
     "gulp-sequence": "^0.4.5",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-swig": "^0.8.0",
+    "lodash": "^4.17.4",
     "mongoose": "^4.5.1",
     "path": "^0.12.7",
     "request": "^2.72.0",
