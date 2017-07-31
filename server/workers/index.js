@@ -6,7 +6,7 @@ var Workers = function( app ) {
 	var self = this;
     self.me = "workers";
     self.workers = [];
-    serl.app = app;
+    self.app = app;
 
 	var startWorker = function (worker) {
 		if(_.isFunction(worker.start)) {
