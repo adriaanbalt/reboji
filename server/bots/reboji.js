@@ -80,6 +80,8 @@ class Reboji {
             for (let i = 0; i < messaging_events.length; i++) {
                 let event = req.body.entry[0].messaging[i]
                 facebookUserId = event.sender.id
+
+                console.log ( 'webhook', facebookUserId )
                 
                 if ( currentUser != facebookUserId ) {
                     // if user doesn't exist, create a user in the database
