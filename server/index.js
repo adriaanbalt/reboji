@@ -152,7 +152,8 @@ function checkUserExists( fbId ) {
             .then( ( user ) => {
                 console.log ( 'checkUserExists response', user )
                 resolve( user ) 
-            })
+            }) 
+        })
 
     // User.findOne()
 
