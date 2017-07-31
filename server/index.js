@@ -135,7 +135,7 @@ const firstMessageTime = 100;
 const messageDelay = 300;
 let facebookUserId;
 
-this.getAllPuzzles();
+
 
 function getAllPuzzles() {
     console.log( 'getAllPuzzles()')
@@ -445,3 +445,7 @@ function sendTextMessage( text ) {
 🉐 ⬜ ⚪ ➡ ⬇ ⬅ ⬆ ↗ ↖ ↘ ↙ ⤴ ⤵
 🎀 🌂 💧 🔨 💺 〽 🔱 🔰 🀄 💎 💠 🔷 🔶
 */
+
+
+
+getAllPuzzles();
