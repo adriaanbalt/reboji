@@ -30,14 +30,6 @@ const firstMessageTime = 100;
 const messageDelay = 300;
 let facebookUserId;
 
-Puzzle.findAsync({}, null, {})
-    .then(allPuzzles => {
-        puzzles = allPuzzles.filter( item => item.pictogram != "" );
-        console.log ( 'all puzzles', puzzles)
-        return allPuzzles;
-    })
-    .catch(err => !console.log(err) && next(err));
-
 app.set('port', (process.env.PORT || 5000))
 
 // Process application/x-www-form-urlencoded
@@ -139,6 +131,19 @@ app.listen(app.get('port'), function() {
 // api routes
 // app.use('/api', require('./routes'));
 app.use('/api', require( path.join(__dirname, 'routes') ));
+
+getAllPuzzles();
+
+function getAllPuzzles() {
+
+    Puzzle.findAsync({}, null, {})
+        .then(allPuzzles => {
+            puzzles = allPuzzles.filter( item => item.pictogram != "" );
+            console.log ( 'all puzzles', puzzles)
+            return allPuzzles;
+        })
+        .catch(err => !console.log(err) && next(err));
+}
 
 function handleMessages( event ) {
 
@@ -251,7 +256,8 @@ function getPuzzleFromList() {
 function setUserCurrentPuzzle(puzzle) {
     currentPuzzle = puzzle
     return new Promise((resolve, reject) => {
-        User.updateAsync({ fbID:facebookUserId }, { currentPuzzle: puzzle })
+        User.findOne({ fbID:facebookUserId })
+            .updateAsync({ currentPuzzle: puzzle })
             .then( (userObj) => {
                 console.log ( ' ' )
                 console.log ( 'setUserCurrentPuzzle(): ')
