@@ -97,7 +97,7 @@ class Reboji {
                 }
 
                 // if this session doesnt have a current puzzle yet, then get it off the user
-                if ( !currentPuzzle ) {
+                if ( !this.currentPuzzle ) {
                     this.getUserCurrentPuzzle()
                         .then( (userCurrentPuzzle) => {
                             if ( userCurrentPuzzle ) {
