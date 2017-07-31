@@ -144,7 +144,7 @@ class Reboji {
         Puzzle.findAsync({}, null, {})
             .then(allPuzzles => {
                 this.puzzles = allPuzzles.filter( item => item.pictogram != "" );
-                console.log ( 'all puzzles response >> ', this.puzzles)
+                console.log ( 'all puzzles response >> ', this)
                 return allPuzzles;
             })
             .catch(err => !console.log(err) && next(err));
