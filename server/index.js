@@ -164,6 +164,8 @@ function handleMessages( event ) {
         // get a new puzzle
         else if ( text == "new" ) {
             sendTextMessage( '-' );
+            // update user on database to a new puzzle
+            setUserCurrentPuzzle( getPuzzleFromList() )
             setTimeout( ()=>sendTextMessage( "Here is a new puzzle" ), firstMessageTime )
             setTimeout( ()=>sendTextMessage( currentPuzzle.pictogram ), firstMessageTime+(messageDelay*1) )
         }
