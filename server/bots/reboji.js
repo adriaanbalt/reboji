@@ -230,7 +230,7 @@ class Reboji {
         console.log ( 'updateUserSuccessfulPuzzles()', newPuzzle)
         this.successfulPuzzles.push( newPuzzle )
         return new Promise((resolve, reject) => {
-            User.updateAsync({ fbID:this.facebookUserId }, { successfulPuzzles: this.successfulPuzzles })
+            User.update({ fbID:this.facebookUserId }, { successfulPuzzles: this.successfulPuzzles })
                 .exec( (err, user) => {
                     if (err) return reject(err);
                     console.log( ' ' );
