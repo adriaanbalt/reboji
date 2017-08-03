@@ -280,7 +280,7 @@ class Reboji {
     getUserCurrentPuzzle() {
         return new Promise((resolve, reject) => {
             User.findOne({ fbID:this.facebookUserId })
-                .populate('currentPuzzle') // only return the Persons name
+                // .populate('currentPuzzle') // only return the Persons name
                 .exec( (err, user) => {
                     if (err) return reject(err);
                     console.log( ' ' );
