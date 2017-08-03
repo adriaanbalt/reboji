@@ -232,10 +232,10 @@ class Reboji {
         this.successfulPuzzles.push( newPuzzle )
         return new Promise((resolve, reject) => {
             User.updateAsync({ fbID:this.facebookUserId }, { successfulPuzzles: this.successfulPuzzles })
-                .then( (userObj) => {
+                .then( (userObj,secondObj) => {
                     console.log ( ' ' )
                     console.log ( 'correctPuzzle(): ')
-                    console.log ( 'user:', userObj );
+                    console.log ( 'user:', userObj, secondObj );
                     console.log ( 'currentPuzzle: ', this.currentPuzzle )
                     return resolve( this.currentPuzzle )
                 })
