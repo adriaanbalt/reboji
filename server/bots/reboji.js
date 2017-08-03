@@ -224,7 +224,6 @@ class Reboji {
         }
     }
     correctPuzzle( puzzle ) {
-        console.log ( 'correctPuzzle()', puzzle)
         this.updateUserSuccessfulPuzzles( puzzle );
     }
     updateUserSuccessfulPuzzles( newPuzzle ) {
@@ -232,12 +231,13 @@ class Reboji {
         this.successfulPuzzles.push( newPuzzle )
         return new Promise((resolve, reject) => {
             User.updateAsync({ fbID:this.facebookUserId }, { successfulPuzzles: this.successfulPuzzles })
-                .then( (userObj,secondObj) => {
-                    console.log ( ' ' )
-                    console.log ( 'correctPuzzle(): ')
-                    console.log ( 'user:', userObj, secondObj );
-                    console.log ( 'currentPuzzle: ', this.currentPuzzle )
-                    return resolve( this.currentPuzzle )
+                .exec( (err, user) => {
+                    if (err) return reject(err);
+                    console.log( ' ' );
+                    console.log('correctPuzzle() >>');
+                    console.log('user: ', user );
+                    // currentPuzzle = story.currentPuzzle
+                    resolve( this.currentPuzzle )
                 })
         })
 
