@@ -1,9 +1,3 @@
-const mongoose = require('mongoose'),
-      request = require('request'),
-      Puzzle = mongoose.model('Puzzle'),
-      User = mongoose.model('User'),
-      Promise = require('bluebird')
-
 // var newObj = new User(
 //     {
 //         fbID: "1064814340266637",
@@ -41,18 +35,23 @@ const mongoose = require('mongoose'),
 //      watermark: 1468522377355,
 //      seq: 3120 } } 1064814340266637
 
+const mongoose = require('mongoose'),
+      request = require('request'),
+      Puzzle = mongoose.model('Puzzle'),
+      User = mongoose.model('User'),
+      Promise = require('bluebird')
+
 // promisifies methods on "Puzzle" and "Puzzle" instances
 Promise.promisifyAll(Puzzle);
 Promise.promisifyAll(Puzzle.prototype);
 Promise.promisifyAll(User);
 Promise.promisifyAll(User.prototype);
 
-
 class Reboji {
 
     constructor(app) {
-
         console.log ( "REBOJI CONSTRUCTOR" );
+        
         this.puzzles = [];
         this.seenPuzzles = [];
         this.successfulPuzzles = [];
@@ -72,7 +71,6 @@ class Reboji {
             }
             res.send('Error, wrong token')
         })
-
 
         // handling messages
         app.post('/webhook/',  (req, res) => {
@@ -122,6 +120,15 @@ class Reboji {
         })
     }
 
+    start() {
+        Puzzle.findAsync({}, null, {})
+            .then(allPuzzles => {
+                this.puzzles = allPuzzles.filter( item => item.pictogram != "" );
+                return allPuzzles;
+            })
+            .catch(err => !console.log(err) && next(err));
+    }
+
     createUser( fbId ) {
         var newObj = new User(
             {
@@ -146,15 +153,6 @@ class Reboji {
                     resolve( user ) 
                 }) 
             })
-    }
-
-    start() {
-        Puzzle.findAsync({}, null, {})
-            .then(allPuzzles => {
-                this.puzzles = allPuzzles.filter( item => item.pictogram != "" );
-                return allPuzzles;
-            })
-            .catch(err => !console.log(err) && next(err));
     }
 
     handleMessages( event ) {

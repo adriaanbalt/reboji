@@ -1,6 +1,7 @@
 "use strict";
 
 var _ = require("lodash");
+var Reboji = require("../bots/reboji");
 
 var Workers = function( app ) {
 	var self = this;
@@ -18,8 +19,7 @@ var Workers = function( app ) {
 		}
 	};
 
-    self.start = function () {
-        var Reboji = require("../bots/reboji");
+    self.start = function () {        
         var bot = new Reboji( self.app );
         console.log ( 'start', bot)
 
