@@ -84,7 +84,7 @@ class Reboji {
                     // if user doesn't exist, create a user in the database
                     this.getUserByFbId( this.facebookUserId )
                         .then( ( userObj )=> {
-                            console.log ( 'userObj', userObj )
+                            console.log ( 'userObj' , userObj )
                             if ( !userObj ) {
                                 this.createUser( this.facebookUserId )
                             } else {
