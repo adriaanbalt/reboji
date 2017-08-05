@@ -206,6 +206,11 @@ class Reboji {
                 this.sendTextMessage( "Your current puzzle is");
                 setTimeout( ()=>this.sendTextMessage( this.currentPuzzle.pictogram ), this.firstMessageTime+(this.messageDelay*1) )
             }
+            // get current puzzle
+            else if ( text == "me" ) {
+                this.sendTextMessage( "Your user info is");
+                setTimeout( ()=>this.sendTextMessage( this.getUserByFbId( this.currentUser ) ), this.firstMessageTime+(this.messageDelay*1) )
+            }
             // successful puzzle response
             else if ( this.checkPuzzleAnswer( text ) ) {
                 // delete a puzzle that was successfully answered
