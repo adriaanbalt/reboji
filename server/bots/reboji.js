@@ -230,21 +230,16 @@ class Reboji {
     }
     updateUserPuzzlesComplete( newPuzzle ) {
         this.puzzlesComplete.push( newPuzzle )
-        console.log ( 'updateUserPuzzlesComplete', newPuzzle, this.puzzlesComplete )
         return new Promise((resolve, reject) => {
             User.findOneAsync({ fbID:this.facebookUserId })
                 .then( (userObj) => {
-                    console.log ( 'updateUserPuzzlesComplete()!! ')
                     this.currentUserObj = userObj
                     userObj.puzzlesComplete = this.puzzlesComplete
-                    userObj.save()
+                    return userObj.save()
                         .then( ( userObj ) => {
-                            console.log ( "saved!", userObj)
+                            this.currentUserObj = userObj
+                            return resolve( userObj.puzzlesComplete )
                         })
-                    console.log ( 'user:', userObj );
-                    this.currentUserObj = userObj
-                    // console.log ( 'currentPuzzle: ', this.currentPuzzle )
-                    return resolve( userObj.puzzlesComplete )
                 })
         })
 
