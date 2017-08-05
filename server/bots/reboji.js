@@ -95,6 +95,8 @@ class Reboji {
                         })
                 }
 
+                console.log ( 'webhook > this.currentPuzzle', this.currentPuzzle )
+
                 // if this session doesnt have a current puzzle yet, then get it off the user
                 if ( !this.currentPuzzle ) {
                     this.getUserCurrentPuzzle()
@@ -108,7 +110,7 @@ class Reboji {
                                 // set the user's current puzzle to the randomly selected puzzle
                                 this.setUserCurrentPuzzle( this.currentPuzzle )
                             }
-                            console.log ( '>>first request: ', this.currentPuzzle, ' user puzzle', userCurrentPuzzle )
+                            console.log ( 'webhook > getUserCurrentPuzzle: ', this.currentPuzzle, ' user puzzle', userCurrentPuzzle )
                             this.handleMessages(event, this.facebookUserId)
                         })
                 } else {
@@ -264,6 +266,7 @@ class Reboji {
     }
 
     setUserCurrentPuzzle(puzzle) {
+        console.log ( 'setUserCurrentPuzzle()', puzzle)
         this.currentPuzzle = puzzle
         return new Promise((resolve, reject) => {
             User.findByIdAndUpdate({ fbID:this.facebookUserId }, { $set: { currentPuzzle: puzzle }})
@@ -305,6 +308,7 @@ class Reboji {
     }
 
     checkPuzzleAnswer( text ) {
+        console.log ( 'checkPuzzleAnswer', ( this.currentPuzzle.answer.toLowerCase() == text.toLowerCase() ), text.toLowerCase(), this.currentPuzzle.answer.toLowerCase() )
         return ( this.currentPuzzle.answer.toLowerCase() == text.toLowerCase() );
         // for ( var i=0; i<currentPuzzle.answer.length; i++ ){
         //     if ( currentPuzzle.answer[i] == text ) {
