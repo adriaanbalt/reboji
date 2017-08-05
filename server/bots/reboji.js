@@ -146,7 +146,7 @@ class Reboji {
     }
 
     getUserByFbId( fbId ) {
-        console.log ( 'getUserByFbId()' )
+        console.log ( 'getUserByFbId()', User.findOneAsync )
         return new Promise((resolve, reject) => {
             User.findOneAsync({ fbID:this.facebookUserId })
                 .then( ( user ) => {
@@ -268,7 +268,7 @@ class Reboji {
     }
 
     setUserCurrentPuzzle(puzzle) {
-        console.log ( 'setUserCurrentPuzzle()', puzzle)
+        console.log ( 'setUserCurrentPuzzle()', puzzle, User.findByIdAndUpdateAsync)
         this.currentPuzzle = puzzle
         return new Promise((resolve, reject) => {
             console.log ( 'here...')
