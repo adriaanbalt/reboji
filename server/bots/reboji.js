@@ -313,7 +313,7 @@ class Reboji {
     }
 
     checkPuzzleAnswer( text ) {
-        console.log ( 'checkPuzzleAnswer', ( this.currentPuzzle.answer.toLowerCase() == text.toLowerCase() ), text.toLowerCase(), this.currentPuzzle.answer.toLowerCase() )
+        // console.log ( 'checkPuzzleAnswer', ( this.currentPuzzle.answer.toLowerCase() == text.toLowerCase() ), text.toLowerCase(), this.currentPuzzle.answer.toLowerCase() )
         return ( this.currentPuzzle.answer.toLowerCase() == text.toLowerCase() );
         // for ( var i=0; i<currentPuzzle.answer.length; i++ ){
         //     if ( currentPuzzle.answer[i] == text ) {
