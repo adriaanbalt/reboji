@@ -80,7 +80,7 @@ class Reboji {
                 this.facebookUserId = event.sender.id
                 
                 console.log ( ' ' )
-                
+
                 if ( this.currentUser != this.facebookUserId ) {
                     // if user doesn't exist, create a user in the database
                     this.getUserByFbId( this.facebookUserId )
@@ -232,15 +232,19 @@ class Reboji {
         this.updateUserSuccessfulPuzzles( puzzle );
     }
     updateUserSuccessfulPuzzles( newPuzzle ) {
-        console.log ( 'updateUserSuccessfulPuzzles', this.successfulPuzzles )
         this.successfulPuzzles.push( newPuzzle )
+        console.log ( 'updateUserSuccessfulPuzzles', this.successfulPuzzles )
         return new Promise((resolve, reject) => {
-            User.updateAsync({ fbID:this.facebookUserId }, { successfulPuzzles: this.successfulPuzzles })
-                .then( (userObj,secondObj) => {
-                    console.log ( 'correctPuzzle(): ')
-                    console.log ( 'user:', userObj, secondObj );
-                    console.log ( 'currentPuzzle: ', this.currentPuzzle )
-                    return resolve( this.currentPuzzle )
+            User.findOneAsync({ fbID:this.facebookUserId })
+                .then( (userObj) => {
+                    console.log ( 'updateUserSuccessfulPuzzles(): ')
+                    this.currentUserObj = userObj
+                    userObj.successfulPuzzles = this.successfulPuzzles
+                    userObj.save()
+                    console.log ( 'user:', userObj );
+                    this.currentUserObj = userObj
+                    // console.log ( 'currentPuzzle: ', this.currentPuzzle )
+                    return resolve( userObj.successfulPuzzles )
                 })
         })
 
