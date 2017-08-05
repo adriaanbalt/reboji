@@ -88,6 +88,9 @@ class Reboji {
                             if ( !userObj ) {
                                 this.createUser( this.facebookUserId )
                             } else {
+                                this.currentUserObj = userObj
+                                this.puzzlesComplete = userObj.puzzlesComplete
+                                this.currentPuzzle = userObj.currentPuzzle
                                 this.currentUser = this.facebookUserId
                             }
                         })
@@ -217,7 +220,7 @@ class Reboji {
                 this.setUserCurrentPuzzle( this.getPuzzleFromList() )
 
                 this.sendTextMessage( "-" )
-                setTimeout( ()=>this.sendTextMessage( "Congratulations! You have completed " + this.puzzlesComplete.length + " of " + this.puzzles.length + " puzzles. Here's a new puzzle" ), 100 )
+                setTimeout( ()=>this.sendTextMessage( "Congratulations! You have completed " + this.currentUserObj.puzzlesComplete.length + " of " + this.puzzles.length + " puzzles. Here's a new puzzle" ), 100 )
                 setTimeout( ()=>this.sendTextMessage( this.currentPuzzle.pictogram ), this.firstMessageTime+(this.messageDelay*1) )
             }
             // incorrect puzzle response
@@ -228,12 +231,13 @@ class Reboji {
             }
         }
     }
+
     updateUserPuzzlesComplete( newPuzzle ) {
-        this.puzzlesComplete.push( newPuzzle )
+        console.log ( "updateUserPuzzlesComplete", this.puzzlesComplete )
+        this.puzzlesComplete.push( newPuzzle.id )
         return new Promise((resolve, reject) => {
             User.findOneAsync({ fbID:this.facebookUserId })
                 .then( (userObj) => {
-                    this.currentUserObj = userObj
                     userObj.puzzlesComplete = this.puzzlesComplete
                     return userObj.save()
                         .then( ( userObj ) => {
@@ -242,8 +246,8 @@ class Reboji {
                         })
                 })
         })
-
     }
+
     removePuzzle( puzzleToRemove ) {
         this.puzzles.filter( puzzle => puzzle === puzzleToRemove )
     }
