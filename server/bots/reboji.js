@@ -273,11 +273,12 @@ class Reboji {
         return new Promise((resolve, reject) => {
             console.log ( 'here...')
             User.findOneAsync({ fbID:this.facebookUserId })
-                .then( (err, userObj) => {
+                .then( (userObj) => {
                     console.log ( ' ' )
                     console.log ( 'setUserCurrentPuzzle(): ')
                     console.log ( 'user:', userObj );
-                    console.log ( 'err:', err );
+                    userObj.currentPuzzle = puzzle
+                    userObj.save()
                     // console.log ( 'currentPuzzle: ', this.currentPuzzle )
                     return resolve( this.currentPuzzle )
                 })
