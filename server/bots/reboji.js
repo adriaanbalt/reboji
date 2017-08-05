@@ -47,8 +47,6 @@ Promise.promisifyAll(Puzzle.prototype);
 Promise.promisifyAll(User);
 Promise.promisifyAll(User.prototype);
 
-console.log ( 'User.prototype', User.prototype )
-
 class Reboji {
 
     constructor(app) {
@@ -81,6 +79,8 @@ class Reboji {
                 let event = req.body.entry[0].messaging[i]
                 this.facebookUserId = event.sender.id
                 
+                console.log ( ' ' )
+                
                 if ( this.currentUser != this.facebookUserId ) {
                     // if user doesn't exist, create a user in the database
                     this.getUserByFbId( this.facebookUserId )
@@ -93,7 +93,7 @@ class Reboji {
                         })
                 }
 
-                console.log ( 'webhook > this.currentPuzzle', this.currentPuzzle )
+                // console.log ( 'webhook > this.currentPuzzle', this.currentPuzzle )
 
                 // if this session doesnt have a current puzzle yet, then get it off the user
                 if ( !this.currentPuzzle ) {
@@ -142,7 +142,6 @@ class Reboji {
     }
 
     getUserByFbId( fbId ) {
-        console.log ( 'getUserByFbId()', User.findOneAsync )
         return new Promise((resolve, reject) => {
             User.findOneAsync({ fbID:this.facebookUserId })
                 .then( ( user ) => {
@@ -204,6 +203,7 @@ class Reboji {
             }
             // get current puzzle
             else if ( text == "me" ) {
+                console.log ( 'this.currentUserObj', this.currentUserObj )
                 this.sendTextMessage( "Your user info is");
                 setTimeout( ()=>this.sendTextMessage( this.currentUserObj ), this.firstMessageTime+(this.messageDelay*1) )
             }
@@ -232,11 +232,11 @@ class Reboji {
         this.updateUserSuccessfulPuzzles( puzzle );
     }
     updateUserSuccessfulPuzzles( newPuzzle ) {
+        console.log ( 'updateUserSuccessfulPuzzles', this.successfulPuzzles )
         this.successfulPuzzles.push( newPuzzle )
         return new Promise((resolve, reject) => {
             User.updateAsync({ fbID:this.facebookUserId }, { successfulPuzzles: this.successfulPuzzles })
                 .then( (userObj,secondObj) => {
-                    console.log ( ' ' )
                     console.log ( 'correctPuzzle(): ')
                     console.log ( 'user:', userObj, secondObj );
                     console.log ( 'currentPuzzle: ', this.currentPuzzle )
@@ -273,7 +273,6 @@ class Reboji {
             console.log ( 'here...')
             User.findOneAsync({ fbID:this.facebookUserId })
                 .then( (userObj) => {
-                    console.log ( ' ' )
                     console.log ( 'setUserCurrentPuzzle(): ')
                     console.log ( 'user:', userObj );
                     this.currentUserObj = userObj
