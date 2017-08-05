@@ -269,7 +269,8 @@ class Reboji {
         console.log ( 'setUserCurrentPuzzle()', puzzle)
         this.currentPuzzle = puzzle
         return new Promise((resolve, reject) => {
-            User.findByIdAndUpdate({ fbID:this.facebookUserId }, { $set: { currentPuzzle: puzzle }})
+            console.log ( 'here...')
+            User.findByIdAndUpdateAsync({ fbID:this.facebookUserId }, { $set: { currentPuzzle: puzzle }})
                 .then( (userObj) => {
                     console.log ( ' ' )
                     console.log ( 'setUserCurrentPuzzle(): ')
