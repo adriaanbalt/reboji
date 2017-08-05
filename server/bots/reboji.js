@@ -54,7 +54,7 @@ class Reboji {
         
         this.puzzles = [];
         this.seenPuzzles = [];
-        this.successfulPuzzles = [];
+        this.puzzlesComplete = [];
         this.failedPuzzles = [];
         this.currentPuzzle;
         this.token = "EAAF0MuSayRkBAMi8pb5w6X2qf3rsk1wF8UCD8Nhpho0yiBknETthNd2b8o4eM0bUXZBiar1jfSlfeBJneMfSoiFjZA77gMdroLnnai7ClsjU4ZBdpFz69ZAnX2Jx1uy1WzZAc7mJbCntbQkErviZCd2obVJ7MDMfQZD"
@@ -194,7 +194,7 @@ class Reboji {
             }
             // check your info
             else if ( text == "score" ) {
-                this.sendTextMessage( "You have completed " + this.successfulPuzzles.length + " of " + this.puzzles.length + " puzzles." );
+                this.sendTextMessage( "You have completed " + this.puzzlesComplete.length + " of " + this.puzzles.length + " puzzles." );
             }
             // get current puzzle
             else if ( text == "current" ) {
@@ -212,36 +212,39 @@ class Reboji {
                 // delete a puzzle that was successfully answered
                 this.removePuzzle( this.currentPuzzle ); 
                 // add successful puzzles to a separate array for logging
-                this.updateUserSuccessfulPuzzles( this.currentPuzzle );
+                this.updateUserPuzzlesComplete( this.currentPuzzle );
                 // update user on database to a new puzzle
                 this.setUserCurrentPuzzle( this.getPuzzleFromList() )
 
                 this.sendTextMessage( "-" )
-                setTimeout( ()=>this.sendTextMessage( "Congratulations! You have completed " + this.successfulPuzzles.length + " of " + this.puzzles.length + " puzzles. Here's a new puzzle" ), 100 )
+                setTimeout( ()=>this.sendTextMessage( "Congratulations! You have completed " + this.puzzlesComplete.length + " of " + this.puzzles.length + " puzzles. Here's a new puzzle" ), 100 )
                 setTimeout( ()=>this.sendTextMessage( this.currentPuzzle.pictogram ), this.firstMessageTime+(this.messageDelay*1) )
             }
             // incorrect puzzle response
             else if ( !this.checkPuzzleAnswer( text ) ) {
                 this.sendTextMessage( '-' );
-                setTimeout( ()=>this.sendTextMessage( "Sorry that was incorrect. You have " + this.successfulPuzzles.length + " of " + this.puzzles.length + " puzzles left to complete. Try again or respond 'help' for available commands." ), 100 )
+                setTimeout( ()=>this.sendTextMessage( "Sorry that was incorrect. You have " + this.puzzlesComplete.length + " of " + this.puzzles.length + " puzzles left to complete. Try again or respond 'help' for available commands." ), 100 )
                 setTimeout( ()=>this.sendTextMessage( this.currentPuzzle.pictogram ), this.firstMessageTime+(this.messageDelay*1) )
             }
         }
     }
-    updateUserSuccessfulPuzzles( newPuzzle ) {
-        this.successfulPuzzles.push( newPuzzle )
-        console.log ( 'updateUserSuccessfulPuzzles', newPuzzle, this.successfulPuzzles )
+    updateUserPuzzlesComplete( newPuzzle ) {
+        this.puzzlesComplete.push( newPuzzle )
+        console.log ( 'updateUserPuzzlesComplete', newPuzzle, this.puzzlesComplete )
         return new Promise((resolve, reject) => {
             User.findOneAsync({ fbID:this.facebookUserId })
                 .then( (userObj) => {
-                    console.log ( 'updateUserSuccessfulPuzzles()!! ')
+                    console.log ( 'updateUserPuzzlesComplete()!! ')
                     this.currentUserObj = userObj
-                    userObj.successfulPuzzles = this.successfulPuzzles
+                    userObj.puzzlesComplete = this.puzzlesComplete
                     userObj.save()
+                        .then( ( userObj ) => {
+                            console.log ( "saved!", userObj)
+                        })
                     console.log ( 'user:', userObj );
                     this.currentUserObj = userObj
                     // console.log ( 'currentPuzzle: ', this.currentPuzzle )
-                    return resolve( userObj.successfulPuzzles )
+                    return resolve( userObj.puzzlesComplete )
                 })
         })
 
