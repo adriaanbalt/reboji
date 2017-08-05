@@ -233,7 +233,6 @@ class Reboji {
     }
 
     updateUserPuzzlesComplete( newPuzzle ) {
-        console.log ( "updateUserPuzzlesComplete", this.puzzlesComplete )
         this.puzzlesComplete.push( newPuzzle.id )
         return new Promise((resolve, reject) => {
             User.findOneAsync({ fbID:this.facebookUserId })
@@ -241,6 +240,7 @@ class Reboji {
                     userObj.puzzlesComplete = this.puzzlesComplete
                     return userObj.save()
                         .then( ( userObj ) => {
+                            console.log ( 'this.currentUserObj', this.currentUserObj )
                             this.currentUserObj = userObj
                             return resolve( userObj.puzzlesComplete )
                         })
@@ -313,7 +313,8 @@ class Reboji {
     }
 
     checkPuzzleAnswer( text ) {
-        // console.log ( 'checkPuzzleAnswer', ( this.currentPuzzle.answer.toLowerCase() == text.toLowerCase() ), text.toLowerCase(), this.currentPuzzle.answer.toLowerCase() )
+        console.log ( 'checkPuzzleAnswer:', this.currentPuzzle, text )
+        // console.log ( 'checkPuzzleAnswehr', ( this.currentPuzzle.answer.toLowerCase() == text.toLowerCase() ), text.toLowerCase(), this.currentPuzzle.answer.toLowerCase() )
         return ( this.currentPuzzle.answer.toLowerCase() == text.toLowerCase() );
         // for ( var i=0; i<currentPuzzle.answer.length; i++ ){
         //     if ( currentPuzzle.answer[i] == text ) {
