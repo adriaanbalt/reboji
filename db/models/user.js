@@ -22,6 +22,12 @@ var UserSchema = new mongoose.Schema({
             ref: 'Puzzle' 
         }
     ],
+    puzzlesComplete: [
+        { 
+            type: String,
+            ref: 'Puzzle' 
+        }
+    ],
     currentPuzzle: { 
         type: String,
         ref: 'Puzzle' 
