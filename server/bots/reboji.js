@@ -64,6 +64,7 @@ class Reboji {
         this.messageDelay = 300;
         this.facebookUserId;
         this.currentUser;
+        this.currentUserObj;
 
         // for Facebook verification
         app.get('/webhook/', (req, res) => {
@@ -204,7 +205,7 @@ class Reboji {
             // get current puzzle
             else if ( text == "me" ) {
                 this.sendTextMessage( "Your user info is");
-                setTimeout( ()=>this.sendTextMessage( this.getUserByFbId( this.currentUser ) ), this.firstMessageTime+(this.messageDelay*1) )
+                setTimeout( ()=>this.sendTextMessage( this.currentUserObj ), this.firstMessageTime+(this.messageDelay*1) )
             }
             // successful puzzle response
             else if ( this.checkPuzzleAnswer( text ) ) {
@@ -231,8 +232,6 @@ class Reboji {
         this.updateUserSuccessfulPuzzles( puzzle );
     }
     updateUserSuccessfulPuzzles( newPuzzle ) {
-        this.getUserByFbId( this.currentUser )
-        console.log ( 'updateUserSuccessfulPuzzles()', newPuzzle)
         this.successfulPuzzles.push( newPuzzle )
         return new Promise((resolve, reject) => {
             User.updateAsync({ fbID:this.facebookUserId }, { successfulPuzzles: this.successfulPuzzles })
@@ -277,6 +276,7 @@ class Reboji {
                     console.log ( ' ' )
                     console.log ( 'setUserCurrentPuzzle(): ')
                     console.log ( 'user:', userObj );
+                    this.currentUserObj = userObj
                     userObj.currentPuzzle = puzzle
                     userObj.save()
                     // console.log ( 'currentPuzzle: ', this.currentPuzzle )
