@@ -212,7 +212,7 @@ class Reboji {
                 // delete a puzzle that was successfully answered
                 this.removePuzzle( this.currentPuzzle ); 
                 // add successful puzzles to a separate array for logging
-                this.correctPuzzle( this.currentPuzzle );
+                this.updateUserSuccessfulPuzzles( this.currentPuzzle );
                 // update user on database to a new puzzle
                 this.setUserCurrentPuzzle( this.getPuzzleFromList() )
 
@@ -228,16 +228,13 @@ class Reboji {
             }
         }
     }
-    correctPuzzle( puzzle ) {
-        this.updateUserSuccessfulPuzzles( puzzle );
-    }
     updateUserSuccessfulPuzzles( newPuzzle ) {
         this.successfulPuzzles.push( newPuzzle )
-        console.log ( 'updateUserSuccessfulPuzzles', this.successfulPuzzles )
+        console.log ( 'updateUserSuccessfulPuzzles', newPuzzle, this.successfulPuzzles )
         return new Promise((resolve, reject) => {
             User.findOneAsync({ fbID:this.facebookUserId })
                 .then( (userObj) => {
-                    console.log ( 'updateUserSuccessfulPuzzles(): ')
+                    console.log ( 'updateUserSuccessfulPuzzles()!! ')
                     this.currentUserObj = userObj
                     userObj.successfulPuzzles = this.successfulPuzzles
                     userObj.save()
@@ -271,14 +268,10 @@ class Reboji {
     }
 
     setUserCurrentPuzzle(puzzle) {
-        console.log ( 'setUserCurrentPuzzle()', puzzle, User.findByIdAndUpdateAsync)
         this.currentPuzzle = puzzle
         return new Promise((resolve, reject) => {
-            console.log ( 'here...')
             User.findOneAsync({ fbID:this.facebookUserId })
                 .then( (userObj) => {
-                    console.log ( 'setUserCurrentPuzzle(): ')
-                    console.log ( 'user:', userObj );
                     this.currentUserObj = userObj
                     userObj.currentPuzzle = puzzle
                     userObj.save()
