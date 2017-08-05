@@ -47,6 +47,8 @@ Promise.promisifyAll(Puzzle.prototype);
 Promise.promisifyAll(User);
 Promise.promisifyAll(User.prototype);
 
+console.log ( 'User.prototype', User.prototype )
+
 class Reboji {
 
     constructor(app) {
