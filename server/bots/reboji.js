@@ -67,7 +67,6 @@ class Reboji {
 
         // for Facebook verification
         app.get('/webhook/', (req, res) => {
-            console.log ( 'webhook verification', req, res )
             if (req.query['hub.verify_token'] === 'obi_wan_dies') {
                 res.send(req.query['hub.challenge'])
             }
@@ -80,20 +79,16 @@ class Reboji {
             for (let i = 0; i < messaging_events.length; i++) {
                 let event = req.body.entry[0].messaging[i]
                 this.facebookUserId = event.sender.id
-                console.log ( 'webhook', ( this.currentUser == this.facebookUserId ), this.currentUser, this.facebookUserId )
                 
                 if ( this.currentUser != this.facebookUserId ) {
                     // if user doesn't exist, create a user in the database
                     this.getUserByFbId( this.facebookUserId )
                         .then( ( userObj )=> {
-                            console.log ( 'userObj' , userObj )
                             if ( !userObj ) {
                                 this.createUser( this.facebookUserId )
                             } else {
                                 this.currentUser = this.facebookUserId
                             }
-                        }).then( ( newUserObj ) => {
-                            console.log ('user created?', newUserObj)
                         })
                 }
 
@@ -112,7 +107,7 @@ class Reboji {
                                 // set the user's current puzzle to the randomly selected puzzle
                                 this.setUserCurrentPuzzle( this.currentPuzzle )
                             }
-                            console.log ( 'webhook > getUserCurrentPuzzle: ', this.currentPuzzle, ' user puzzle', userCurrentPuzzle )
+                            // console.log ( 'webhook > getUserCurrentPuzzle: ', this.currentPuzzle, ' user puzzle', userCurrentPuzzle )
                             this.handleMessages(event, this.facebookUserId)
                         })
                 } else {
@@ -150,7 +145,7 @@ class Reboji {
         return new Promise((resolve, reject) => {
             User.findOneAsync({ fbID:this.facebookUserId })
                 .then( ( user ) => {
-                    console.log ( 'checkUserExists response', user )
+                    // console.log ( 'checkUserExists response', user )
                     if ( !user ) {
 
                     }
