@@ -201,6 +201,7 @@ class Reboji {
             }
             // get current puzzle
             else if ( text == "current" ) {
+                console.log ( 'current ', this.currentPuzzle )
                 this.sendTextMessage( "Your current puzzle is");
                 setTimeout( ()=>this.sendTextMessage( this.currentPuzzle.pictogram ), this.firstMessageTime+(this.messageDelay*1) )
             }
