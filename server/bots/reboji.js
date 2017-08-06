@@ -76,7 +76,7 @@ class Reboji {
         // handling messages
         app.post('/webhook/',  (req, res) => {
             let messaging_events = req.body.entry[0].messaging
-            for (let i = 0 i < messaging_events.length i++) {
+            for (let i = 0; i < messaging_events.length; i++) {
                 let event = req.body.entry[0].messaging[i]
                 let facebookUserId = event.sender.id
                 
@@ -326,7 +326,7 @@ class Reboji {
         console.log ( 'checkPuzzleAnswer:', this.currentPuzzle, text )
         // console.log ( 'checkPuzzleAnswehr', ( this.currentPuzzle.answer.toLowerCase() == text.toLowerCase() ), text.toLowerCase(), this.currentPuzzle.answer.toLowerCase() )
         return ( this.currentPuzzle.answer.toLowerCase() == text.toLowerCase() )
-        // for ( var i=0 i<currentPuzzle.answer.length i++ ){
+        // for ( var i=0; i<currentPuzzle.answer.length; i++ ){
         //     if ( currentPuzzle.answer[i] == text ) {
         //         return true
         //     }
